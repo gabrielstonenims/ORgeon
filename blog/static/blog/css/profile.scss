@@ -1,0 +1,23 @@
+@import "./config";
+
+.employee-profile-info{
+    padding: 20px;
+    border-radius: 7px;
+    background: #eff0f1;
+    .employee-profile-image{
+        img{
+            width: 200px;
+            height: 200px;
+            border-radius: 100px;
+        }
+    }
+    .deinfo{
+        h4{
+            text-transform: capitalize;
+            font-weight: bold;
+        }
+        small{
+            font-weight: bold;
+        }
+    }
+}

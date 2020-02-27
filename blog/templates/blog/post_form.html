@@ -1,0 +1,25 @@
+{% extends "blog/sidenav.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container mt-4">
+  <h3 class="text-center mb-3">Send notes to Employees</h3>
+  <br>
+    <div class="row mb-3">
+        <div class="col-xs-5 col-sm-5 col-md-8 mr-auto ml-auto mb-3">
+            <form method="post" id="theform" enctype="multipart/form-data" >
+                {% csrf_token %}
+                <fieldset class="form-group">
+                  {{ form|crispy}}
+                </fieldset>
+                <div class="form-group">
+                  <button id="butt" type="submit">Post</button>
+                </div>
+              </form>
+        </div>
+    </div>
+</div>
+
+<script>
+  CKEDITOR.replace( 'message' );
+</script>
+{% endblock %}

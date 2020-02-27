@@ -1,0 +1,72 @@
+a.butt {
+  color: #fff;
+  font-weight: bold;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: #ffd700;
+  border-radius: 5px;
+  -webkit-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
+}
+
+a.butt:hover {
+  background: #ffec8b;
+  color: #000;
+}
+
+#butt {
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: #ffd700;
+  border-radius: 5px;
+  -webkit-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
+}
+
+#butt:hover {
+  background: #ffec8b;
+  color: #000;
+}
+
+.main-reports, .main-post, .main-user-messages {
+  padding: 20px;
+}
+
+.main-reports h5, .main-post h5, .main-user-messages h5 {
+  font-size: 15px;
+}
+
+.main-reports img, .main-post img, .main-user-messages img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.main-reports a, .main-post a, .main-user-messages a {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.main-reports li, .main-post li, .main-user-messages li {
+  -webkit-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
+}
+
+.main-reports li:hover, .main-post li:hover, .main-user-messages li:hover {
+  background: #eedd82;
+  color: #fff;
+}
+
+.dashboard {
+  padding: 20px;
+  font-weight: bold;
+}
+/*# sourceMappingURL=main.css.map */

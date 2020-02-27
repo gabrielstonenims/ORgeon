@@ -1,0 +1,53 @@
+$primary_color:#531CA5;
+$secondary_color:#ace35a;
+$light:#fff;
+$dark:#d3d3d3;
+
+// img{
+//     display: block;
+//     width: 100%;
+// }
+
+@mixin setFlex($direction) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin myButt {
+    
+}
+
+a.butt{
+    color: $light;
+    font-weight: bold;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: #ffd700;
+    border-radius: 5px;
+    transition: 0.5s ease-in;
+    &:hover{
+        background: #ffec8b;
+        color: #000;
+    }
+}
+
+#butt{
+    border: none;
+    color: $light;
+    font-weight: bold;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: #ffd700;
+    border-radius: 5px;
+    transition: 0.5s ease-in;
+    &:hover{
+        background: #ffec8b;
+        color: #000;
+    }
+}

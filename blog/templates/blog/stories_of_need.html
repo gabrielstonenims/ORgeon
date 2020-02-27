@@ -1,0 +1,22 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-3">
+        <h3 class="text-center mb-3">Stories of Need</h3>
+        <div class="row mb-3">
+            <div class="col-xs -sm-6 col-sm-6 md-6 mb-3">
+                <h3 class="text-center mb-3">Stop Child Streetism</h3>
+                <div class="sometext">
+                    <p>Children from most parts of Africa and the world are facing difficulties in putting thier lives together.Most are doing anything to survive out there.Help ORgeon save these children.</p>
+                </div>
+                <br>
+                <div class="pics mb-3">
+                    <a class="mb-3" href="{% static 'blog/images/73.jpg' %}" data-lightbox="gallery">
+                        <img class="mb-2 z-depth-1-half" src="{% static 'blog/images/73.jpg' %}" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

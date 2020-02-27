@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container mt-3">
+        <h3 class="text-center mb-3">Help the needy,save lives.</h3>
+        <br>
+        <div class="row mb-3">
+            {% for event in events %}
+                <div class="col-xs-6 col-sm-6 col-md-6 mb-3">
+                    <div class="eventimg">
+                        <img src="{{ event.event_poster.url }}" alt="">
+                    </div>
+                </div>
+            {% endfor %}
+            {% for event in events %}
+                <div class="col-xs-6 col-sm-6 col-md-6 mb-3">
+                    <h3 class="text-center mb-3">{{ event.theme }}</h3>
+                    <br>
+                    <h5 class="mb-2">{{ event.venue }}</h5>
+                    <h5 class="mb-2">{{ event.date }}</h5>
+                    <br>
+                    <div class="event-description">
+                        <p>{{ event.description_of_event }}</p>
+                    </div>
+                    <br>
+                    <a class="butt mr-2" href="{% url 'jointrip' %}">Join the trip</a> or <a class="butt ml-2" href="{% url 'donate' %}">Donate in favour of the trip.</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

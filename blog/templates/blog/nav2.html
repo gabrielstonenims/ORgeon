@@ -1,0 +1,69 @@
+
+{% load static %}
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #8b6cc4;">
+  <div class="container">
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="#">Navbar</a>
+
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+      aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+      <!-- Links -->
+      <ul class="navbar-nav mr-auto">
+        {% if request.user.username == "secretary" %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register' %}"><i class="fas fa-plus-circle"></i>Employee</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'employees' %}">Employees</a>
+        </li>
+        {% endif  %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'reports' %}">Reports</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'create_report' %}"><i class="fas fa-plus-circle"></i>Report</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'messages' request.user %}">
+            Messages</sup>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+        </li>
+
+        {% if request.user.username == "admin" %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'post_new' %}"><i class="fas fa-plus-circle"></i>Post</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto nav-flex-icons">
+        <li class="nav-item avatar">
+          <a class="nav-link p-0" href="#">
+            <img src="{{ request.user.profile.profile_pic.url }}" alt="avatar image"
+              style="width: 30px;height: 30px;border-radius: 15px;">
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">{{ request.user }}</a>
+        </li>
+
+      </ul>
+    </div>
+    <!-- Collapsible content -->
+  </div>
+</nav>
+<!--/.Navbar-->

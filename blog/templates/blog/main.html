@@ -1,0 +1,54 @@
+{% extends "blog/sidenav.html" %}
+
+{% block content %}
+    <div class="container mt-3">
+        <h3 class="text-center mb-3 dashboard animated bounceInDown">Dashboard</h3>
+        <br>
+        <div class="row mb-3">
+            <!-- reports -->
+            <div class="col-xs-5 col-sm-5 col-md-5 mb-3 main-reports">
+                <h5 class="mb-2 text-muted">Reports</h5>
+                <ul class="list-group z-depth-1-half mb-2">
+                    {% for report in reports %}
+                    <li class="list-group-item">
+                        <img src="{{ report.user.profile.profile_pic.url }}" alt="">
+                        <a class="ml-2 text-muted" href="{{ report.get_absolute_url }}">{{ report.title }}</a><br>
+
+                        <small class="text-muted" style="float: right;">{{ report.date_posted|date:"D d M Y"}}</small>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                  <br>
+                  <a class="butt" href="{% url 'reports' %}">View All</a>
+            </div>
+            <!-- posts -->
+            <div class="col-xs-5 col-sm-5 col-md-5 mb-3 main-post">
+                <h5 class="mb-2 text-muted">Admin Notes</h5>
+                <ul class="list-group z-depth-1-half mb-2">
+                    {% for post in posts %}
+                    <li class="list-group-item">
+                        <img src="{{ post.author.profile.profile_pic.url }}" alt="">
+                        <a class="ml-2 text-muted" href="{{ post.get_absolute_post_url }}">{{ post.title }}</a>
+                        <br>
+                        <small class="text-muted" style="float: right;">{{ post.date_posted|date:"D d M Y"}}</small>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                  <br>
+                  <a class="butt" href="{% url 'posts' %}">View All</a>
+            </div>
+            <!-- messages -->
+            <!-- <div class="col-xs-5 col-sm-5 col-md-3 mb-3 main-user-messages">
+                <h5 class="mb-2 text-muted">Employees Stories</h5>
+                <ul class="list-group z-depth-1-half">
+                    {% for story in user_stories %}
+                    <li class="list-group-item">
+                        <img src="{{ story.user.profile.profile_pic.url }}" alt="">
+                        <a class="ml-2 text-muted" href="{{ story.get_absolute_story_url }}">{{ story.story_title }}</a>
+                    </li>
+                    {% endfor %}
+                  </ul>
+            </div> -->
+        </div>
+    </div>
+{% endblock %}

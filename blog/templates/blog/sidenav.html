@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="{% static 'blog/images/nfh.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/css/style.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/css/mdb.min.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/css/forms.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/css/reports.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/css/messages.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/css/main.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/css/post.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/css/profile.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/css/swiper.min.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/css/fontawesome-all.min.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/css/animate.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/css/lightbox.min.css'%}" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+
+    <title>
+        ORGEON
+    </title>
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-2 sidebar-nav sticky-top">
+                <div class="sidenav">
+                    <div class="company-logo mb-1">
+                        <img src="{% static 'blog/images/forhome.png' %}" alt="company-logo"> <span
+                            style="text-transform: capitalize;font-weight: bold;">Orgeon</span>
+                    </div>
+                    <hr class="my-2">
+                    <div class="logged-in-user mb-1">
+                        <img src="{{ request.user.profile.profile_pic.url }}" alt="" class="z-depth-1-half"> <span class="ml-2"
+                            style="text-transform: capitalize;font-weight: bold;">{{ request.user }}</span>
+                    </div>
+                    <hr class="my-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="{% url 'main' %}"><i class="fas fa-home mr-1"></i>Home</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{% url 'employees' %}"><i class="fas fa-users mr-1"></i>Employees</a>
+                        </li>
+                        {% if request.user.username == "secretary" %}
+                        <li class="list-group-item">
+                            <a href="{% url 'register' %}"><i class="fas fa-plus mr-1"></i>Employee</a>
+                        </li>
+                        {% endif %}
+                        <li class="list-group-item">
+                            <a href="{% url 'reports' %}"><i class="fas fa-edit mr-1"></i>Reports</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{% url 'create_report' %}"><i class="fas fa-plus mr-1"></i>Report</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a  href="{% url 'messages' request.user.username  %}">
+                                <i class="fas fa-envelope mr-1"></i> Messages
+                            </a>
+                        </li>
+                    </ul>
+
+                    <hr class="my-2">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="{% url 'profile' %}"><i class="fas fa-user mr-2"></i>Profile</a>
+                        </li>
+                        {% if request.user.username == "admin" %}
+                        <li class="list-group-item">
+                            <a href="{% url 'post_new' %}"><i class="fas fa-plus-circle mr-1"></i>Post</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{% url 'newsletter_create' %}"><i class="fas fa-plus-circle mr-1"></i>News</a>
+                        </li>
+                        {% endif %}
+                        <li class="list-group-item">
+                            <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-10">
+                <div class="container">
+                    <div class="row mb-3 text-center">
+                        <div class="col-xs-6 col-sm-6 col-md-5 ml-auto mr-auto">
+                            {% if messages %}
+                            {% for message in messages %}
+                            <div class="animated bounce alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% block content %}
+
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'blog/js/jquery-3.4.1.min.js'%}"></script>
+    <script src="{% static 'blog/js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'blog/js/mdb.min.js'%}"></script>
+    <script src="{% static 'blog/js/swiper.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'blog/js/ckeditor.js'%}"></script>
+    <script src="{% static 'blog/js/jscode.js'%}"></script>
+    <script src="{% static 'blog/js/fontawesome-all.min.js'%}"></script>
+    <script src="{% static 'blog/js/lightbox-plus-jquery.min.js'%}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        offset: 400,
+        duration: 1000
+      });
+    </script>
+</body>
+
+</html>
+
+

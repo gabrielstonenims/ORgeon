@@ -1,0 +1,63 @@
+@import "./_config";
+
+.reports{
+    padding: 20px;
+    .report-group{
+        a{
+            img{
+                width: 40px;
+                height: 40px;
+                border-radius: 20px;
+                float: left;
+            }
+            span{
+                padding: 10px;
+                text-transform: capitalize;
+                font-weight: bold;
+            }
+            span.report-writer{
+                color: #000;
+            }
+            small.date-posted{
+                float: right;
+            }
+        }
+    }
+}
+// report details
+
+.report-container{
+    padding: 20px;
+    .report-img-username{
+        img{
+            width:60px;
+            height: 60px;
+            border-radius: 30px;
+        }
+        span{
+            text-transform: capitalize;
+            font-weight: bold;
+        }
+    }
+    .main-report-container{
+        padding: 20px;
+        background-color: #eff0f1;
+        border-radius: 5px;
+    }
+}
+
+.more-reports{
+    ul{
+        li{
+            transition: 0.5s ease-in;
+        &:hover{
+            background: #eedd82;
+            color: #fff;
+        }
+        a{
+            color: #000;
+            font-weight: bold;
+        }
+        }
+    }
+}

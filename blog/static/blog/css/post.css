@@ -1,0 +1,68 @@
+a.butt {
+  color: #fff;
+  font-weight: bold;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: #ffd700;
+  border-radius: 5px;
+  -webkit-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
+}
+
+a.butt:hover {
+  background: #ffec8b;
+  color: #000;
+}
+
+#butt {
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: #ffd700;
+  border-radius: 5px;
+  -webkit-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
+}
+
+#butt:hover {
+  background: #ffec8b;
+  color: #000;
+}
+
+.admin-posts {
+  padding: 10px;
+}
+
+.admin-posts .post-poster img {
+  width: 100%;
+  height: 300px;
+}
+
+.admin-post-details p.pst-msg {
+  padding: 10px;
+  background: #eff0f1;
+  border-radius: 5px;
+}
+
+.admin-post-details .from-admin img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.comment-section-post {
+  padding: 10px;
+  background: #eff0f1;
+  border-radius: 5px;
+}
+
+textarea {
+  resize: none;
+}
+/*# sourceMappingURL=post.css.map */

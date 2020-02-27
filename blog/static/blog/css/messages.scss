@@ -1,0 +1,29 @@
+@import "./_config";
+
+.sendmessage{
+    position: fixed;
+    z-index: 1;
+}
+
+.user-message {
+  padding: 20px;
+  background-color: #eff0f1;
+  border-radius: 5px;
+  img {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    float: left;
+  }
+  span.sender-name {
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  span.sender-message {
+    text-transform: capitalize;
+  }
+  small.time-posted {
+    float: right;
+    // padding: 5px;
+  }
+}

@@ -1,0 +1,98 @@
+a.butt {
+  color: #fff;
+  font-weight: bold;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: #ffd700;
+  border-radius: 5px;
+  -webkit-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
+}
+
+a.butt:hover {
+  background: #ffec8b;
+  color: #000;
+}
+
+#butt {
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: #ffd700;
+  border-radius: 5px;
+  -webkit-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
+}
+
+#butt:hover {
+  background: #ffec8b;
+  color: #000;
+}
+
+.reports {
+  padding: 20px;
+}
+
+.reports .report-group a img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  float: left;
+}
+
+.reports .report-group a span {
+  padding: 10px;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.reports .report-group a span.report-writer {
+  color: #000;
+}
+
+.reports .report-group a small.date-posted {
+  float: right;
+}
+
+.report-container {
+  padding: 20px;
+}
+
+.report-container .report-img-username img {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+}
+
+.report-container .report-img-username span {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.report-container .main-report-container {
+  padding: 20px;
+  background-color: #eff0f1;
+  border-radius: 5px;
+}
+
+.more-reports ul li {
+  -webkit-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
+}
+
+.more-reports ul li:hover {
+  background: #eedd82;
+  color: #fff;
+}
+
+.more-reports ul li a {
+  color: #000;
+  font-weight: bold;
+}
+/*# sourceMappingURL=reports.css.map */

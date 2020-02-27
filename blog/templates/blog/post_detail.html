@@ -1,0 +1,36 @@
+{% extends "blog/sidenav.html" %}
+
+{% block content %}
+<div class="container mt-3">
+    <section class="my-5">
+        <div class="row">
+            <div class="col-lg-5 admin-posts">
+                {% if post.poster %}
+                <div class="view overlay rounded z-depth-2 mb-lg-0 mb-4 post-poster">
+                    <a title="click to enlarge image" href="{{ post.poster.url }}" data-lightbox='gallery'>
+                        <img class="img-fluid" src="{{ post.poster.url }}" alt="Sample image">
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-lg-6 admin-post-details">
+                <h3 class="font-weight-bold mb-3"><strong>{{ post.title }}</strong></h3>
+                <p class="pst-msg">{{ post.message }}</p>
+                <p><span class="text-muted mr-1">from</span> <span class="from-admin">
+                        <img src="{{ post.author.profile.profile_pic.url }}" alt="">
+                    </span>, {{ post.date_posted|date:"D d M Y"}}</p>
+            </div>
+        </div>
+    </section>
+    {% if post.need_replies %}
+    <h3 class="text-center mb-3">Reply below</h3>
+    <br>
+
+    <div class="main-comment-section mb-3">
+        {% include "blog/comment_form.html" %}
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

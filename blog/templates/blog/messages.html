@@ -1,0 +1,52 @@
+{% extends "blog/sidenav.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container mt-4">
+    <!-- Section: Blog v.3 -->
+    <div class="sendmessage">
+        <a title="send new message to a single user" href="{% url 'message_new' %}"><i class="fas fa-plus-circle fa-2x"></i></a>
+    </div>
+    <div class="row mb-3 ml-4">
+        <div class="col-xs-6 col-sm-6 col-md-8 mb-3">
+            {% for message in user_messages %}
+                <div class="user-message mb-3">
+                    <span>
+                        <img class="z-depth-1-half" src="{{ message.sender.profile.profile_pic.url  }}" alt="">
+                    </span>
+                    <span class="ml-2 sender-name">{{ message.title }}</span><br>
+                    <span class="ml-2 sender-message">{{ message.message_content|safe }}</span><br>
+                    <small class="time-posted text-muted">{{ message.date_posted|date:"D d M Y" }}</small>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+   
+    <!-- Modal -->
+    <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Send message to a single user</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <fieldset class="form-group">
+                      {{ form | crispy }}
+                  </fieldset>
+                  <div class="form-group">
+                      <button type="submit" id="profile_update_but">Send</button>
+                  </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+  

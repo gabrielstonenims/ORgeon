@@ -1,0 +1,58 @@
+a.butt {
+  color: #fff;
+  font-weight: bold;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: #ffd700;
+  border-radius: 5px;
+  -webkit-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
+}
+
+a.butt:hover {
+  background: #ffec8b;
+  color: #000;
+}
+
+#butt {
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: #ffd700;
+  border-radius: 5px;
+  -webkit-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
+}
+
+#butt:hover {
+  background: #ffec8b;
+  color: #000;
+}
+
+.employee-profile-info {
+  padding: 20px;
+  border-radius: 7px;
+  background: #eff0f1;
+}
+
+.employee-profile-info .employee-profile-image img {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+}
+
+.employee-profile-info .deinfo h4 {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.employee-profile-info .deinfo small {
+  font-weight: bold;
+}
+/*# sourceMappingURL=profile.css.map */
