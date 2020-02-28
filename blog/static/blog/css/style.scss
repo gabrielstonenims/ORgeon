@@ -10,7 +10,10 @@ body{
     overflow-x: hidden;
     // background-color: #d3d3d3;
 }
-
+svg{
+    height: 60px;
+    // fill: wheat;
+}
 .main-wrapper{
     .sidebar-nav{
         color: #fff;
@@ -24,6 +27,46 @@ body{
                     height: 40px;
                     border-radius: 20px;
                 }
+                #logo{
+                    width: 100%;
+                    
+                    path:nth-child(2){
+                        stroke-dasharray: 589.9854736328125;
+                        stroke-dashoffset: 589.9854736328125;
+                        animation: line-anim 2s ease forwards infinite;
+                    }
+                    
+                    path:nth-child(4){
+                        stroke-dasharray: 506.5438537597656;
+                        stroke-dashoffset: 506.5438537597656;
+                        animation: line-anim 2s ease forwards infinite 0.3s;
+                    }
+                    
+                    path:nth-child(6){
+                        stroke-dasharray: 506.5433654785156;
+                        stroke-dashoffset: 506.5433654785156;
+                        animation: line-anim 2s ease forwards infinite 0.6s;
+                    }
+                    
+                    path:nth-child(8){
+                        stroke-dasharray: 521.3291015625;
+                        stroke-dashoffset: 521.3291015625;
+                        animation: line-anim 2s ease forwards infinite 0.9s;
+                    }
+                    
+                    path:nth-child(10){
+                        stroke-dasharray: 589.9854736328125;
+                        stroke-dashoffset: 589.9854736328125;
+                        animation: line-anim 2s ease forwards infinite 1.2s;
+                    }
+                   
+                    path:nth-child(12){
+                        stroke-dasharray: 466.5599670410156;
+                        stroke-dashoffset: 466.5599670410156;
+                        animation: line-anim 2s ease forwards infinite 1.5s;
+                    }
+                   
+                }
             }
             .logged-in-user{
                 img{
@@ -34,7 +77,7 @@ body{
                 }
             }
             .list-group{
-                background: rgba(0, 0, 0, 0.753);
+                // background: rgba(0, 0, 0, 0.753);
                 li{
                     // padding: 10px;
                     a{
@@ -56,4 +99,10 @@ body{
 
 hr{
     background-color: grey;
+}
+
+@keyframes line-anim{
+    to{
+        stroke-dashoffset: 0;
+    }
 }

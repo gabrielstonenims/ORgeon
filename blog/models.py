@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from PIL import Image
 from django.core.validators import FileExtensionValidator
+from datetime import date,time,datetime,timedelta
 
 PARTNERSHIP_TYPE = (
     ("personal","personal"),
@@ -140,7 +141,7 @@ class Post(models.Model):
     author = author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_user')
     title = models.CharField(max_length=200)
     message = models.TextField(help_text="This message would be sent to all employees")
-    poster = models.ImageField(upload_to="post_posters",blank=True,validators=[FileExtensionValidator(allowed_extensions=['jpeg','jpg'])])
+    poster = models.ImageField(upload_to="post_posters",blank=True,validators=[FileExtensionValidator(allowed_extensions=['jpeg','jpg'])],help_text="Leave this field blank if message has no image.")
     views = models.IntegerField(default=0)
     need_replies = models.BooleanField(default=False)
     date_posted = models.DateTimeField(default=timezone.now)
@@ -151,6 +152,7 @@ class Post(models.Model):
 
     def get_absolute_post_url(self):
         return reverse("post_detail",args={self.pk })
+
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -172,3 +174,21 @@ class Comments(models.Model):
         return f"{self.user.username} has commented on {self.post }"
 
 
+
+# class CheckLoginLogout(models.Model):
+#     logged_user = models.ForeignKey(User,on_delete=models.CASCADE)
+#     login_code = models.IntegerField()
+#     date_and_time_logged = models.DateTimeField(default=timezone.now)
+
+#     def __str__(self):
+#         return f"{ self.logged_user.username } logged in at {self.date_and_time_logged}"
+
+
+class Login(models.Model):
+    username = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    login_code = models.IntegerField()
+    date_and_time_logged = models.DateTimeField(default=timezone.now) 
+
+    def __str__(self):
+        return f"{ self.username} logged in at {self.date_and_time_logged}"

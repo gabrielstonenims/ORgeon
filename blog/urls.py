@@ -5,6 +5,7 @@ from .views import Volunteers
 from .views import PostCreateView,PostListView
 urlpatterns = [
     path('',views.home,name='home'),
+    path('login/',views.login,name='login'),
     path('success/',views.success_stories,name='success'),
     path('stories_of_need/',views.needy_stories,name='stories_of_need'),
     path('inspirational_stories/',views.inspirational_stories,name='inspirational_stories'),
@@ -27,5 +28,6 @@ urlpatterns = [
     path('message/new/',views.create_message,name='message_new'),
     path('main/',views.main,name='main'),
     path('messages/<str:username>/<int:id>/',views.instantmessage_detail,name='inmessage_detail'),
-    path('newsletter/',views.news_letter,name='newsletter_create')
+    path('newsletter/',views.news_letter,name='newsletter_create'),
+    path('logout/<str:username>/',views.logout,name='logout')
 ]

@@ -65,4 +65,9 @@ a.butt:hover {
 textarea {
   resize: none;
 }
+
+.ps-header {
+  font-weight: bold;
+  padding: 20px;
+}
 /*# sourceMappingURL=post.css.map */
