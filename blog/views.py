@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView
-from .models import Volunteer, Events, JoinTrip, Partnership, NewsLetter, Report, InstantMessage,Post,Comments,NewsUpdate,Usermsg,Login
+from .models import Volunteer, Events, JoinTrip, Partnership, NewsLetter, Report, InstantMessage,Post,Comments,NewsUpdate,Usermsg,Logout
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
@@ -18,7 +18,7 @@ from .forms import (VolunteerForm,
                     NewsLetterForm,
                     ReportForm,
                     PostForm,InstantMessageForm,CommentsForm,
-                    NewsUpdateForm,LoginForm
+                    NewsUpdateForm,
                     )
 from django.contrib.auth.models import User
 import random
@@ -57,14 +57,6 @@ def news_letter(request):
 
 
 def home(request):
-    user = request.user.username
-    is_user = False
-    if Login.objects.filter(username=user).exists():
-        duser = Login.objects.get(username=user)
-        is_user = True
-        if is_user:
-            duser.delete()
-
     if request.method == "POST":
         form = NewsLetterForm(request.POST)
         if form.is_valid():
@@ -249,11 +241,9 @@ def donate(request):
 
 @login_required()
 def reports(request):
-    if Login.objects.filter(username=request.user.username).exists():
-        reports = Report.objects.all().order_by('-date_posted')
-    else:
-        messages.info(request,f"You were logged out.")
-        return redirect('login')
+    
+    reports = Report.objects.all().order_by('-date_posted')
+        
 
     context = {
         "reports": reports
@@ -264,15 +254,18 @@ def reports(request):
 
 @login_required()
 def report_detail(request, id):
-    if Login.objects.filter(username=request.user.username).exists():
-        report = get_object_or_404(Report, id=id)
-        reports = Report.objects.all().order_by('-date_posted')
-    else:
-        messages.info(request,f"You were logged out.")
-        return redirect('login')
+    
+    report = get_object_or_404(Report, id=id)
+    hasRead = False
+    if report:
+        if not report.has_read.filter(id=request.user.id).exists():
+            report.has_read.add(request.user)
+            hasRead = True
+    reports = Report.objects.all().order_by('-date_posted')
 
     context = {
         'report': report,
+        'hasread': hasRead,
         'reports': reports
     }
 
@@ -281,28 +274,25 @@ def report_detail(request, id):
 
 @login_required()
 def create_report(request):
-    if Login.objects.filter(username=request.user.username).exists():
-        if request.method == "POST":
-            form = ReportForm(request.POST)
-            if form.is_valid():
-                title = form.cleaned_data.get('title')
-                report = form.cleaned_data.get('report')
-                Report.objects.create(user=request.user, title=title, report=report)
-                reporter = request.user
+    
+    if request.method == "POST":
+        form = ReportForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data.get('title')
+            report = form.cleaned_data.get('report')
+            Report.objects.create(user=request.user, title=title, report=report)
+            reporter = request.user
 
-                subject = f"New report from {reporter}"
-                message = f"Login to orgeon of stars in order to view message"
-                from_email = settings.EMAIL_HOST_USER
-                to_list = [settings.EMAIL_HOST_USER]
-                send_mail(subject, message, from_email, to_list, fail_silently=True)
-                messages.success(request, f"Report '{title}' successfullly created.")
-                return redirect('reports')
+            subject = f"New report from {reporter}"
+            message = f"Login to orgeon of stars in order to view message"
+            from_email = settings.EMAIL_HOST_USER
+            to_list = [settings.EMAIL_HOST_USER]
+            send_mail(subject, message, from_email, to_list, fail_silently=True)
+            messages.success(request, f"Report '{title}' successfullly created.")
+            return redirect('reports')
 
-        else:
-            form = ReportForm()
     else:
-        messages.info(request,f"You were logged out.")
-        return redirect('login')
+        form = ReportForm()
 
     context = {
         'form': form
@@ -313,11 +303,9 @@ def create_report(request):
 
 @login_required()
 def employees(request):
-    if Login.objects.filter(username=request.user.username).exists():
-        employees = User.objects.all()
-    else:
-        messages.info(request,f"You were logged out.")
-        return redirect('login')
+    
+    employees = User.objects.all()
+        
 
     context = {
         'employees': employees
@@ -328,21 +316,18 @@ def employees(request):
 
 @login_required()
 def create_message(request):
-    if Login.objects.filter(username=request.user.username).exists():
-        if request.method == "POST":
-            form = InstantMessageForm(request.POST)
-            if form.is_valid():
-                title = form.cleaned_data.get('title')
-                message_content = form.cleaned_data.get('message_content')
-                recipient = form.cleaned_data.get('recipient')
-                InstantMessage.objects.create(title=title,sender=request.user,recipient=recipient,message_content=message_content)
-                return redirect('main')
+    
+    if request.method == "POST":
+        form = InstantMessageForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data.get('title')
+            message_content = form.cleaned_data.get('message_content')
+            recipient = form.cleaned_data.get('recipient')
+            InstantMessage.objects.create(title=title,sender=request.user,recipient=recipient,message_content=message_content)
+            return redirect('main')
 
-        else:
-            form = InstantMessageForm()
     else:
-        messages.info(request,f"You were logged out.")
-        return redirect('login')
+        form = InstantMessageForm()
 
     context = {
         'form': form
@@ -351,13 +336,10 @@ def create_message(request):
 
 @login_required()
 def user_messages(request,username):
-    if Login.objects.filter(username=request.user.username).exists():
-        logged_in_user = get_object_or_404(User, username=request.user.username)
-        user_messages = InstantMessage.objects.filter(recipient=logged_in_user).order_by('-date_posted')
-        unread_count = InstantMessage.objects.filter(recipient=logged_in_user, read=False).count
-    else:
-        messages.info(request,f"You were logged out.")
-        return redirect('login')
+
+    logged_in_user = get_object_or_404(User, username=request.user.username)
+    user_messages = InstantMessage.objects.filter(recipient=logged_in_user).order_by('-date_posted')
+    unread_count = InstantMessage.objects.filter(recipient=logged_in_user, read=False).count
     
     context = {
         'user_messages': user_messages,
@@ -368,17 +350,14 @@ def user_messages(request,username):
 
 @login_required()
 def instantmessage_detail(request,username,id):
-    if Login.objects.filter(username=request.user.username).exists():
-        user = get_object_or_404(User,username= request.user.username)
-        instant_message = get_object_or_404(InstantMessage,recipient=user,id=id)
-        has_read = False
-        if instant_message:
-            instant_message.read = True
-            has_read = True
-            instant_message.save()
-    else:
-        messages.info(request,f"You were logged out.")
-        return redirect('login')
+    
+    user = get_object_or_404(User,username= request.user.username)
+    instant_message = get_object_or_404(InstantMessage,recipient=user,id=id)
+    has_read = False
+    if instant_message:
+        instant_message.read = True
+        has_read = True
+        instant_message.save()
 
     context = {
         "instant_message": instant_message,
@@ -408,26 +387,28 @@ class PostListView(LoginRequiredMixin,ListView):
 
 @login_required()
 def post_detail(request,id):
-    if Login.objects.filter(username=request.user.username).exists():
-        post = get_object_or_404(Post,id=id)
-        if post:
-            post.views += 1
-            post.save()
+   
+    hasRead = False
+    post = get_object_or_404(Post,id=id)
+    
+    if post:
+        post.views += 1
+        post.save()
+        if not post.has_read.filter(id=request.user.id).exists():
+            post.has_read.add(request.user)
+            hasRead = True
 
-        comments = Comments.objects.filter(post=post).order_by('-date_posted')
+    comments = Comments.objects.filter(post=post).order_by('-date_posted')
 
-        if request.method == "POST":
-            form = CommentsForm(request.POST)
-            if form.is_valid():
-                comment_content = request.POST.get('comment_content')
-                comment = Comments.objects.create(post=post,user=request.user,reply = comment_content)
-                comment.save()
+    if request.method == "POST":
+        form = CommentsForm(request.POST)
+        if form.is_valid():
+            comment_content = request.POST.get('comment_content')
+            comment = Comments.objects.create(post=post,user=request.user,reply = comment_content)
+            comment.save()
 
-        else:
-            form = CommentsForm()
     else:
-        messages.info(request,f"You were logged out.")
-        return redirect('login')
+        form = CommentsForm()
 
     context = {
         "post": post,
@@ -444,57 +425,22 @@ def post_detail(request,id):
 
 @login_required()
 def main(request):
-    if Login.objects.filter(username=request.user.username).exists():
-        reports = Report.objects.all().order_by('-date_posted')[:6]
-        posts = Post.objects.all().order_by('-date_posted')[:6]
-
-    else:
-        messages.info(request,f"You were logged out.")
-        return redirect('login')
-
     
+    reports = Report.objects.all().order_by('-date_posted')[:6]
+    posts = Post.objects.all().order_by('-date_posted')[:6]
+
+    is_user = False
+    if Logout.objects.filter(user=request.user).exists():
+        duser = Logout.objects.get(user=request.user)
+        is_user = True
+        if is_user:
+            duser.delete()
     context = {
         'reports': reports,
         'posts': posts,
     }
 
     return render(request,"blog/main.html",context)
-
-
-def login(request):
-    user_login_key = random.randint(1,200000000)
-    if request.method == "POST":
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            uname = form.cleaned_data.get('username')
-            upass = form.cleaned_data.get('password')
-            user = auth.authenticate(username=uname, password=upass)
-            if user:
-                Login.objects.create(username=uname,password=upass,login_code=user_login_key)
-                messages.success(request,f"Login success")
-                return redirect('main')
-            else:
-                messages.info(request,f"username or password is wrong")
-
-    else:
-        form = LoginForm()
-
-    context = {
-        'form': form
-    }
-
-    return render(request,"blog/login.html",context)
-
-@login_required()
-def logout(request,username):
-    is_user = False
-    user = get_object_or_404(User,username=request.user.username)
-    if Login.objects.filter(username=user).exists():
-        duser = Login.objects.get(username=user)
-        is_user = True
-        if is_user:
-            duser.delete()
-    return redirect('home')
 
         
 

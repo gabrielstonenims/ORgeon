@@ -10,6 +10,11 @@
             {% for report in reports %}
             <ul class="list-group report-group z-depth-1-half">
                 <li class="list-group-item">
+                    {% if request.user in report.has_read.all %}
+                        <sup style="float: right;"><small class=" text-muted badge badge-default">Read</small></sup>
+                    {% else %}
+                        <sup style="float: right;"><small class="badge badge-danger animated jello infinite">New</small></sup>
+                    {% endif %}
                     <a href="{{ report.get_absolute_url }}">
                         <img src="{{ report.user.profile.profile_pic.url }}" alt=""><span class="report-writer">{{ report.user }}</span><br>
                         <span class="ml-r report-title text-muted">{{ report.title }}</span>

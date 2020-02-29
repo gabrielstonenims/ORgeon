@@ -100,6 +100,7 @@ class Report(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     report = models.TextField()
+    has_read = models.ManyToManyField(User,related_name="has_read_report",blank=True)
     date_posted = models.DateTimeField(default=timezone.now)
 
 
@@ -143,6 +144,7 @@ class Post(models.Model):
     message = models.TextField(help_text="This message would be sent to all employees")
     poster = models.ImageField(upload_to="post_posters",blank=True,validators=[FileExtensionValidator(allowed_extensions=['jpeg','jpg'])],help_text="Leave this field blank if message has no image.")
     views = models.IntegerField(default=0)
+    has_read = models.ManyToManyField(User,related_name="has_read_post", blank=True)
     need_replies = models.BooleanField(default=False)
     date_posted = models.DateTimeField(default=timezone.now)
     
@@ -175,20 +177,10 @@ class Comments(models.Model):
 
 
 
-# class CheckLoginLogout(models.Model):
-#     logged_user = models.ForeignKey(User,on_delete=models.CASCADE)
-#     login_code = models.IntegerField()
-#     date_and_time_logged = models.DateTimeField(default=timezone.now)
-
-#     def __str__(self):
-#         return f"{ self.logged_user.username } logged in at {self.date_and_time_logged}"
-
-
-class Login(models.Model):
-    username = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
-    login_code = models.IntegerField()
+class Logout(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    logout_code = models.IntegerField()
     date_and_time_logged = models.DateTimeField(default=timezone.now) 
 
     def __str__(self):
-        return f"{ self.username} logged in at {self.date_and_time_logged}"
+        return f"{ self.user} logged out at {self.date_and_time_logged}"

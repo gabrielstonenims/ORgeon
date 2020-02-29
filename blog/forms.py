@@ -1,7 +1,7 @@
 from django import forms
 from .models import (Volunteer, 
 JoinTrip, Partnership, NewsLetter,
- Report,Post,InstantMessage,Comments,Comments,NewsUpdate,Login
+ Report,Post,InstantMessage,Comments,Comments,NewsUpdate
  )
 
 
@@ -76,12 +76,6 @@ class CommentsForm(forms.ModelForm):
         fields = ['reply']
 
 
-class LoginForm(forms.ModelForm):
-    username = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your username'}))
-    password = forms.CharField(label='', max_length=100, widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Report Title'}))
-    class Meta:
-        model = Login
-        fields = ['username','password']
 
 
 
