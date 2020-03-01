@@ -2,6 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container mt-4">
+    <br>
     <!-- Section: Blog v.3 -->
     <div class="sendmessage">
         <a title="send new message to a single user" href="{% url 'message_new' %}"><i class="fas fa-plus-circle fa-2x"></i></a>
@@ -13,10 +14,12 @@
                     <span>
                         <img class="z-depth-1-half" src="{{ message.sender.profile.profile_pic.url  }}" alt="">
                     </span>
-                    <span class="ml-2 sender-name">{{ message.title }}</span><br>
+                    <span class="ml-2 sender-name text-center">{{ message.title }}</span><br>
                     <span class="ml-2 sender-message">{{ message.message_content|safe }}</span><br>
                     <small class="time-posted text-muted">{{ message.date_posted|date:"D d M Y" }}</small>
                 </div>
+                {% empty %}
+                <p class="text-center text-muted">No messages </p>
             {% endfor %}
         </div>
     </div>

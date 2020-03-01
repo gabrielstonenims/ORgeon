@@ -65,4 +65,29 @@ a.butt:hover {
 .user-message small.time-posted {
   float: right;
 }
+
+.themessage {
+  padding: 20px;
+}
+
+.themessage img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  border: solid silver 2px;
+}
+
+.themessage span {
+  font-weight: bold;
+}
+
+.themessage .instant-container {
+  padding: 10px;
+  border-radius: 5px;
+  background: #eff0f1;
+}
+
+.themessage .instant-container h3 {
+  font-weight: bold;
+}
 /*# sourceMappingURL=messages.css.map */

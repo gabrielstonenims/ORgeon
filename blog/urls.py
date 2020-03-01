@@ -2,7 +2,7 @@ from django.urls import path
 
 from . import views
 from .views import Volunteers
-from .views import PostCreateView,PostListView
+from .views import PostCreateView,PostListView,EventCreateView,EventDetailView
 urlpatterns = [
     path('',views.home,name='home'),
     # path('login/',views.login,name='login'),
@@ -29,5 +29,7 @@ urlpatterns = [
     path('main/',views.main,name='main'),
     path('messages/<str:username>/<int:id>/',views.instantmessage_detail,name='inmessage_detail'),
     path('newsletter/',views.news_letter,name='newsletter_create'),
+    path('event/new/',EventCreateView.as_view(),name='event_new'),
+    path('event/<int:pk>/',EventDetailView.as_view(),name="event_detail")
     # path('logout/<str:username>/',views.logout,name='logout')
 ]

@@ -6,67 +6,103 @@
     <br>
     <div class="row mb-3">
         <!-- reports -->
-        <div class="col-xs-5 col-sm-5 col-md-5 mb-3 main-reports">
+        <div class="col-xs-5 col-sm-5 col-md-4 mb-3 main-reports">
             <h5 class="mb-2 text-muted">Reports</h5>
             <ul class="list-group z-depth-1-half mb-2">
                 {% for report in reports %}
-                    {% if request.user in report.has_read.all %}
-                        <li class="list-group-item">
-                            <sup style="float: right;"><small class="text-muted badge badge-default">Read</small></sup>
-                            <img src="{{ report.user.profile.profile_pic.url }}" alt="">
-                            <a class="ml-2 text-muted" href="{{ report.get_absolute_url }}">{{ report.title }}</a><br>
-                            <small class="text-muted" style="float: right;">{{ report.date_posted|date:"D d M Y"}}</small>
-                        </li>
-                    {% else %}
-                        <li class="list-group-item">
-                            <sup style="float: right;" class="mt-1"><small class="badge badge-danger animated jello infinite">New</small></sup>
-                            <img src="{{ report.user.profile.profile_pic.url }}" alt="">
-                            <a class="ml-2 text-muted" href="{{ report.get_absolute_url }}">{{ report.title }}</a><br>
-                            <small class="text-muted" style="float: right;">{{ report.date_posted|date:"D d M Y"}}</small>
-                        </li>
-                    {% endif %}
+                {% if request.user in report.has_read.all %}
+                <li class="list-group-item">
+                    <sup style="float: right;"><small class="text-muted badge badge-default">Read</small></sup>
+                    <img src="{{ report.user.profile.profile_pic.url }}" alt="" title="{{ report.user }}">
+                    <a class="ml-2 text-muted" href="{{ report.get_absolute_url }}">{{ report.title }}</a><br>
+                    <small class="text-muted" style="float: right;">{{ report.date_posted|date:"D d M Y"}}</small>
+                </li>
+                {% else %}
+                <li class="list-group-item">
+                    <sup style="float: right;" class="mt-1"><small
+                            class="badge badge-danger animated jello infinite">New</small></sup>
+                    <img src="{{ report.user.profile.profile_pic.url }}" alt="" title="{{ report.user }}">
+                    <a class="ml-2 text-muted" href="{{ report.get_absolute_url }}">{{ report.title }}</a><br>
+                    <small class="text-muted" style="float: right;">{{ report.date_posted|date:"D d M Y"}}</small>
+                </li>
+                {% endif %}
                 {% endfor %}
             </ul>
             <br>
             <a class="butt" href="{% url 'reports' %}">View All</a>
         </div>
         <!-- posts -->
-        <div class="col-xs-5 col-sm-5 col-md-5 mb-3 main-post">
+        <div class="col-xs-5 col-sm-5 col-md-4 mb-3 main-post">
             <h5 class="mb-2 text-muted">Admin Notes</h5>
             <ul class="list-group z-depth-1-half mb-2">
                 {% for post in posts %}
-                    {% if request.user in post.has_read.all %}
-                        <li class="list-group-item">
-                            <sup style="float: right;"><small class="text-muted badge badge-default">Read</small></sup>
-                            <img src="{{ post.author.profile.profile_pic.url }}" alt="">
-                            <a class="ml-2 text-muted" href="{{ post.get_absolute_post_url }}">{{ post.title }}</a><br>
-                            <small class="text-muted" style="float: right;">{{ post.date_posted|date:"D d M Y"}}</small>
-                        </li>
-                    {% else %}
-                        <li class="list-group-item">
-                            <sup style="float: right;" class="mt-1"><small class="badge badge-danger animated jello infinite">New</small></sup>
-                            <img src="{{ post.author.profile.profile_pic.url }}" alt="">
-                            <a class="ml-2 text-muted" href="{{ post.get_absolute_post_url }}">{{ post.title }}</a><br>
-                            <small class="text-muted" style="float: right;">{{ post.date_posted|date:"D d M Y"}}</small>
-                        </li>
-                    {% endif %}
+                {% if request.user in post.has_read.all %}
+                <li class="list-group-item">
+                    <sup style="float: right;"><small class="text-muted badge badge-default">Read</small></sup>
+                    <img src="{{ post.author.profile.profile_pic.url }}" alt="" title="{{ post.author }}">
+                    <a class="ml-2 text-muted" href="{{ post.get_absolute_post_url }}">{{ post.title }}</a><br>
+                    <small class="text-muted" style="float: right;">{{ post.date_posted|date:"D d M Y"}}</small>
+                </li>
+                {% else %}
+                <li class="list-group-item">
+                    <sup style="float: right;" class="mt-1"><small
+                            class="badge badge-danger animated jello infinite">New</small></sup>
+                    <img src="{{ post.author.profile.profile_pic.url }}" alt="" title="{{ post.author }}">
+                    <a class="ml-2 text-muted" href="{{ post.get_absolute_post_url }}">{{ post.title }}</a><br>
+                    <small class="text-muted" style="float: right;">{{ post.date_posted|date:"D d M Y"}}</small>
+                </li>
+                {% endif %}
                 {% endfor %}
             </ul>
             <br>
             <a class="butt" href="{% url 'posts' %}">View All</a>
         </div>
-        <!-- messages -->
-        <!-- <div class="col-xs-5 col-sm-5 col-md-3 mb-3 main-user-messages">
-                <h5 class="mb-2 text-muted">Employees Stories</h5>
-                <ul class="list-group z-depth-1-half">
-                    {% for story in user_stories %}
-                    <li class="list-group-item">
-                        <img src="{{ story.user.profile.profile_pic.url }}" alt="">
-                        <a class="ml-2 text-muted" href="{{ story.get_absolute_story_url }}">{{ story.story_title }}</a>
-                    </li>
-                    {% endfor %}
-                  </ul>
-            </div> -->
+        <!-- events -->
+        <div class="col-xs-5 col-sm-5 col-md-4 mb-3 main-user-messages">
+            <h5 class="mb-2 text-muted">Your Messages <span style="float: right;" class="mr-2">Unread = {{ unread_counts }}</span></h5>
+            <ul class="list-group z-depth-1-half mb-2">
+                {% for message in unread_count %}
+                {% if message.read %}
+                <li class="list-group-item">
+                    <sup style="float: right;"><small class="text-muted badge badge-default">Read</small></sup>
+                    <img src="{{ message.sender.profile.profile_pic.url }}" alt="" title="{{ message.sender}}">
+                    <a class="ml-2 text-muted" href="{{ message.get_absolute_instant_message_url }}">{{ message.title }}</a><br>
+                    <small class="text-muted" style="float: right;">{{ message.date_posted|date:"D d M Y"}}</small>
+                </li>
+                {% else %}
+                <li class="list-group-item">
+                    <sup style="float: right;" class="mt-1"><small
+                            class="badge badge-danger animated jello infinite">New</small></sup>
+                    <img src="{{ message.sender.profile.profile_pic.url }}" alt="" title="{{ message.sender}}">
+                    <a class="ml-2 text-muted" href="{{ message.get_absolute_instant_message_url }}">{{ message.title }}</a><br>
+                    <small class="text-muted" style="float: right;">{{ message.date_posted|date:"D d M Y"}}</small>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            <br>
+            <a class="butt" href="{% url 'messages' request.user.username %}">View All</a>
+            
+            <!-- <a class="butt" href="{% url 'events' %}">View All</a> -->
+        </div>
+    </div>
+    <hr class="my-4">
+
+    <div class="row">
+        <div class="col-xs-5 col-sm-5 col-md-4 mb-3 main-post">
+            <h5 class="mb-2 text-muted">Events</h5>
+            <ul class="list-group z-depth-1-half">
+                {% for cv in current_events %}
+                <li class="list-group-item">
+                    <img src="{{ cv.user.profile.profile_pic.url }}" alt="">
+                    <a class="ml-2 text-muted" href="{{ cv.get_absolute_event_url }}">{{ cv.theme }}</a>
+                </li>
+                {% empty %}
+                <li class="list-group-item">Sorry,no events available</li>
+                {% endfor %}
+            </ul>
+            <br>
+        </div>
     </div>
 </div>
 {% endblock %}

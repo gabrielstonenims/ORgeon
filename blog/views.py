@@ -23,6 +23,7 @@ from .forms import (VolunteerForm,
 from django.contrib.auth.models import User
 import random
 from django.contrib import auth
+from django.utils import timezone
 
 
 @login_required()
@@ -324,6 +325,7 @@ def create_message(request):
             message_content = form.cleaned_data.get('message_content')
             recipient = form.cleaned_data.get('recipient')
             InstantMessage.objects.create(title=title,sender=request.user,recipient=recipient,message_content=message_content)
+            messages.success(request,f"Your message was sent.")
             return redirect('main')
 
     else:
@@ -350,7 +352,6 @@ def user_messages(request,username):
 
 @login_required()
 def instantmessage_detail(request,username,id):
-    
     user = get_object_or_404(User,username= request.user.username)
     instant_message = get_object_or_404(InstantMessage,recipient=user,id=id)
     has_read = False
@@ -414,6 +415,7 @@ def post_detail(request,id):
         "post": post,
         'form': form,
         'comments': comments,
+        'hasRead': hasRead
     }
 
     if request.is_ajax():
@@ -425,9 +427,14 @@ def post_detail(request,id):
 
 @login_required()
 def main(request):
-    
+    unread_count = InstantMessage.objects.filter(recipient=request.user.id)
+    unread_counts = InstantMessage.objects.filter(recipient=request.user.id,read=False).count
     reports = Report.objects.all().order_by('-date_posted')[:6]
     posts = Post.objects.all().order_by('-date_posted')[:6]
+    td = date.today()
+    tt = timezone.now()
+    ntt = tt.time
+    current_events = Events.objects.filter(date_of_event = td )
 
     is_user = False
     if Logout.objects.filter(user=request.user).exists():
@@ -438,9 +445,22 @@ def main(request):
     context = {
         'reports': reports,
         'posts': posts,
+        'current_events': current_events,
+        'unread_count': unread_count,
+        'unread_counts': unread_counts
     }
 
     return render(request,"blog/main.html",context)
 
         
+class EventCreateView(LoginRequiredMixin,CreateView):
+    model = Events
+    fields = ['theme','venue','date_of_event','event_poster','description_of_event']
+    success_url = '/events'
 
+    def form_valid(self,form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class EventDetailView(LoginRequiredMixin,DetailView):
+    model= Events

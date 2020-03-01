@@ -1,0 +1,35 @@
+{% extends 'blog/sidenav.html' %}
+{% load static%}
+{% block content %}
+
+<br>
+<div class="container mt-3">
+    <br>
+   <!-- Section: Blog v.1 -->
+<section class="my-5">
+    <div class="row">
+      <div class="col-lg-4">
+        {% if object.event_poster.url %}
+        <div class="view overlay rounded z-depth-2 mb-lg-0 mb-4">
+            <a href="{{ object.event_poster.url }}" data-lightbox="gallery" data-title="{{ object.theme }}">
+                <img class="img-fluid" src="{{ object.event_poster.url }}" alt="Sample image">
+            </a>
+        </div>
+        {% endif %}
+  
+      </div>
+      <div class="col-lg-6 event-container">
+        <h3 class="font-weight-bold mb-3"><strong>{{ object.theme }}</strong></h3>
+        <!-- Excerpt -->
+        <p>{{ object.description_of_event|safe }}</p>
+        <!-- Post data -->
+        <p class="venue">Venue:  <strong>{{ object.venue }}</strong>,<span class="doe ml-2">Date of event: {{ object.date_of_event|date:"D d M Y" }}</span></p>
+      </div>
+      <!-- Grid column -->
+    </div>
+    <!-- Grid row -->
+  </section>
+  <!-- Section: Blog v.1 -->
+</div>
+
+{% endblock %}

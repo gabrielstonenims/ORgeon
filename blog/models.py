@@ -49,10 +49,11 @@ class Volunteer(models.Model):
 
 
 class Events(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,default=1)
     theme = models.CharField(max_length=100)
     venue = models.CharField(max_length=150)
-    date = models.CharField(max_length=100)
-    event_started = models.BooleanField(default=False)
+    date_of_event = models.DateField(default=timezone.now)
+    # event_started = models.BooleanField(default=False,)
     event_poster = models.ImageField(upload_to='event_pics',blank=True,validators=[FileExtensionValidator(allowed_extensions=['jpeg','jpg'])])
     description_of_event = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
@@ -60,6 +61,9 @@ class Events(models.Model):
 
     def __str__(self):
         return f"{self.theme}"
+
+    def get_absolute_event_url(self):
+        return reverse("event_detail",args={self.id })
 
 
 class JoinTrip(models.Model):

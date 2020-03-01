@@ -12,7 +12,7 @@ body {
 }
 
 svg {
-  height: 60px;
+  height: 20px;
 }
 
 .main-wrapper .sidebar-nav {
@@ -23,12 +23,6 @@ svg {
 
 .main-wrapper .sidebar-nav .sidenav {
   padding: 20px;
-}
-
-.main-wrapper .sidebar-nav .sidenav .company-logo img {
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
 }
 
 .main-wrapper .sidebar-nav .sidenav .company-logo #logo {
@@ -93,7 +87,7 @@ svg {
 .main-wrapper .sidebar-nav .sidenav .list-group li a:hover {
   background: #eedd82;
   color: #000;
-  padding: 5px;
+  padding: 3px;
   border-radius: 5px;
 }
 
