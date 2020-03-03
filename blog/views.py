@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView
-from .models import Volunteer, Events, JoinTrip, Partnership, NewsLetter, Report, InstantMessage,Post,Comments,NewsUpdate,Usermsg,Logout
+from .models import Volunteer, Events, JoinTrip, Partnership, NewsLetter, Report, InstantMessage, Post, Comments, NewsUpdate, Usermsg, Logout
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
@@ -10,14 +10,15 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 import pytz
-from datetime import datetime,date,time,timedelta
+from django.db.models import Q
+from datetime import datetime, date, time, timedelta
 from django.core.paginator import Paginator
 from .forms import (VolunteerForm,
                     JoinTripForm,
                     PartnershipForm,
                     NewsLetterForm,
                     ReportForm,
-                    PostForm,InstantMessageForm,CommentsForm,
+                    PostForm, InstantMessageForm, CommentsForm,
                     NewsUpdateForm,
                     )
 from django.contrib.auth.models import User
@@ -40,8 +41,10 @@ def news_letter(request):
             message = f"\n {update_message}"
             from_email = settings.EMAIL_HOST_USER
             to_list = suscribed_users
-            send_mail(subject, message, from_email, to_list, fail_silently=True)
-            messages.success(request,f"News update messages sent successfully.")
+            send_mail(subject, message, from_email,
+                      to_list, fail_silently=True)
+            messages.success(
+                request, f"News update messages sent successfully.")
             return redirect('newsletter_create')
     else:
         form = NewsUpdateForm()
@@ -50,11 +53,7 @@ def news_letter(request):
         "form": form
     }
 
-    return render(request,"blog/newsletter.html",context)
-
-
-
-
+    return render(request, "blog/newsletter.html", context)
 
 
 def home(request):
@@ -70,8 +69,10 @@ def home(request):
                 message = f"We will send you all the necessary updates."
                 from_email = settings.EMAIL_HOST_USER
                 to_list = [email]
-                send_mail(subject, message, from_email, to_list, fail_silently=True)
-                messages.success(request, f"Thank you,your email has been added to our newslist.")
+                send_mail(subject, message, from_email,
+                          to_list, fail_silently=True)
+                messages.success(
+                    request, f"Thank you,your email has been added to our newslist.")
                 return redirect('home')
 
     else:
@@ -105,7 +106,8 @@ def volunteer_register(request):
         if form.is_valid():
             v_email = form.cleaned_data.get('email')
             if Volunteer.objects.filter(email=v_email).exists():
-                messages.info(request, f"Volunteer with {v_email} already exist.")
+                messages.info(
+                    request, f"Volunteer with {v_email} already exist.")
             else:
                 form.save()
                 name = form.cleaned_data.get('name')
@@ -114,13 +116,15 @@ def volunteer_register(request):
                 message1 = f"{name} wishes to volunteer for Orgeon."
                 from_email = settings.EMAIL_HOST_USER
                 to_list = [settings.EMAIL_HOST_USER]
-                send_mail(subject1, message1, from_email, to_list, fail_silently=True)
+                send_mail(subject1, message1, from_email,
+                          to_list, fail_silently=True)
                 # to user volunteering email
                 subject = "Orgeon of Stars welcomes you."
                 message = f"Thank you for volunteering with Orgeon of stars,in order to know more about \n you we will contact you soon,stay blessed."
                 from_email = settings.EMAIL_HOST_USER
                 to_list = [v_email]
-                send_mail(subject, message, from_email, to_list, fail_silently=True)
+                send_mail(subject, message, from_email,
+                          to_list, fail_silently=True)
                 messages.success(request, f"Thank you for joining.")
                 return redirect('volunteers')
 
@@ -169,14 +173,17 @@ def join_trip(request):
             message1 = f"More details below \n 1.Email: {email}\n2.Phone: {phone}"
             from_email = settings.EMAIL_HOST_USER
             to_list = [settings.EMAIL_HOST_USER]
-            send_mail(subject1, message1, from_email, to_list, fail_silently=True)
+            send_mail(subject1, message1, from_email,
+                      to_list, fail_silently=True)
 
             subject = "Thank you."
             message = f"Orgeon of stars is so delighted that you have decided to join our trip,\n saving lives and helping the vulnerable children is our top priority and we are \n happy that you've made it yours too.\nWe will let you know of any other information before we embark on this journey.\nStay blessed."
             from_email = settings.EMAIL_HOST_USER
             to_list = [trip_email]
-            send_mail(subject, message, from_email, to_list, fail_silently=True)
-            messages.success(request, f"Thank you for joining us on this trip.")
+            send_mail(subject, message, from_email,
+                      to_list, fail_silently=True)
+            messages.success(
+                request, f"Thank you for joining us on this trip.")
 
     else:
         form = JoinTripForm()
@@ -194,7 +201,8 @@ def become_partner(request):
         if form.is_valid():
             partner_email = form.cleaned_data.get('email')
             if Partnership.objects.filter(email=partner_email).exists():
-                messages.info(request, f"A partner with the same email already exits.")
+                messages.info(
+                    request, f"A partner with the same email already exits.")
 
             else:
                 form.save()
@@ -205,14 +213,16 @@ def become_partner(request):
                 message = f"We are happy to see you and also work with you.We will contact you soon for additional information.Stay blessed."
                 from_email = settings.EMAIL_HOST_USER
                 to_list = [partner_email]
-                send_mail(subject, message, from_email, to_list, fail_silently=True)
+                send_mail(subject, message, from_email,
+                          to_list, fail_silently=True)
 
                 # mail to personal email
                 subject1 = "Got new partner"
                 message1 = f"{name} wants to partner with Orgeon of stars.\nMore details are below\n1.Email: {email}\n2.Phone: {phone}"
                 from_email = settings.EMAIL_HOST_USER
                 to_list = [settings.EMAIL_HOST_USER]
-                send_mail(subject1, message1, from_email, to_list, fail_silently=True)
+                send_mail(subject1, message1, from_email,
+                          to_list, fail_silently=True)
                 messages.success(request, f"Thank you for joining us..")
                 return redirect('partners')
     else:
@@ -242,9 +252,8 @@ def donate(request):
 
 @login_required()
 def reports(request):
-    
+
     reports = Report.objects.all().order_by('-date_posted')
-        
 
     context = {
         "reports": reports
@@ -255,7 +264,7 @@ def reports(request):
 
 @login_required()
 def report_detail(request, id):
-    
+
     report = get_object_or_404(Report, id=id)
     hasRead = False
     if report:
@@ -275,21 +284,24 @@ def report_detail(request, id):
 
 @login_required()
 def create_report(request):
-    
+
     if request.method == "POST":
         form = ReportForm(request.POST)
         if form.is_valid():
             title = form.cleaned_data.get('title')
             report = form.cleaned_data.get('report')
-            Report.objects.create(user=request.user, title=title, report=report)
+            Report.objects.create(
+                user=request.user, title=title, report=report)
             reporter = request.user
 
             subject = f"New report from {reporter}"
             message = f"Login to orgeon of stars in order to view message"
             from_email = settings.EMAIL_HOST_USER
             to_list = [settings.EMAIL_HOST_USER]
-            send_mail(subject, message, from_email, to_list, fail_silently=True)
-            messages.success(request, f"Report '{title}' successfullly created.")
+            send_mail(subject, message, from_email,
+                      to_list, fail_silently=True)
+            messages.success(
+                request, f"Report '{title}' successfullly created.")
             return redirect('reports')
 
     else:
@@ -304,9 +316,8 @@ def create_report(request):
 
 @login_required()
 def employees(request):
-    
+
     employees = User.objects.all()
-        
 
     context = {
         'employees': employees
@@ -315,34 +326,25 @@ def employees(request):
     return render(request, "blog/employees.html", context)
 
 
-@login_required()
-def create_message(request):
-    
-    if request.method == "POST":
-        form = InstantMessageForm(request.POST)
-        if form.is_valid():
-            title = form.cleaned_data.get('title')
-            message_content = form.cleaned_data.get('message_content')
-            recipient = form.cleaned_data.get('recipient')
-            InstantMessage.objects.create(title=title,sender=request.user,recipient=recipient,message_content=message_content)
-            messages.success(request,f"Your message was sent.")
-            return redirect('main')
+class InstantMessgeCreateView(LoginRequiredMixin, CreateView):
+    model = InstantMessage
+    fields = ['title', 'recipient', 'message_content']
+    success_url = '/main'
 
-    else:
-        form = InstantMessageForm()
+    def form_valid(self, form):
+        form.instance.sender = self.request.user
+        return super().form_valid(form)
 
-    context = {
-        'form': form
-    }
-    return render(request,"blog/instantmessage_form.html",context)
 
 @login_required()
-def user_messages(request,username):
+def user_messages(request, username):
 
     logged_in_user = get_object_or_404(User, username=request.user.username)
-    user_messages = InstantMessage.objects.filter(recipient=logged_in_user).order_by('-date_posted')
-    unread_count = InstantMessage.objects.filter(recipient=logged_in_user, read=False).count
-    
+    user_messages = InstantMessage.objects.filter(
+        recipient=logged_in_user).order_by('-date_posted')
+    unread_count = InstantMessage.objects.filter(
+        recipient=logged_in_user, read=False).count
+
     context = {
         'user_messages': user_messages,
         'notification_count': unread_count,
@@ -350,10 +352,11 @@ def user_messages(request,username):
 
     return render(request, "blog/messages.html", context)
 
+
 @login_required()
-def instantmessage_detail(request,username,id):
-    user = get_object_or_404(User,username= request.user.username)
-    instant_message = get_object_or_404(InstantMessage,recipient=user,id=id)
+def instantmessage_detail(request, username, id):
+    user = get_object_or_404(User, username=request.user.username)
+    instant_message = get_object_or_404(InstantMessage, recipient=user, id=id)
     has_read = False
     if instant_message:
         instant_message.read = True
@@ -365,33 +368,32 @@ def instantmessage_detail(request,username,id):
         'has_read': has_read
     }
 
-    return render(request,"blog/instant_message_detail.html",context)
+    return render(request, "blog/instant_message_detail.html", context)
 
 
-class PostCreateView(LoginRequiredMixin,CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title','message','poster','need_replies']
+    fields = ['title', 'message', 'poster', 'need_replies']
     success_url = '/main'
 
-    def form_valid(self,form):
+    def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
 
-class PostListView(LoginRequiredMixin,ListView):
+class PostListView(LoginRequiredMixin, ListView):
     model = Post
     template_name = "blog/post_list.html"
     context_object_name = 'posts'
     ordering = ['-date_posted']
 
 
-
 @login_required()
-def post_detail(request,id):
-   
+def post_detail(request, id):
+
     hasRead = False
-    post = get_object_or_404(Post,id=id)
-    
+    post = get_object_or_404(Post, id=id)
+
     if post:
         post.views += 1
         post.save()
@@ -405,7 +407,8 @@ def post_detail(request,id):
         form = CommentsForm(request.POST)
         if form.is_valid():
             comment_content = request.POST.get('comment_content')
-            comment = Comments.objects.create(post=post,user=request.user,reply = comment_content)
+            comment = Comments.objects.create(
+                post=post, user=request.user, reply=comment_content)
             comment.save()
 
     else:
@@ -419,22 +422,24 @@ def post_detail(request,id):
     }
 
     if request.is_ajax():
-        html = render_to_string("blog/comment_form.html",context,request=request)
+        html = render_to_string("blog/comment_form.html",
+                                context, request=request)
         return JsonResponse({"form": html})
-    return render(request,"blog/post_detail.html",context)
-
+    return render(request, "blog/post_detail.html", context)
 
 
 @login_required()
 def main(request):
-    unread_count = InstantMessage.objects.filter(recipient=request.user.id)
-    unread_counts = InstantMessage.objects.filter(recipient=request.user.id,read=False).count
+    unread_count = InstantMessage.objects.filter(
+        recipient=request.user.id).order_by('-date_posted')[:6]
+    unread_counts = InstantMessage.objects.filter(
+        recipient=request.user.id, read=False).count
     reports = Report.objects.all().order_by('-date_posted')[:6]
     posts = Post.objects.all().order_by('-date_posted')[:6]
     td = date.today()
     tt = timezone.now()
     ntt = tt.time
-    current_events = Events.objects.filter(date_of_event = td )
+    current_events = Events.objects.filter(date_of_event=td)
 
     is_user = False
     if Logout.objects.filter(user=request.user).exists():
@@ -450,17 +455,50 @@ def main(request):
         'unread_counts': unread_counts
     }
 
-    return render(request,"blog/main.html",context)
+    return render(request, "blog/main.html", context)
 
-        
-class EventCreateView(LoginRequiredMixin,CreateView):
+
+class EventCreateView(LoginRequiredMixin, CreateView):
     model = Events
-    fields = ['theme','venue','date_of_event','event_poster','description_of_event']
+    fields = ['theme', 'venue', 'date_of_event',
+              'event_poster', 'description_of_event']
     success_url = '/events'
 
-    def form_valid(self,form):
+    def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class EventDetailView(LoginRequiredMixin,DetailView):
-    model= Events
+
+class EventDetailView(LoginRequiredMixin, DetailView):
+    model = Events
+
+
+@login_required
+def search_post(request):
+    query = request.GET.get('q')
+    if query:
+        posts = Post.objects.filter(
+            Q(title=query) 
+        )
+        ismsg = InstantMessage.objects.filter(
+            Q(title=query) |
+            Q(message_content=query)
+        )
+        allreport = Report.objects.filter(
+            Q(title=query) |
+            Q(report=query)
+        )
+        all_users = User.objects.filter(
+            Q(username=query) |
+            Q(email=query)
+        )
+
+    context = {
+        'posts': posts,
+        'ismgs': ismsg,
+        'allreport': allreport,
+        'allusers': all_users
+    }
+    if request.is_ajax():
+        html = render_to_string("blog/search_list.html", context, request=request)
+        return JsonResponse({'form': html })

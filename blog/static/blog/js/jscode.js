@@ -8,7 +8,7 @@ $(function() {
     $(document).on("submit",".post-comment-form",function(event){
       event.preventDefault()
       $.ajax({
-        type:"POST",
+        type:"POST", 
         url:$(this).attr('action'),
         data:$(this).serialize(),
         dataType:'json',
