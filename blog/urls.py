@@ -2,7 +2,7 @@ from django.urls import path
 
 from . import views
 from .views import Volunteers
-from .views import PostCreateView,PostListView,EventCreateView,EventDetailView,InstantMessgeCreateView
+from .views import PostCreateView,PostListView,EventCreateView,EventDetailView,InstantMessgeCreateView,ReportListView
 urlpatterns = [
     path('',views.home,name='home'),
     # path('login/',views.login,name='login'),
@@ -17,17 +17,17 @@ urlpatterns = [
     path('partner/new/',views.become_partner,name='become_a_partner'),
     path('partners/',views.partners,name='partners'),
     path('donate/',views.donate,name='donate'),
-    path('reports/',views.reports,name='reports'),
+    path('reports/',ReportListView.as_view(),name='reports'),
     path('report/<int:id>/',views.report_detail,name='report_detail'),
     path('report/new/',views.create_report,name='create_report'),
     path('employees/',views.employees,name='employees'),
-    path('messages/<str:username>/',views.user_messages,name='messages'),
+    path('messages/',views.user_messages,name='messages'),
     path('notification/new/',PostCreateView.as_view(),name='post_new'),
     path('posts/',PostListView.as_view(),name='posts'),
     path('post/<int:id>/',views.post_detail,name='post_detail'),
     path('message/new/',InstantMessgeCreateView.as_view(),name='message_new'),
     path('main/',views.main,name='main'),
-    path('messages/<str:username>/<int:id>/',views.instantmessage_detail,name='inmessage_detail'),
+    path('messages/<int:id>/',views.instantmessage_detail,name='inmessage_detail'),
     path('newsletter/',views.news_letter,name='newsletter_create'),
     path('event/new/',EventCreateView.as_view(),name='event_new'),
     path('event/<int:pk>/',EventDetailView.as_view(),name="event_detail"),

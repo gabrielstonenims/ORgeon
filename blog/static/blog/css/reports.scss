@@ -1,5 +1,11 @@
 @import "./_config";
+@import "./debody";
 
+.report-main{
+    h3{
+        color: $light;
+    }
+}
 .reports{
     padding: 20px;
     .report-group{
@@ -37,9 +43,13 @@
         span{
             text-transform: capitalize;
             font-weight: bold;
+            color: $light;
         }
     }
     .main-report-container{
+        h3{
+            color: black;
+        }
         padding: 20px;
         background-color: #eff0f1;
         border-radius: 5px;

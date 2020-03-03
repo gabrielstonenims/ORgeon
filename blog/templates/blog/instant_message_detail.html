@@ -1,8 +1,10 @@
-{% extends "blog/sidenav.html" %}
+{% extends "blog/base2.html" %}
 
 {% block content %}
-    <div class="container mt-4">
-        <div class="row mb-3">
+<div class="message-main">
+
+    <div class="container">
+        <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-8 mb-3">
                 <div class="themessage">
                     <img class="z-depth-1-half" src="{{ instant_message.sender.profile.profile_pic.url }}" alt="">
@@ -16,4 +18,6 @@
             </div>
         </div>
     </div>
+
+</div>
 {% endblock %}

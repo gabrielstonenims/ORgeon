@@ -1,109 +1,46 @@
-* {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.5;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
-
-svg {
-  height: 20px;
-}
-
-.main-wrapper .sidebar-nav {
+a.butt {
   color: #fff;
-  background: #0037a0;
-  height: 100vh;
-}
-
-.main-wrapper .sidebar-nav .sidenav {
-  padding: 20px;
-}
-
-.main-wrapper .sidebar-nav .sidenav .company-logo #logo {
-  width: 100%;
-}
-
-.main-wrapper .sidebar-nav .sidenav .company-logo #logo path:nth-child(2) {
-  stroke-dasharray: 589.9854736328125;
-  stroke-dashoffset: 589.9854736328125;
-  -webkit-animation: line-anim 2s ease forwards infinite;
-          animation: line-anim 2s ease forwards infinite;
-}
-
-.main-wrapper .sidebar-nav .sidenav .company-logo #logo path:nth-child(4) {
-  stroke-dasharray: 506.5438537597656;
-  stroke-dashoffset: 506.5438537597656;
-  -webkit-animation: line-anim 2s ease forwards infinite 0.3s;
-          animation: line-anim 2s ease forwards infinite 0.3s;
-}
-
-.main-wrapper .sidebar-nav .sidenav .company-logo #logo path:nth-child(6) {
-  stroke-dasharray: 506.5433654785156;
-  stroke-dashoffset: 506.5433654785156;
-  -webkit-animation: line-anim 2s ease forwards infinite 0.6s;
-          animation: line-anim 2s ease forwards infinite 0.6s;
-}
-
-.main-wrapper .sidebar-nav .sidenav .company-logo #logo path:nth-child(8) {
-  stroke-dasharray: 521.3291015625;
-  stroke-dashoffset: 521.3291015625;
-  -webkit-animation: line-anim 2s ease forwards infinite 0.9s;
-          animation: line-anim 2s ease forwards infinite 0.9s;
-}
-
-.main-wrapper .sidebar-nav .sidenav .company-logo #logo path:nth-child(10) {
-  stroke-dasharray: 589.9854736328125;
-  stroke-dashoffset: 589.9854736328125;
-  -webkit-animation: line-anim 2s ease forwards infinite 1.2s;
-          animation: line-anim 2s ease forwards infinite 1.2s;
-}
-
-.main-wrapper .sidebar-nav .sidenav .company-logo #logo path:nth-child(12) {
-  stroke-dasharray: 466.5599670410156;
-  stroke-dashoffset: 466.5599670410156;
-  -webkit-animation: line-anim 2s ease forwards infinite 1.5s;
-          animation: line-anim 2s ease forwards infinite 1.5s;
-}
-
-.main-wrapper .sidebar-nav .sidenav .logged-in-user img {
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-  border: solid silver 2px;
-}
-
-.main-wrapper .sidebar-nav .sidenav .list-group li a {
+  font-weight: bold;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: #020024;
+  background: -webkit-gradient(linear, left top, right top, from(#020024), color-stop(35%, #090979), to(#00d4ff));
+  background: linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%);
+  border-radius: 5px;
   -webkit-transition: 0.5s ease-in;
   transition: 0.5s ease-in;
-  color: rgba(0, 0, 0, 0.753);
 }
 
-.main-wrapper .sidebar-nav .sidenav .list-group li a:hover {
-  background: #eedd82;
+a.butt:hover {
+  background: #ffec8b;
   color: #000;
-  padding: 3px;
+}
+
+#butt {
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: #020024;
+  background: -webkit-gradient(linear, left top, right top, from(#020024), color-stop(35%, #090979), to(#00d4ff));
+  background: linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%);
   border-radius: 5px;
+  -webkit-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
 }
 
-hr {
-  background-color: grey;
+#butt:hover {
+  background: #ffec8b;
+  color: #000;
 }
 
-@-webkit-keyframes line-anim {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes line-anim {
-  to {
-    stroke-dashoffset: 0;
-  }
+nav .nav-item a {
+  color: #fff;
+  font-weight: bold;
 }
 /*# sourceMappingURL=style.css.map */

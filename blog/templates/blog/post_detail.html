@@ -1,4 +1,4 @@
-{% extends "blog/sidenav.html" %}
+{% extends "blog/base2.html" %}
 
 {% block content %}
 <div class="container mt-3">
@@ -16,9 +16,9 @@
             <div class="col-lg-6 admin-post-details">
                 <h3 class="font-weight-bold mb-3"><strong>{{ post.title }}</strong></h3>
                 <p class="pst-msg">{{ post.message }}</p>
-                <p><span class="text-muted mr-1">from</span> <span class="from-admin">
+                <p><span class="mr-1" style="color: white;">from</span> <span class="from-admin">
                         <img src="{{ post.author.profile.profile_pic.url }}" alt="">
-                    </span>, {{ post.date_posted|date:"D d M Y"}}</p>
+                    </span>,<span style="color: white;"> {{ post.date_posted|date:"D d M Y"}}</span></p>
             </div>
         </div>
     </section>

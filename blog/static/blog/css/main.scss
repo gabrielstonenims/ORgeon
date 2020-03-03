@@ -1,10 +1,29 @@
 @import "./config";
+@import "./debody";
+
+.just-main{
+    .userdetails{
+        .card{
+            h4.card-title{
+                text-transform: capitalize;
+            }
+            .card-body{
+                background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+            }
+        }
+    }
+    hr.my-4{
+        border: solid rgba(158, 154, 154, 0.856) 2px;
+    }
+}
 
 .main-reports,.main-post,.main-user-messages{
 
     padding: 20px;
     h5{
         font-size: 15px;
+        color: $light;
     }
     img{
         width: 40px;
@@ -31,4 +50,5 @@
 .dashboard{
     padding: 20px;
     font-weight: bold;
+    color: $light;
 }

@@ -5,7 +5,9 @@ a.butt {
   padding-right: 7px;
   padding-top: 5px;
   padding-bottom: 5px;
-  background: #ffd700;
+  background: #020024;
+  background: -webkit-gradient(linear, left top, right top, from(#020024), color-stop(35%, #090979), to(#00d4ff));
+  background: linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%);
   border-radius: 5px;
   -webkit-transition: 0.5s ease-in;
   transition: 0.5s ease-in;
@@ -24,7 +26,9 @@ a.butt:hover {
   padding-right: 7px;
   padding-top: 5px;
   padding-bottom: 5px;
-  background: #ffd700;
+  background: #020024;
+  background: -webkit-gradient(linear, left top, right top, from(#020024), color-stop(35%, #090979), to(#00d4ff));
+  background: linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%);
   border-radius: 5px;
   -webkit-transition: 0.5s ease-in;
   transition: 0.5s ease-in;

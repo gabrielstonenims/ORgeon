@@ -1,9 +1,12 @@
-{% extends "blog/sidenav.html" %}
+{% extends "blog/base2.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
- <div class="container mt-3">
+<div class="report-main">
+
+
+ <div class="container">
    <br>
-   <h3 class="text-center mb-3">Create new report</h3>
+   <h3 class="text-center">Create new report</h3>
    <br>
     <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-8 mr-auto ml-auto">
@@ -19,6 +22,7 @@
         </div>
       </div>
  </div>
+</div>
  <script>
   CKEDITOR.replace( 'reportform' );
 </script>

@@ -127,7 +127,7 @@ class InstantMessage(models.Model):
         return f"{self.sender} has sent a private message to { self.recipient.username }."
 
     def get_absolute_instant_message_url(self):
-        return reverse("inmessage_detail",args={self.recipient.username,self.pk })
+        return reverse("inmessage_detail",args={ self.pk })
 
 
     def message_count(self):

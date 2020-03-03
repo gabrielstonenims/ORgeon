@@ -5,12 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="icon" href="{% static 'blog/images/nfh.ico' %}" type="image/x-icon">
+  <link rel="icon" href="{% static 'blog/images/for-title.ico' %}" type="image/x-icon">
   <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css'%}" type="text/css">
+  <link rel="stylesheet" href="{% static 'blog/css/style.css'%}" type="text/css">
   <link rel="stylesheet" href="{% static 'blog/css/mdb.min.css'%}" type="text/css">
   <link rel="stylesheet" href="{% static 'blog/css/forms.css'%}" type="text/css">
-  <link rel="stylesheet" href="{% static 'blog/css/richtext.min.css'%}" type="text/css">
   <link rel="stylesheet" href="{% static 'blog/css/reports.css'%}" type="text/css">
+  <link rel="stylesheet" href="{% static 'blog/css/messages.css'%}" type="text/css">
+  <link rel="stylesheet" href="{% static 'blog/css/events.css'%}" type="text/css">
+  <link rel="stylesheet" href="{% static 'blog/css/main.css'%}" type="text/css">
+  <link rel="stylesheet" href="{% static 'blog/css/post.css'%}" type="text/css">
+  <link rel="stylesheet" href="{% static 'blog/css/profile.css'%}" type="text/css">
   <link rel="stylesheet" href="{% static 'blog/css/swiper.min.css'%}" type="text/css">
   <link rel="stylesheet" href="{% static 'blog/css/fontawesome-all.min.css'%}" type="text/css">
   <link rel="stylesheet" href="{% static 'blog/css/animate.css'%}" type="text/css">
@@ -24,7 +29,7 @@
 <body class="orgeon-lp">
   {% include 'blog/nav2.html' %}
   <div class="container">
-    <div class="row">
+    <div class="row text-center">
       <div class="col-xs-6 col-sm-6 col-md-6 ml-auto mr-auto">
         {% if messages %}
           {% for message in messages %}
@@ -40,16 +45,21 @@
 
   {% endblock %}
   <script src="{% static 'blog/js/jquery-3.4.1.min.js'%}"></script>
-  <script src="{% static 'blog/js/bootstrap.min.js'%}"></script>
-  <script src="{% static 'blog/js/mdb.min.js'%}"></script>
-  <script src="{% static 'blog/js/swiper.min.js'%}"></script>
-  <script type="text/javascript" src="{% static 'blog/js/ckeditor.js'%}"></script>
-  <script src="{% static 'blog/js/jscode.js'%}"></script>
-  <script src="{% static 'blog/js/fontawesome-all.min.js'%}"></script>
-  <script src="{% static 'blog/js/lightbox-plus-jquery.min.js'%}"></script>
-  <!-- <script>
-    CKEDITOR.replace( 'reportform' );
-  </script> -->
+    <script src="{% static 'blog/js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'blog/js/mdb.min.js'%}"></script>
+    <script src="{% static 'blog/js/swiper.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'blog/js/ckeditor.js'%}"></script>
+    <script src="{% static 'blog/js/jscode.js'%}"></script>
+    <script src="{% static 'blog/js/ajax.js'%}"></script>
+    <script src="{% static 'blog/js/fontawesome-all.min.js'%}"></script>
+    <script src="{% static 'blog/js/lightbox-plus-jquery.min.js'%}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 400,
+            duration: 1000
+        });
+    </script>
 </body>
 </html>
 

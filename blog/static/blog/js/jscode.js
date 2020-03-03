@@ -22,10 +22,13 @@ $(function() {
       })
     })
 
-    // svg get stroke dash array
-    const logo = document.querySelectorAll("#logo path")
-    for(let i=0;i<logo.length;i++){
-      console.log(`Letter ${i} is ${logo[i].getTotalLength()}`)
-    }
+  
+    $(window).on("resize",(event)=>{
+      console.log(event.target.innerWidth)
+      if(window.innerWidth <= 700){
+        $(".sidebar-nav").removeClass('sticky-top')
+        console.log('resizing window')
+      }
+    })
 });
 

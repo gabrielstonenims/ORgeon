@@ -1,4 +1,5 @@
 @import "./_config";
+@import "./debody";
 
 #addemployeeform,#volunteerform,#tripform,#partnerform{
     background-color: #0037a0;;
@@ -12,11 +13,13 @@
 
 h3.header-employee{
     font-weight: bold;
+    color: $light;
 
 }
 .employee-container{
     padding: 20px;
     .card{
+        border-radius: 5px;
         background: silver;
         max-width: 100%;
         height: 400px;
@@ -56,6 +59,10 @@ h3.header-employee{
                 h6{
                    color: #002387;
                    font-weight: bold; 
+                }
+                h3.em-email{
+                    text-align: center;
+                    font-size: 15px;
                 }
             }
         }

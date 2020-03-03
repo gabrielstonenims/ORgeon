@@ -1,69 +1,57 @@
-
 {% load static %}
-<!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #8b6cc4;">
+<!--Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background: #0037a0;">
   <div class="container">
-    <!-- Navbar brand -->
-    <a class="navbar-brand" href="#">Navbar</a>
-
-    <!-- Collapse button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-      aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="basicExampleNav">
-      <!-- Links -->
-      <ul class="navbar-nav mr-auto">
-        {% if request.user.username == "secretary" %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'register' %}"><i class="fas fa-plus-circle"></i>Employee</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'employees' %}">Employees</a>
-        </li>
-        {% endif  %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'reports' %}">Reports</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'create_report' %}"><i class="fas fa-plus-circle"></i>Report</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'messages' request.user %}">
-            Messages</sup>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-        </li>
-
-        {% if request.user.username == "admin" %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'post_new' %}"><i class="fas fa-plus-circle"></i>Post</a>
-        </li>
-        {% endif %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto nav-flex-icons">
-        <li class="nav-item avatar">
-          <a class="nav-link p-0" href="#">
-            <img src="{{ request.user.profile.profile_pic.url }}" alt="avatar image"
-              style="width: 30px;height: 30px;border-radius: 15px;">
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">{{ request.user }}</a>
-        </li>
-
-      </ul>
-    </div>
-    <!-- Collapsible content -->
+  <a class="navbar-brand" href="{% url 'main' %}">
+    <img src="{% static 'blog/images/logo-orgeon.jpg' %}" alt="" style="width: 40px;height: 40px;border-radius: 20px; border: solid silver 2px;">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+    aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'main' %}"><i class="fas fa-home mr-1"></i>Home</a>
+      </li>
+      <li class="nav-item" title="view all employees">
+        <a class="nav-link" href="{% url 'employees' %}"><i class="fas fa-users mr-1"></i>Employees</a>
+    </li>
+    {% if request.user.username == "secretary" %}
+    <li class="nav-item" title="add a new employee">
+        <a class="nav-link" href="{% url 'register' %}"><i class="fas fa-plus mr-1"></i>Employee</a>
+    </li>
+    {% endif %}
+    <li class="nav-item" title="view all reports">
+        <a class="nav-link" href="{% url 'reports' %}"><i class="fas fa-edit mr-1"></i>Reports</a>
+    </li>
+    <li class="nav-item" title="add a new report">
+        <a class="nav-link" href="{% url 'create_report' %}"><i class="fas fa-plus mr-1"></i>Report</a>
+    </li>
+    <li class="nav-item" title="view all your messages">
+        <a class="nav-link" href="{% url 'messages'  %}">
+            <i class="fas fa-envelope mr-1"></i>Messages
+        </a>
+    </li>
+    </ul>
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <img src="{{ request.user.profile.profile_pic.url }}" alt="" style="width: 40px;height: 40px;border-radius: 20px; border: solid silver 2px;" title="{{ request.user.username }}">
+        </a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-default"
+          aria-labelledby="navbarDropdownMenuLink-333">
+          <a title="view profile" class="dropdown-item" href="{% url 'profile' %}"><i class="fas fa-user mr-1"></i>Profile</a>
+          {% if request.user.username == "admin" %}
+          <a title="send post to all employees" class="dropdown-item" href="{% url 'post_new' %}"><i class="fas fa-plus-circle mr-1"></i>Post</a>
+          <a class="dropdown-item" href="{% url 'event_new' %}" title="send post to all employees"><i class="fas fa-plus-circle mr-1"></i>Event</a>
+          <a title="send updates to subscribers" class="dropdown-item" href="{% url 'newsletter_create' %}"><i class="fas fa-plus-circle mr-1" ></i>News</a>
+          {% endif %}
+          <a title="logout of your accounts" class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt mr-1"></i>Logout</a>
+        </div>
+      </li>
+    </ul>
   </div>
+</div>
 </nav>
-<!--/.Navbar-->

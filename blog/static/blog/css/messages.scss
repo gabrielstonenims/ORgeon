@@ -1,4 +1,11 @@
 @import "./_config";
+@import "./debody";
+
+.message-main{
+  h3{
+      color: $light;
+  }
+}
 
 .sendmessage{
     position: fixed;
@@ -39,10 +46,13 @@
   }
   span{
     font-weight: bold;
+    color: $light;
+    text-transform: capitalize;
   }
   .instant-container{
     h3{
       font-weight: bold;
+      color: black;
     }
     padding: 10px;
     border-radius: 5px;

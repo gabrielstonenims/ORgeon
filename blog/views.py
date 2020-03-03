@@ -249,18 +249,12 @@ def donate(request):
 
     return render(request, "blog/donate.html")
 
-
-@login_required()
-def reports(request):
-
-    reports = Report.objects.all().order_by('-date_posted')
-
-    context = {
-        "reports": reports
-    }
-
-    return render(request, "blog/reports.html", context)
-
+class ReportListView(LoginRequiredMixin,ListView):
+    model = Report
+    template_name = "blog/reports.html"
+    context_object_name = "reports"
+    ordering = ['-date_posted']
+    paginate_by = 5
 
 @login_required()
 def report_detail(request, id):
@@ -271,7 +265,7 @@ def report_detail(request, id):
         if not report.has_read.filter(id=request.user.id).exists():
             report.has_read.add(request.user)
             hasRead = True
-    reports = Report.objects.all().order_by('-date_posted')
+    reports = Report.objects.all().order_by('-date_posted')[:6]
 
     context = {
         'report': report,
@@ -337,14 +331,13 @@ class InstantMessgeCreateView(LoginRequiredMixin, CreateView):
 
 
 @login_required()
-def user_messages(request, username):
+def user_messages(request):
+    user_messages = InstantMessage.objects.filter(recipient=request.user).order_by('-date_posted')
+    unread_count = InstantMessage.objects.filter(recipient=request.user, read=False).count
 
-    logged_in_user = get_object_or_404(User, username=request.user.username)
-    user_messages = InstantMessage.objects.filter(
-        recipient=logged_in_user).order_by('-date_posted')
-    unread_count = InstantMessage.objects.filter(
-        recipient=logged_in_user, read=False).count
-
+    paginator = Paginator(user_messages, 4)
+    page = request.GET.get('page')
+    user_messages = paginator.get_page(page)
     context = {
         'user_messages': user_messages,
         'notification_count': unread_count,
@@ -354,8 +347,8 @@ def user_messages(request, username):
 
 
 @login_required()
-def instantmessage_detail(request, username, id):
-    user = get_object_or_404(User, username=request.user.username)
+def instantmessage_detail(request,id):
+    user = get_object_or_404(User, username=request.user)
     instant_message = get_object_or_404(InstantMessage, recipient=user, id=id)
     has_read = False
     if instant_message:
@@ -430,10 +423,8 @@ def post_detail(request, id):
 
 @login_required()
 def main(request):
-    unread_count = InstantMessage.objects.filter(
-        recipient=request.user.id).order_by('-date_posted')[:6]
-    unread_counts = InstantMessage.objects.filter(
-        recipient=request.user.id, read=False).count
+    unread_count = InstantMessage.objects.filter(recipient=request.user.id).order_by('-date_posted')[:6]
+    unread_counts = InstantMessage.objects.filter(recipient=request.user.id, read=False).count
     reports = Report.objects.all().order_by('-date_posted')[:6]
     posts = Post.objects.all().order_by('-date_posted')[:6]
     td = date.today()
@@ -447,6 +438,7 @@ def main(request):
         is_user = True
         if is_user:
             duser.delete()
+    # messages.success(request,f"Welcome {request.user.username }")
     context = {
         'reports': reports,
         'posts': posts,
@@ -478,26 +470,13 @@ def search_post(request):
     query = request.GET.get('q')
     if query:
         posts = Post.objects.filter(
-            Q(title=query) 
+            Q(title__icontains=query) |
+            Q(author__username=query)
         )
-        ismsg = InstantMessage.objects.filter(
-            Q(title=query) |
-            Q(message_content=query)
-        )
-        allreport = Report.objects.filter(
-            Q(title=query) |
-            Q(report=query)
-        )
-        all_users = User.objects.filter(
-            Q(username=query) |
-            Q(email=query)
-        )
+        
 
     context = {
         'posts': posts,
-        'ismgs': ismsg,
-        'allreport': allreport,
-        'allusers': all_users
     }
     if request.is_ajax():
         html = render_to_string("blog/search_list.html", context, request=request)

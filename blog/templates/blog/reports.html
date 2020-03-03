@@ -1,11 +1,12 @@
-{% extends "blog/sidenav.html" %}
+{% extends "blog/base2.html" %}
 
 {% block content %}
-<div class="container mt-3">
+<div class="report-main">
+
+<div class="container">
     <br>
-    <h3 class="text-center mb-3">Latest Reports</h3>
-    <br>
-    <div class="row mb-3">
+    <h3 class="text-center mb-3 animated bounceInDown">Latest Reports</h3>
+    <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-5 mb-3 reports">
             {% for report in reports %}
             <ul class="list-group report-group z-depth-1-half">
@@ -22,12 +23,48 @@
                     </a>
                 </li>
             </ul>
-        
             {% endfor %}
+            <br>
+            <nav aria-label="Page navigation example" class="text-center">
+                <ul class="pagination pagination-circle pg-blue pt-3">
+                   {% if is_paginated %}
+                     {% if page_obj.has_previous %}
+                     <li class="page-item "><a href="?page=1" class="page-link">First</a></li>
+                       <li class="page-item ">
+                      <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    </li>
+                     {% endif%}
+          
+                     {% for num in page_obj.paginator.page_range %}
+                       {% if page_obj.number == num %}
+                           <li class="page-item active">
+                            <a href="?page={{ num }}" class="page-link">{{ num }}</a>
+                          </li>
+                       {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"-3" %}
+                         {{ num }}
+                       {% else %}
+                        <li class="page-item"><a a href="?page={{ num }}" class="page-link">{{ num }}</a></li>
+                       {% endif %}
+                     {% endfor %}
+                     {% if page_obj.has_next %}
+                       <li class="page-item">
+                        <a href="?page={{ page_obj.next_page_number}}" class="page-link" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                        </a>
+                       </li>
+                       <li class="page-item"><a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">Last</a></li>
+                     {% endif%}
+                   {% endif %}
+                 </ul>
+           </nav>
         </div>
     </div>
 </div>
-
+</div>
 <script>
     CKEDITOR.replace('reportform');
 </script>

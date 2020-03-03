@@ -1,9 +1,8 @@
-{%if posts.count > 0  %}
+{% if posts.count > 0  %}
 <ul id="search-results" class="list-group pt-2">
   {% for post in posts  %}
   <li class="list-group-item pt-1"><a href="{{ post.get_absolute_post_url }}">{{ post.title }}</a></li>
   <!-- <li class="list-group-item pt-1"><a href="{{ msg.get_absolute_instant_message_url }}">{{ msg.title }}</a></li> -->
   {% endfor %}
 </ul>
-
 {% endif %}

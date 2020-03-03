@@ -1,4 +1,4 @@
-{% extends 'blog/sidenav.html' %}
+{% extends 'blog/base2.html' %}
 {% load static %}
 
 {% load crispy_forms_tags %}
@@ -29,7 +29,7 @@
         <form method="POST" id="proform" enctype="multipart/form-data">
           {% csrf_token %}
           <fieldset class="form-group">
-            <legend class="mb-3 text-center">
+            <legend class="mb-3 text-center" style="color: white;">
               Update your profile below
             </legend>
             {{ u_form | crispy }}

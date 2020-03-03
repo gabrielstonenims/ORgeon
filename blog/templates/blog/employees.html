@@ -1,14 +1,14 @@
-{% extends "blog/sidenav.html" %}
+{% extends "blog/base2.html" %}
 
 {% block content %}
-<div class="container mt-3">
+<div class="container">
     <br>
     <h3 class="text-center mb-3 header-employee animated bounceInDown">Employees of Orgeon</h3>
     <br>
-    <div class="row mb-3">
+    <div class="row">
         {% for employee in employees %}
             <div class="col-xs-6 col-sm-6 col-md-3 mb-3 employee-container">
-                <div class="card">
+                <div class="card z-depth-1-half">
                     <div class="card-back"></div>
                     <div class="employee-full-details">
                         <div class="employee-pic mb-3">
@@ -20,6 +20,9 @@
                         <div class="employee-details">
                             <h3 class="text-center mb-2">{{ employee.profile.fullname }}</h3>
                             <h6 class="text-center">{{ employee.profile.position }}</h6>
+                            {% if employee.email %}
+                            <h3 class="em-email text-muted text-center">{{ employee.email }} </h3>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -27,4 +30,5 @@
         {% endfor %}
     </div>
 </div>
+
 {% endblock %}

@@ -1,4 +1,10 @@
 @import "./config";
+@import "./debody";
+.profile-main{
+    h3{
+        color: $light;
+    }
+  }
 
 .employee-profile-info{
     padding: 20px;
@@ -15,9 +21,13 @@
         h4{
             text-transform: capitalize;
             font-weight: bold;
+            color: black;
         }
         small{
             font-weight: bold;
         }
     }
+}
+label{
+    color: $light;
 }

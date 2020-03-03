@@ -1,5 +1,5 @@
 @import "./config";
-
+@import "./debody";
 .admin-posts {
   padding: 10px;
   .post-poster {
@@ -10,6 +10,9 @@
   }
 }
 .admin-post-details{
+  h3{
+    color: $light;
+  }
     p.pst-msg{
         padding: 10px;
         background: #eff0f1;
@@ -20,10 +23,13 @@
         width: 40px;
         height: 40px;
         border-radius: 20px;
+        border: solid 2px silver;
       }
     }
 }
-
+h3,h4{
+  color: $light;
+}
 // comments section
 .comment-section-post{
     padding: 10px;
