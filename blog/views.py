@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView
-from .models import Volunteer, Events, JoinTrip, Partnership, NewsLetter, Report, InstantMessage, Post, Comments, NewsUpdate, Usermsg, Logout
+from .models import Volunteer, Events, JoinTrip, Partnership, NewsLetter, Report, InstantMessage, Post, Comments, NewsUpdate, Usermsg,Gallery
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
@@ -30,7 +30,6 @@ from django.utils import timezone
 @login_required()
 def news_letter(request):
     suscribed_users = NewsLetter.objects.all()
-    print(suscribed_users)
     if request.method == "POST":
         form = NewsUpdateForm(request.POST)
         if form.is_valid():
@@ -431,14 +430,6 @@ def main(request):
     tt = timezone.now()
     ntt = tt.time
     current_events = Events.objects.filter(date_of_event=td)
-
-    is_user = False
-    if Logout.objects.filter(user=request.user).exists():
-        duser = Logout.objects.get(user=request.user)
-        is_user = True
-        if is_user:
-            duser.delete()
-    # messages.success(request,f"Welcome {request.user.username }")
     context = {
         'reports': reports,
         'posts': posts,
@@ -467,24 +458,34 @@ class EventDetailView(LoginRequiredMixin, DetailView):
 
 @login_required()
 def user_activities(request):
-    users = User.objects.all().count
-    volunteers = Volunteer.objects.all().count
-    partners = Partnership.objects.all().count
-    de_trip = JoinTrip.objects.all().order_by('email').count
-    subscribers = NewsLetter.objects.all().count
-    msg_system = InstantMessage.objects.all().count
-    print(subscribers)
+    users = User.objects.all().count()
+    volunteers = Volunteer.objects.all().count()
+    partners = Partnership.objects.all().count()
+    # reports = Report.objects.all().order_by('-date_posted').count()
+    subscribers = NewsLetter.objects.all().count()
+    msg_system = InstantMessage.objects.all().count()
+
+   
     context = {
         "users": users,
         "volunteers": volunteers,
         "partners": partners,
-        "detrip": de_trip,
+        # "report": reports,
         "subscribers": subscribers,
         "msg_system": msg_system
     }
+
     if request.is_ajax():
-        ht = render_to_string("blog/activities.html",context,request=request)
-        return JsonResponse({"form":ht})
+        return HttpResponse(context)
 
     return render(request,"blog/activities.html",context)
+
+
+@login_required()
+def gallery(request):
+    gallery = Gallery.objects.all().order_by('-date_posted')
+    context = {
+        "gallery": gallery
+    }
+    return render(request,"blog/gallery.html",context)
     

@@ -3,10 +3,13 @@ $secondary_color:#ace35a;
 $light:#fff;
 $dark:#d3d3d3;
 
-// img{
-//     display: block;
-//     width: 100%;
-// }
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: $dark;
+    overflow-x: hidden;
+  }
 
 @mixin setFlex($direction) {
     display: flex;
@@ -15,9 +18,11 @@ $dark:#d3d3d3;
     align-items: center;
 }
 
-@mixin myButt {
-    
-}
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
 
 a.butt{
     color: $light;

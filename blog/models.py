@@ -107,9 +107,6 @@ class Report(models.Model):
     has_read = models.ManyToManyField(User,related_name="has_read_report",blank=True)
     date_posted = models.DateTimeField(default=timezone.now)
 
-    def report_count(self):
-        return self.report.count
-
     def __str__(self):
         return f"{self.user.username}'s report = {self.title}"
 
@@ -183,10 +180,10 @@ class Comments(models.Model):
 
 
 
-class Logout(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    logout_code = models.IntegerField()
-    date_and_time_logged = models.DateTimeField(default=timezone.now) 
+class Gallery(models.Model):
+    image_caption = models.CharField(max_length=100,blank=True)
+    image = models.ImageField(upload_to="galleries")
+    date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f"{ self.user} logged out at {self.date_and_time_logged}"
+        return f"{self.image_caption} "

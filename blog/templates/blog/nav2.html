@@ -47,6 +47,7 @@
           <a title="send post to all employees" class="dropdown-item" href="{% url 'post_new' %}"><i class="fas fa-plus-circle mr-1"></i>Post</a>
           <a class="dropdown-item" href="{% url 'event_new' %}" title="send post to all employees"><i class="fas fa-plus-circle mr-1"></i>Event</a>
           <a title="send updates to subscribers" class="dropdown-item" href="{% url 'newsletter_create' %}"><i class="fas fa-plus-circle mr-1" ></i>News</a>
+          <a title="check the day to day activities" class="dropdown-item" href="{% url 'activities' %}"><i class="fas fa-chart-pie mr-1"></i>Activities</a>
           {% endif %}
           <a title="logout of your accounts" class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt mr-1"></i>Logout</a>
         </div>

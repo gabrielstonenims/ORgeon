@@ -1,3 +1,16 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #d3d3d3;
+  overflow-x: hidden;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 a.butt {
   color: #fff;
   font-weight: bold;
@@ -37,18 +50,6 @@ a.butt:hover {
 #butt:hover {
   background: #ffec8b;
   color: #000;
-}
-
-* {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  overflow-x: hidden;
 }
 
 section.showcase {
@@ -1125,5 +1126,22 @@ footer {
     font-weight: bold;
     color: #ffffff;
   }
+}
+
+.gallery {
+  overflow: hidden;
+}
+
+.gallery a img {
+  border-radius: 10px;
+  width: 240px;
+  height: 250px;
+  -webkit-transition: 2s ease;
+  transition: 2s ease;
+}
+
+.gallery a img:hover {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
 }
 /*# sourceMappingURL=home.css.map */

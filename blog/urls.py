@@ -5,7 +5,7 @@ from .views import Volunteers
 from .views import PostCreateView,PostListView,EventCreateView,EventDetailView,InstantMessgeCreateView,ReportListView
 urlpatterns = [
     path('',views.home,name='home'),
-    # path('login/',views.login,name='login'),
+    path('gallery/',views.gallery,name='gallery'),
     path('success/',views.success_stories,name='success'),
     path('stories_of_need/',views.needy_stories,name='stories_of_need'),
     path('inspirational_stories/',views.inspirational_stories,name='inspirational_stories'),

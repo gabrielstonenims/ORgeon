@@ -25,6 +25,8 @@
                     <br>
                     <a class="butt mr-2" href="{% url 'jointrip' %}">Join the trip</a> or <a class="butt ml-2" href="{% url 'donate' %}">Donate in favour of the trip.</a>
                 </div>
+                {% empty %}
+                <p>Sorry there are not events available.</p>
             {% endfor %}
         </div>
     </div>
