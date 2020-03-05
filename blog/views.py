@@ -465,19 +465,26 @@ class EventDetailView(LoginRequiredMixin, DetailView):
     model = Events
 
 
-@login_required
-def search_post(request):
-    query = request.GET.get('q')
-    if query:
-        posts = Post.objects.filter(
-            Q(title__icontains=query) |
-            Q(author__username=query)
-        )
-        
-
+@login_required()
+def user_activities(request):
+    users = User.objects.all().count
+    volunteers = Volunteer.objects.all().count
+    partners = Partnership.objects.all().count
+    de_trip = JoinTrip.objects.all().order_by('email').count
+    subscribers = NewsLetter.objects.all().count
+    msg_system = InstantMessage.objects.all().count
+    print(subscribers)
     context = {
-        'posts': posts,
+        "users": users,
+        "volunteers": volunteers,
+        "partners": partners,
+        "detrip": de_trip,
+        "subscribers": subscribers,
+        "msg_system": msg_system
     }
     if request.is_ajax():
-        html = render_to_string("blog/search_list.html", context, request=request)
-        return JsonResponse({'form': html })
+        ht = render_to_string("blog/activities.html",context,request=request)
+        return JsonResponse({"form":ht})
+
+    return render(request,"blog/activities.html",context)
+    

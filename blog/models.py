@@ -107,6 +107,8 @@ class Report(models.Model):
     has_read = models.ManyToManyField(User,related_name="has_read_report",blank=True)
     date_posted = models.DateTimeField(default=timezone.now)
 
+    def report_count(self):
+        return self.report.count
 
     def __str__(self):
         return f"{self.user.username}'s report = {self.title}"

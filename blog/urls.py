@@ -31,5 +31,5 @@ urlpatterns = [
     path('newsletter/',views.news_letter,name='newsletter_create'),
     path('event/new/',EventCreateView.as_view(),name='event_new'),
     path('event/<int:pk>/',EventDetailView.as_view(),name="event_detail"),
-    path('search/',views.search_post,name='search')
+    path('activities/',views.user_activities,name='activities')
 ]
