@@ -6,6 +6,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+from email.message import EmailMessage
+import smtplib
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
@@ -29,6 +31,7 @@ from django.utils import timezone
 
 @login_required()
 def news_letter(request):
+    msg = EmailMessage()
     suscribed_users = NewsLetter.objects.all()
     if request.method == "POST":
         form = NewsUpdateForm(request.POST)
@@ -36,15 +39,26 @@ def news_letter(request):
             form.save()
             title = form.cleaned_data.get('title').upper()
             update_message = form.cleaned_data.get('message')
-            subject = title
-            message = f"\n {update_message}"
-            from_email = settings.EMAIL_HOST_USER
-            to_list = suscribed_users
-            send_mail(subject, message, from_email,
-                      to_list, fail_silently=True)
-            messages.success(
-                request, f"News update messages sent successfully.")
-            return redirect('newsletter_create')
+            msg["Subject"] =  title
+            msg["From"] =settings.EMAIL_HOST_USER
+            msg["To"] = suscribed_users
+            msg.set_content(update_message)
+            hml = f"""
+            <!Doctype html>
+            <html>
+            <body>
+            <h1 style='font-style:italic;'>{ title }</h1>
+            <p style='color:SlateGray;'>  { update_message } </p>
+            </body>
+            </html>
+            </html>
+            """
+            msg.add_alternative(hml,subtype='html')
+            with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
+                smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+                smtp.send_message(msg)
+                messages.success(request, f"News update messages sent successfully.")
+                return redirect('newsletter_create')
     else:
         form = NewsUpdateForm()
 
@@ -57,6 +71,7 @@ def news_letter(request):
 
 def home(request):
     if request.method == "POST":
+        msg = EmailMessage()
         form = NewsLetterForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data.get('email')
@@ -64,15 +79,28 @@ def home(request):
                 messages.info(request, "This email already exists.")
             else:
                 form.save()
-                subject = "Thank you for subcribing to our newsletter."
-                message = f"We will send you all the necessary updates."
-                from_email = settings.EMAIL_HOST_USER
-                to_list = [email]
-                send_mail(subject, message, from_email,
-                          to_list, fail_silently=True)
-                messages.success(
-                    request, f"Thank you,your email has been added to our newslist.")
-                return redirect('home')
+                msg["Subject"] =  "Thank you for subcribing to our newsletter."
+                msg["From"] =settings.EMAIL_HOST_USER
+                msg["To"] = email
+                msg.set_content("We will send you all the necessary updates.")
+                hml = f"""
+                <!Doctype html>
+                <html>
+                <body>
+                <h1 style='font-style:italic;'>Thank you for subcribing to our newsletter.</h1>
+                <p style='color:SlateGray;'> We will send you all the necessary updates.</p>
+                <p style='color:SlateGray;'>Stay blessed.</p>
+                <p style='color:SlateGray;'>ORgeonofstars</p>
+                </body>
+                </html>
+                </html>
+                """
+                msg.add_alternative(hml,subtype='html')
+                with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
+                    smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+                    smtp.send_message(msg)
+                    messages.success(request, f"Thank you,your email has been added to our newslist.")
+                    return redirect('home')
 
     else:
         form = NewsLetterForm()
@@ -100,6 +128,8 @@ def some_videos(request):
 
 
 def volunteer_register(request):
+    msg = EmailMessage()
+    msg1 = EmailMessage()
     if request.method == "POST":
         form = VolunteerForm(request.POST)
         if form.is_valid():
@@ -110,22 +140,47 @@ def volunteer_register(request):
             else:
                 form.save()
                 name = form.cleaned_data.get('name')
-                # mail to personal email
-                subject1 = f"{name} has just volunteered."
-                message1 = f"{name} wishes to volunteer for Orgeon."
-                from_email = settings.EMAIL_HOST_USER
-                to_list = [settings.EMAIL_HOST_USER]
-                send_mail(subject1, message1, from_email,
-                          to_list, fail_silently=True)
+                msg["Subject"] = f"{name} has just volunteered."
+                msg["From"] =settings.EMAIL_HOST_USER
+                msg["To"] = settings.EMAIL_HOST_USER
+                msg.set_content(f"{name} wishes to volunteer for Orgeon.")
+                hml = f"""
+                <!Doctype html>
+                <html>
+                <body>
+                <h1 style='font-style:italic;'>{name} has just volunteered.</h1>
+                <p style='color:SlateGray;'> {name} wishes to volunteer for Orgeon.</p>
+                </body>
+                </html>
+                </html>
+                """
+                msg.add_alternative(hml,subtype='html')
+                with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
+                    smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+                    smtp.send_message(msg)
                 # to user volunteering email
-                subject = "Orgeon of Stars welcomes you."
-                message = f"Thank you for volunteering with Orgeon of stars,in order to know more about \n you we will contact you soon,stay blessed."
-                from_email = settings.EMAIL_HOST_USER
-                to_list = [v_email]
-                send_mail(subject, message, from_email,
-                          to_list, fail_silently=True)
-                messages.success(request, f"Thank you for joining.")
-                return redirect('volunteers')
+                msg1["Subject"] = "Orgeon of Stars welcomes you."
+                msg1["From"] =settings.EMAIL_HOST_USER
+                msg1["To"] = v_email
+                msg1.set_content("Thank you for volunteering with Orgeon of stars,in order to know more about \n you we will contact you soon,stay blessed.")
+                hml = f"""
+                <!Doctype html>
+                <html>
+                <body>
+                <h1 style='font-style:italic;'>Welcome to ORgeonofstars.</h1>
+                <p style='color:SlateGray;'> Thank you for volunteering with Orgeon of stars,in order to know more about \n you we will contact you soon.</p>
+                <p style='color:SlateGray;'>Stay blessed.</p>
+                <p style='color:SlateGray;'>ORgeonofstars</p>
+                </body>
+                </html>
+                </html>
+                """
+                msg1.add_alternative(hml,subtype='html')
+                with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
+                    smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+                    smtp.send_message(msg1)
+                    messages.success(request, f"Thank you for joining.")
+                    return redirect('volunteers')
 
     else:
         form = VolunteerForm()
@@ -155,6 +210,8 @@ def events(request):
 
 
 def join_trip(request):
+    msg = EmailMessage()
+    msg1 = EmailMessage()
     if request.method == "POST":
         form = JoinTripForm(request.POST)
         if form.is_valid():
@@ -168,21 +225,48 @@ def join_trip(request):
             phone = form.cleaned_data.get('phone')
 
             # mail to personal email
-            subject1 = f"{name} wants to join the trip."
-            message1 = f"More details below \n 1.Email: {email}\n2.Phone: {phone}"
-            from_email = settings.EMAIL_HOST_USER
-            to_list = [settings.EMAIL_HOST_USER]
-            send_mail(subject1, message1, from_email,
-                      to_list, fail_silently=True)
+            msg["Subject"] = f"{name} wants to join the trip."
+            msg["From"] =settings.EMAIL_HOST_USER
+            msg["To"] = settings.EMAIL_HOST_USER
+            msg.set_content(f"More details below \n 1.Email: {email}\n2.Phone: {phone}")
+            hml = f"""
+            <!Doctype html>
+            <html>
+            <body>
+            <h1 style='font-style:italic;'>{name} wants to join the trip.</h1>
+            <p style='color:SlateGray;'> Name: {name} </p>
+            <p style='color:SlateGray;'>Email: {email}</p>
+            <p style='color:SlateGray;'>Email: {phone}</p>
+            </body>
+            </html>
+            </html>
+            """
+            msg.add_alternative(hml,subtype='html')
+            with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
+                smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+                smtp.send_message(msg)
 
-            subject = "Thank you."
-            message = f"Orgeon of stars is so delighted that you have decided to join our trip,\n saving lives and helping the vulnerable children is our top priority and we are \n happy that you've made it yours too.\nWe will let you know of any other information before we embark on this journey.\nStay blessed."
-            from_email = settings.EMAIL_HOST_USER
-            to_list = [trip_email]
-            send_mail(subject, message, from_email,
-                      to_list, fail_silently=True)
-            messages.success(
-                request, f"Thank you for joining us on this trip.")
+            msg1["Subject"] = "Thank you."
+            msg1["From"] =settings.EMAIL_HOST_USER
+            msg1["To"] = trip_email
+            msg1.set_content(f"Orgeon of stars is so delighted that you have decided to join our trip, saving lives and helping the vulnerable children is our top priority and we are happy that you've made it yours too.We will let you know of any other information before we embark on this journey.Stay blessed.")
+            hml = f"""
+            <!Doctype html>
+            <html>
+            <body>
+            <h1 style='font-style:italic;'>Thank you for joining our trip.</h1>
+            <p style='color:SlateGray;'>Orgeon of stars is so delighted that you have decided to join our trip, saving lives and helping the vulnerable children is our top priority and we are happy that you've made it yours too.We will let you know of any other information before we embark on this journey.Stay blessed."</p>
+            <p style='color:SlateGray;'>ORgeonofstars</p>
+            </body>
+            </html>
+            </html>
+            """
+            msg1.add_alternative(hml,subtype='html')
+            with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
+                smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+                smtp.send_message(msg1)
+                messages.success(request, f"Thank you for joining us on this trip.")
+                return redirect('events')
 
     else:
         form = JoinTripForm()
@@ -195,6 +279,8 @@ def join_trip(request):
 
 
 def become_partner(request):
+    msg1 = EmailMessage()
+    msg = EmailMessage()
     if request.method == "POST":
         form = PartnershipForm(request.POST)
         if form.is_valid():
@@ -208,22 +294,51 @@ def become_partner(request):
                 name = form.cleaned_data.get('name')
                 email = form.cleaned_data.get('email')
                 phone = form.cleaned_data.get('phone')
-                subject = "Thank you for your partnership"
-                message = f"We are happy to see you and also work with you.We will contact you soon for additional information.Stay blessed."
-                from_email = settings.EMAIL_HOST_USER
-                to_list = [partner_email]
-                send_mail(subject, message, from_email,
-                          to_list, fail_silently=True)
+
+                msg1["Subject"] = "Thank you for your partnership"
+                msg1["From"] =settings.EMAIL_HOST_USER
+                msg1["To"] = partner_email
+                msg1.set_content(f"We are happy to see you and also work with you.We will contact you soon for additional information.Stay blessed.")
+                hml = f"""
+                <!Doctype html>
+                <html>
+                <body>
+                <h1 style='font-style:italic;'>Thank you for your partnership.</h1>
+                <p style='color:SlateGray;'>We are happy to see you and also work with you.We will contact you soon for additional information.Stay blessed.</p>
+                <p style='color:SlateGray;'>ORgeonofstars</p>
+                </body>
+                </html>
+                </html>
+                """
+                msg1.add_alternative(hml,subtype='html')
+                with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
+                    smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+                    smtp.send_message(msg1)
 
                 # mail to personal email
-                subject1 = "Got new partner"
-                message1 = f"{name} wants to partner with Orgeon of stars.\nMore details are below\n1.Email: {email}\n2.Phone: {phone}"
-                from_email = settings.EMAIL_HOST_USER
-                to_list = [settings.EMAIL_HOST_USER]
-                send_mail(subject1, message1, from_email,
-                          to_list, fail_silently=True)
-                messages.success(request, f"Thank you for joining us..")
-                return redirect('partners')
+                
+                msg["Subject"] = "Got new partner"
+                msg["From"] =settings.EMAIL_HOST_USER
+                msg["To"] = partner_email
+                msg.set_content(f"{name} wants to partner with Orgeon of stars.")
+                hml = f"""
+                <!Doctype html>
+                <html>
+                <body>
+                <h1 style='font-style:italic;'>New Partnership.</h1>
+                <p style='color:SlateGray;'>{name} wants to partner with Orgeon of stars.</p>
+                <p style='color:SlateGray;'>Email: {email}</p>
+                <p style='color:SlateGray;'>Email: {phone}</p>
+                </body>
+                </html>
+                </html>
+                """
+                msg.add_alternative(hml,subtype='html')
+                with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
+                    smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+                    smtp.send_message(msg)
+                    messages.success(request, f"Thank you for joining us..")
+                    return redirect('partners')
     else:
         form = PartnershipForm()
 

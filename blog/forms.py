@@ -17,8 +17,7 @@ class VolunteerForm(forms.ModelForm):
 
     class Meta:
         model = Volunteer
-        fields = ['name', 'email', 'profession',
-                  'phone', 'why_join_Orgeon', 'photo']
+        fields = ['name', 'email', 'profession','phone', 'why_join_Orgeon']
 
 
 class JoinTripForm(forms.ModelForm):

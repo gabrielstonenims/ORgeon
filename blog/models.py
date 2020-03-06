@@ -30,7 +30,7 @@ class Volunteer(models.Model):
     phone = models.CharField(max_length=40)
     why_join_Orgeon = models.CharField(max_length=200)
     # volunteering_as = models.CharField(max_length=100)
-    photo = models.ImageField(upload_to='volunteers_pics',default='default.jpg',validators=[FileExtensionValidator(allowed_extensions=['jpeg','jpg'])])
+    # photo = models.ImageField(upload_to='volunteers_pics',default='default.jpg',validators=[FileExtensionValidator(allowed_extensions=['jpeg','jpg'])])
     date_volunteered = models.DateTimeField(default=timezone.now)
 
 

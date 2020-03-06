@@ -5,11 +5,11 @@
         <h3 class="text-center mb-3">Partnerships</h3>
         <br>
         <div class="row mb-3">
-            <ul>
+            <ul class="list-group z-depth-1-half">
                 {% for partner in partners %}
-                <li>{{ partner.name }}</li>
+                <li class="list-group-item">{{ partner.name }}</li>
                 {% endfor %}
-            </ul>
+              </ul>
         </div>
     </div>
 {% endblock %}
