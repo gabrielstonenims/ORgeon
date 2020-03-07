@@ -7,9 +7,10 @@
     <br>
     <div class="row">
         {% for employee in employees %}
-            <div class="col-xs-6 col-sm-6 col-md-3 mb-3 employee-container">
-                <div class="card z-depth-1-half">
-                    <div class="card-back"></div>
+            <div class="col-xs-6 col-sm-6 col-md-4 mb-3 employee-container">
+                <div class="card z-depth-1-half" >
+                    <div class="card-back" 
+                    style="background: url('{{ employee.profile.cover_pic.url }}');background-size: cover;"></div>
                     <div class="employee-full-details">
                         <div class="employee-pic mb-3">
                             <a href="{{ employee.profile.profile_pic.url }}" data-lightbox='gallery' data-title='{{employee.profile.fullname }}'>

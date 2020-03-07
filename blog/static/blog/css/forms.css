@@ -95,7 +95,7 @@ h3.header-employee {
   position: absolute;
   background: url("../images/airbnb-apartment-appartment-584399.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100%;
 }
 
 .employee-container .card .employee-full-details {
