@@ -14,7 +14,7 @@
             {% for message in user_messages %}
                 <div class="user-message mb-3">
                     <span>
-                        <img class="z-depth-1-half" src="{{ message.sender.profile.profile_pic.url  }}" alt="">
+                        <img class="z-depth-1-half" src="{{ message.sender.profile.profile_pic.url  }}" alt="message-sender" title="@{{ message.sender.username }}">
                     </span>
                     <span class="ml-2 sender-name text-center">{{ message.title }}</span><br>
                     <span class="ml-2 sender-message">{{ message.message_content|safe }}</span><br>

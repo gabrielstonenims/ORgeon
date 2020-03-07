@@ -43,7 +43,7 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-default"
           aria-labelledby="navbarDropdownMenuLink-333">
           <a title="view profile" class="dropdown-item" href="{% url 'profile' %}"><i class="fas fa-user mr-1"></i>Profile</a>
-          {% if request.user.username == "admin" %}
+          {% if request.user.username == "joycelyn" %}
           <a title="send post to all employees" class="dropdown-item" href="{% url 'post_new' %}"><i class="fas fa-plus-circle mr-1"></i>Post</a>
           <a class="dropdown-item" href="{% url 'event_new' %}" title="send post to all employees"><i class="fas fa-plus-circle mr-1"></i>Event</a>
           <a title="send updates to subscribers" class="dropdown-item" href="{% url 'newsletter_create' %}"><i class="fas fa-plus-circle mr-1" ></i>News</a>

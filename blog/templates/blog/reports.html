@@ -17,7 +17,7 @@
                         <sup style="float: right;"><small class="badge badge-danger animated jello infinite">New</small></sup>
                     {% endif %}
                     <a href="{{ report.get_absolute_url }}">
-                        <img src="{{ report.user.profile.profile_pic.url }}" alt=""><span class="report-writer">{{ report.user }}</span><br>
+                        <img src="{{ report.user.profile.profile_pic.url }}" alt=""><span class="report-writer">@{{ report.user }}</span><br>
                         <span class="ml-r report-title text-muted">{{ report.title }}</span>
                         <small class="date-posted text-muted">{{ report.date_posted|date:"M D Y" }}</small>
                     </a>

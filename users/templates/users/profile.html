@@ -4,7 +4,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container mt-4">
-  <div class="employee-profile-info mb-3 z-depth-1-half">
+  <div class="employee-profile-info mb-3 z-depth-1-half" style="background: url('{{ user.profile.cover_pic.url}}');background-repeat: no-repeat;background-size: cover;">
     <div class="row">
       <div class="col-xs-5 col-sm-5 col-md-2 mb-3 mr-auto ml-auto">
         <div class="employee-profile-image">
@@ -13,10 +13,10 @@
       </div>
       <div class="col-xs-5 col-sm-5 col-md-8 mb-3 mt-4">
         <div class="deinfo">
-          <h4>{{ user.username }}</h4>
-          <small class="text-muted">{{ user.email }}</small><br>
-          <small class="text-muted">{{ user.profile.bio }}</small><br>
-          <small class="text-muted">{{ user.profile.position }}</small>
+          <h4>@{{ user.username }}</h4>
+          <small class="">{{ user.email }}</small><br>
+          <small class="">{{ user.profile.bio }}</small><br>
+          <small class="">{{ user.profile.position }}</small>
         </div>
       </div>
     </div>

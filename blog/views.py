@@ -162,13 +162,13 @@ def volunteer_register(request):
                 msg1["Subject"] = "Orgeon of Stars welcomes you."
                 msg1["From"] =settings.EMAIL_HOST_USER
                 msg1["To"] = v_email
-                msg1.set_content("Thank you for volunteering with Orgeon of stars,in order to know more about \n you we will contact you soon,stay blessed.")
+                msg1.set_content("Thank you for volunteering with Orgeon of stars,in order to know more about  you we will contact you soon,stay blessed.")
                 hml = f"""
                 <!Doctype html>
                 <html>
                 <body>
                 <h1 style='font-style:italic;'>Welcome to ORgeonofstars.</h1>
-                <p style='color:SlateGray;'> Thank you for volunteering with Orgeon of stars,in order to know more about \n you we will contact you soon.</p>
+                <p style='color:SlateGray;'> Thank you for volunteering with Orgeon of stars,in order to know more about  you we will contact you soon.</p>
                 <p style='color:SlateGray;'>Stay blessed.</p>
                 <p style='color:SlateGray;'>ORgeonofstars</p>
                 </body>
@@ -403,7 +403,7 @@ def create_report(request):
             reporter = request.user
 
             subject = f"New report from {reporter}"
-            message = f"Login to orgeon of stars in order to view message"
+            message = f"Login to orgeon of stars in order to read message"
             from_email = settings.EMAIL_HOST_USER
             to_list = [settings.EMAIL_HOST_USER]
             send_mail(subject, message, from_email,
@@ -596,7 +596,7 @@ def user_activities(request):
     return render(request,"blog/activities.html",context)
 
 
-@login_required()
+
 def gallery(request):
     gallery = Gallery.objects.all().order_by('-date_posted')
     context = {

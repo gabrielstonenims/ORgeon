@@ -18,12 +18,12 @@
                         </a>
                     </div>
                     <div class="card-body  white-text rounded-bottom">
-                        <h4 class="card-title">{{ request.user.username }}</h4>
+                        <h4 class="card-title">@{{ request.user.username }}</h4>
                         <hr class="hr-light">
                         <p class="card-text white-text mb-4">{{ request.user.profile.bio}}</p>
                         <p class="card-text white-text mb-4">{{ request.user.email }}</p>
                         <p class="card-text white-text mb-4">{{ request.user.profile.position }}</p>
-                        <a href="{% url 'profile' %}" class="white-text d-flex justify-content-end">
+                        <a href="{% url 'profile' %}" class="butt white-text  justify-content-start">
                             Edit Profile
                         </a>
                     </div>
@@ -37,7 +37,7 @@
                     {% if request.user in post.has_read.all %}
                     <li class="list-group-item">
                         <sup style="float: right;"><small class="text-muted badge badge-default">Read</small></sup>
-                        <img src="{{ post.author.profile.profile_pic.url }}" alt="" title="{{ post.author }}">
+                        <img src="{{ post.author.profile.profile_pic.url }}" alt="" title="@{{ post.author }}">
                         <a class="ml-2 text-muted" href="{{ post.get_absolute_post_url }}">{{ post.title }}</a><br>
                         <small class="text-muted" style="float: right;">{{ post.date_posted|date:"D d M Y"}}</small>
                     </li>
@@ -45,11 +45,13 @@
                     <li class="list-group-item">
                         <sup style="float: right;" class="mt-1"><small
                                 class="badge badge-danger animated jello infinite">New</small></sup>
-                        <img src="{{ post.author.profile.profile_pic.url }}" alt="" title="{{ post.author }}">
+                        <img src="{{ post.author.profile.profile_pic.url }}" alt="" title="@{{ post.author }}">
                         <a class="ml-2 text-muted" href="{{ post.get_absolute_post_url }}">{{ post.title }}</a><br>
                         <small class="text-muted" style="float: right;">{{ post.date_posted|date:"D d M Y"}}</small>
                     </li>
                     {% endif %}
+                    {% empty %}
+                    <li class="list-group-item">Sorry,no posts  from the Admin</li>
                     {% endfor %}
                 </ul>
                 <br>
@@ -64,7 +66,7 @@
                     {% if message.read %}
                     <li class="list-group-item">
                         <sup style="float: right;"><small class="text-muted badge badge-default">Read</small></sup>
-                        <img src="{{ message.sender.profile.profile_pic.url }}" alt="" title="{{ message.sender}}">
+                        <img src="{{ message.sender.profile.profile_pic.url }}" alt="" title="@{{ message.sender}}">
                         <a class="ml-2 text-muted"
                             href="{{ message.get_absolute_instant_message_url }}">{{ message.title }}</a><br>
                         <small class="text-muted" style="float: right;">{{ message.date_posted|date:"D d M Y"}}</small>
@@ -73,12 +75,14 @@
                     <li class="list-group-item">
                         <sup style="float: right;" class="mt-1"><small
                                 class="badge badge-danger animated jello infinite">New</small></sup>
-                        <img src="{{ message.sender.profile.profile_pic.url }}" alt="" title="{{ message.sender}}">
+                        <img src="{{ message.sender.profile.profile_pic.url }}" alt="" title="@{{ message.sender}}">
                         <a class="ml-2 text-muted"
                             href="{{ message.get_absolute_instant_message_url }}">{{ message.title }}</a><br>
                         <small class="text-muted" style="float: right;">{{ message.date_posted|date:"D d M Y"}}</small>
                     </li>
                     {% endif %}
+                    {% empty %}
+                    <li class="list-group-item">Sorry,no messages available</li>
                     {% endfor %}
                 </ul>
                 <br>
@@ -95,7 +99,7 @@
                     {% if request.user in report.has_read.all %}
                     <li class="list-group-item">
                         <sup style="float: right;"><small class="text-muted badge badge-default">Read</small></sup>
-                        <img src="{{ report.user.profile.profile_pic.url }}" alt="" title="{{ report.user }}">
+                        <img src="{{ report.user.profile.profile_pic.url }}" alt="" title="@{{ report.user }}">
                         <a class="ml-2 text-muted" href="{{ report.get_absolute_url }}">{{ report.title }}</a><br>
                         <small class="text-muted" style="float: right;">{{ report.date_posted|date:"D d M Y"}}</small>
                     </li>
@@ -103,11 +107,13 @@
                     <li class="list-group-item">
                         <sup style="float: right;" class="mt-1"><small
                                 class="badge badge-danger animated jello infinite">New</small></sup>
-                        <img src="{{ report.user.profile.profile_pic.url }}" alt="" title="{{ report.user }}">
+                        <img src="{{ report.user.profile.profile_pic.url }}" alt="" title="@{{ report.user }}">
                         <a class="ml-2 text-muted" href="{{ report.get_absolute_url }}">{{ report.title }}</a><br>
                         <small class="text-muted" style="float: right;">{{ report.date_posted|date:"D d M Y"}}</small>
                     </li>
                     {% endif %}
+                    {% empty %}
+                    <li class="list-group-item">Sorry,no reports available</li>
                     {% endfor %}
                 </ul>
                 <br>
