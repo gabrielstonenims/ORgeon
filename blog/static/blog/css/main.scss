@@ -1,54 +1,83 @@
 @import "./config";
 @import "./debody";
 
-.just-main{
-    .userdetails{
-        .card{
-            h4.card-title{
-                text-transform: capitalize;
-            }
-            .card-body{
-                background: rgb(2,0,36);
-background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
-            }
-        }
-    }
-    hr.my-4{
-        border: solid rgba(158, 154, 154, 0.856) 2px;
-    }
-}
-
-.main-reports,.main-post,.main-user-messages{
-
-    padding: 20px;
-    h5{
-        font-size: 15px;
-        color: $light;
-    }
-    img{
-        width: 40px;
-        height: 40px;
-        border-radius: 20px;
-    }
-    a{
-        // color: #000;
-        font-size: 12px;
-        font-weight: bold;
+.just-main {
+  .userdetails {
+    .card {
+      h4.card-title {
         text-transform: capitalize;
+      }
+      .card-body {
+        background: rgb(2, 0, 36);
+        background: linear-gradient(
+          90deg,
+          rgba(2, 0, 36, 1) 0%,
+          rgba(9, 9, 121, 1) 35%,
+          rgba(0, 212, 255, 1) 100%
+        );
+      }
     }
-    li{
-        transition: 0.5s ease-in;
-        &:hover{
-            background: #eedd82;
-            color: #fff;
-        }
-    }
+  }
+  hr.my-4 {
+    border: solid rgba(158, 154, 154, 0.856) 2px;
+  }
 }
 
-
-
-.dashboard{
-    padding: 20px;
-    font-weight: bold;
+.main-reports,
+.main-post,
+.main-user-messages {
+  padding: 20px;
+  h5 {
+    font-size: 15px;
     color: $light;
+  }
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+  }
+  a {
+    // color: #000;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  li {
+    transition: 0.5s ease-in;
+    &:hover {
+      background: #eedd82;
+      color: #fff;
+    }
+  }
+}
+
+.dashboard {
+  padding: 20px;
+  font-weight: bold;
+  color: $light;
+}
+
+span.users-online {
+    display: flex;
+  .online-user {
+    padding: 10px;
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      animation: glow ease 1.5s  infinite;
+    }
+  }
+}
+
+@keyframes glow{
+  0%{
+    border: solid #00FF00 2px;
+  }
+  50%{
+    border: solid #228B22 2px;
+  }
+  100%{
+    border: solid green 2px;
+  }
 }

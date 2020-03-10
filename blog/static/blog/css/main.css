@@ -76,33 +76,45 @@ body {
   border: solid rgba(158, 154, 154, 0.856) 2px;
 }
 
-.main-reports, .main-post, .main-user-messages {
+.main-reports,
+.main-post,
+.main-user-messages {
   padding: 20px;
 }
 
-.main-reports h5, .main-post h5, .main-user-messages h5 {
+.main-reports h5,
+.main-post h5,
+.main-user-messages h5 {
   font-size: 15px;
   color: #fff;
 }
 
-.main-reports img, .main-post img, .main-user-messages img {
+.main-reports img,
+.main-post img,
+.main-user-messages img {
   width: 40px;
   height: 40px;
   border-radius: 20px;
 }
 
-.main-reports a, .main-post a, .main-user-messages a {
+.main-reports a,
+.main-post a,
+.main-user-messages a {
   font-size: 12px;
   font-weight: bold;
   text-transform: capitalize;
 }
 
-.main-reports li, .main-post li, .main-user-messages li {
+.main-reports li,
+.main-post li,
+.main-user-messages li {
   -webkit-transition: 0.5s ease-in;
   transition: 0.5s ease-in;
 }
 
-.main-reports li:hover, .main-post li:hover, .main-user-messages li:hover {
+.main-reports li:hover,
+.main-post li:hover,
+.main-user-messages li:hover {
   background: #eedd82;
   color: #fff;
 }
@@ -111,5 +123,47 @@ body {
   padding: 20px;
   font-weight: bold;
   color: #fff;
+}
+
+span.users-online {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+span.users-online .online-user {
+  padding: 10px;
+}
+
+span.users-online .online-user img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  -webkit-animation: glow ease 1.5s  infinite;
+          animation: glow ease 1.5s  infinite;
+}
+
+@-webkit-keyframes glow {
+  0% {
+    border: solid #00FF00 2px;
+  }
+  50% {
+    border: solid #228B22 2px;
+  }
+  100% {
+    border: solid green 2px;
+  }
+}
+
+@keyframes glow {
+  0% {
+    border: solid #00FF00 2px;
+  }
+  50% {
+    border: solid #228B22 2px;
+  }
+  100% {
+    border: solid green 2px;
+  }
 }
 /*# sourceMappingURL=main.css.map */

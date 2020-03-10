@@ -5,6 +5,14 @@
     <div class="container">
         <br>
         <h3 class="text-center mb-3 dashboard animated bounceInDown">Dashboard</h3>
+        <small style="color: white;font-weight: bold;text-transform: capitalize;">Online</small>
+        <span class="users-online">
+
+            {% for user in users %}
+            <div class="online-user">
+                <img src="{{ user.user.profile.profile_pic.url}}" alt="user-pic" class="z-depth-1-half animated jello" title="@{{ user.user.username }}" >
+            </div>
+            {% endfor %}</span>
         <div class="row mb-3">
             <!-- reports -->
             <div class="col-xs-6 col-sm-6 col-md-4 mb-3 userdetails">

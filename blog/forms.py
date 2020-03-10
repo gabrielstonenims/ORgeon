@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 from .models import (Volunteer, 
 JoinTrip, Partnership, NewsLetter,
  Report,Post,InstantMessage,Comments,Comments,NewsUpdate
@@ -74,7 +75,15 @@ class CommentsForm(forms.ModelForm):
         model = Comments
         fields = ['reply']
 
+class LoginForm(forms.Form):
+    username = forms.CharField(label='', max_length=100, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'username'}))
+    password = forms.CharField(label='', max_length=100, widget=forms.PasswordInput(
+        attrs={'class': 'form-control', 'placeholder': 'password'}))
 
+    # class Meta:
+    #     model = User
+    #     fields = ['username','password']
 
 
 

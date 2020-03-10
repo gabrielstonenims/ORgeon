@@ -124,7 +124,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'main'
 LOGIN_URL = 'login'
-LOGOUT_REDIRECT_URL = '/'
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = config('EMAIL_USE_TLS',default=False, cast=bool)

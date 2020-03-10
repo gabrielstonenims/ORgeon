@@ -187,3 +187,21 @@ class Gallery(models.Model):
 
     def __str__(self):
         return f"{self.image_caption} "
+
+
+class LoginCode(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    date_logged = models.DateTimeField(default=timezone.now)
+
+
+    def __str__(self):
+        return f"{self.user.username} logged in at {self.date_logged}"
+
+
+class Online_user(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    date_logged_in = models.DateTimeField(default=timezone.now)
+
+
+    def __str__(self):
+        return f"{self.user.username} just came online"

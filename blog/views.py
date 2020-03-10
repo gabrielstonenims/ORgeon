@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView
-from .models import Volunteer, Events, JoinTrip, Partnership, NewsLetter, Report, InstantMessage, Post, Comments, NewsUpdate, Usermsg,Gallery
+from .models import Volunteer, Events, JoinTrip, Partnership, NewsLetter, Report, InstantMessage, Post, Comments, NewsUpdate, Usermsg, Gallery,LoginCode,Online_user
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
@@ -21,12 +21,14 @@ from .forms import (VolunteerForm,
                     NewsLetterForm,
                     ReportForm,
                     PostForm, InstantMessageForm, CommentsForm,
-                    NewsUpdateForm,
+                    NewsUpdateForm, LoginForm
                     )
 from django.contrib.auth.models import User
 import random
 from django.contrib import auth
 from django.utils import timezone
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate,login
 
 
 @login_required()
@@ -39,8 +41,8 @@ def news_letter(request):
             form.save()
             title = form.cleaned_data.get('title').upper()
             update_message = form.cleaned_data.get('message')
-            msg["Subject"] =  title
-            msg["From"] =settings.EMAIL_HOST_USER
+            msg["Subject"] = title
+            msg["From"] = settings.EMAIL_HOST_USER
             msg["To"] = suscribed_users
             msg.set_content(update_message)
             hml = f"""
@@ -53,11 +55,13 @@ def news_letter(request):
             </html>
             </html>
             """
-            msg.add_alternative(hml,subtype='html')
-            with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
-                smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+            msg.add_alternative(hml, subtype='html')
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                smtp.login(settings.EMAIL_HOST_USER,
+                           settings.EMAIL_HOST_PASSWORD)
                 smtp.send_message(msg)
-                messages.success(request, f"News update messages sent successfully.")
+                messages.success(
+                    request, f"News update messages sent successfully.")
                 return redirect('newsletter_create')
     else:
         form = NewsUpdateForm()
@@ -79,8 +83,8 @@ def home(request):
                 messages.info(request, "This email already exists.")
             else:
                 form.save()
-                msg["Subject"] =  "Thank you for subcribing to our newsletter."
-                msg["From"] =settings.EMAIL_HOST_USER
+                msg["Subject"] = "Thank you for subcribing to our newsletter."
+                msg["From"] = settings.EMAIL_HOST_USER
                 msg["To"] = email
                 msg.set_content("We will send you all the necessary updates.")
                 hml = f"""
@@ -95,11 +99,13 @@ def home(request):
                 </html>
                 </html>
                 """
-                msg.add_alternative(hml,subtype='html')
-                with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
-                    smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+                msg.add_alternative(hml, subtype='html')
+                with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                    smtp.login(settings.EMAIL_HOST_USER,
+                               settings.EMAIL_HOST_PASSWORD)
                     smtp.send_message(msg)
-                    messages.success(request, f"Thank you,your email has been added to our newslist.")
+                    messages.success(
+                        request, f"Thank you,your email has been added to our newslist.")
                     return redirect('home')
 
     else:
@@ -141,7 +147,7 @@ def volunteer_register(request):
                 form.save()
                 name = form.cleaned_data.get('name')
                 msg["Subject"] = f"{name} has just volunteered."
-                msg["From"] =settings.EMAIL_HOST_USER
+                msg["From"] = settings.EMAIL_HOST_USER
                 msg["To"] = settings.EMAIL_HOST_USER
                 msg.set_content(f"{name} wishes to volunteer for Orgeon.")
                 hml = f"""
@@ -154,15 +160,17 @@ def volunteer_register(request):
                 </html>
                 </html>
                 """
-                msg.add_alternative(hml,subtype='html')
-                with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
-                    smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+                msg.add_alternative(hml, subtype='html')
+                with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                    smtp.login(settings.EMAIL_HOST_USER,
+                               settings.EMAIL_HOST_PASSWORD)
                     smtp.send_message(msg)
                 # to user volunteering email
                 msg1["Subject"] = "Orgeon of Stars welcomes you."
-                msg1["From"] =settings.EMAIL_HOST_USER
+                msg1["From"] = settings.EMAIL_HOST_USER
                 msg1["To"] = v_email
-                msg1.set_content("Thank you for volunteering with Orgeon of stars,in order to know more about  you we will contact you soon,stay blessed.")
+                msg1.set_content(
+                    "Thank you for volunteering with Orgeon of stars,in order to know more about  you we will contact you soon,stay blessed.")
                 hml = f"""
                 <!Doctype html>
                 <html>
@@ -175,9 +183,10 @@ def volunteer_register(request):
                 </html>
                 </html>
                 """
-                msg1.add_alternative(hml,subtype='html')
-                with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
-                    smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+                msg1.add_alternative(hml, subtype='html')
+                with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                    smtp.login(settings.EMAIL_HOST_USER,
+                               settings.EMAIL_HOST_PASSWORD)
                     smtp.send_message(msg1)
                     messages.success(request, f"Thank you for joining.")
                     return redirect('volunteers')
@@ -226,9 +235,10 @@ def join_trip(request):
 
             # mail to personal email
             msg["Subject"] = f"{name} wants to join the trip."
-            msg["From"] =settings.EMAIL_HOST_USER
+            msg["From"] = settings.EMAIL_HOST_USER
             msg["To"] = settings.EMAIL_HOST_USER
-            msg.set_content(f"More details below \n 1.Email: {email}\n2.Phone: {phone}")
+            msg.set_content(
+                f"More details below \n 1.Email: {email}\n2.Phone: {phone}")
             hml = f"""
             <!Doctype html>
             <html>
@@ -241,13 +251,14 @@ def join_trip(request):
             </html>
             </html>
             """
-            msg.add_alternative(hml,subtype='html')
-            with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
-                smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+            msg.add_alternative(hml, subtype='html')
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                smtp.login(settings.EMAIL_HOST_USER,
+                           settings.EMAIL_HOST_PASSWORD)
                 smtp.send_message(msg)
 
             msg1["Subject"] = "Thank you."
-            msg1["From"] =settings.EMAIL_HOST_USER
+            msg1["From"] = settings.EMAIL_HOST_USER
             msg1["To"] = trip_email
             msg1.set_content(f"Orgeon of stars is so delighted that you have decided to join our trip, saving lives and helping the vulnerable children is our top priority and we are happy that you've made it yours too.We will let you know of any other information before we embark on this journey.Stay blessed.")
             hml = f"""
@@ -261,11 +272,13 @@ def join_trip(request):
             </html>
             </html>
             """
-            msg1.add_alternative(hml,subtype='html')
-            with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
-                smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+            msg1.add_alternative(hml, subtype='html')
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                smtp.login(settings.EMAIL_HOST_USER,
+                           settings.EMAIL_HOST_PASSWORD)
                 smtp.send_message(msg1)
-                messages.success(request, f"Thank you for joining us on this trip.")
+                messages.success(
+                    request, f"Thank you for joining us on this trip.")
                 return redirect('events')
 
     else:
@@ -296,9 +309,10 @@ def become_partner(request):
                 phone = form.cleaned_data.get('phone')
 
                 msg1["Subject"] = "Thank you for your partnership"
-                msg1["From"] =settings.EMAIL_HOST_USER
+                msg1["From"] = settings.EMAIL_HOST_USER
                 msg1["To"] = partner_email
-                msg1.set_content(f"We are happy to see you and also work with you.We will contact you soon for additional information.Stay blessed.")
+                msg1.set_content(
+                    f"We are happy to see you and also work with you.We will contact you soon for additional information.Stay blessed.")
                 hml = f"""
                 <!Doctype html>
                 <html>
@@ -310,17 +324,19 @@ def become_partner(request):
                 </html>
                 </html>
                 """
-                msg1.add_alternative(hml,subtype='html')
-                with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
-                    smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+                msg1.add_alternative(hml, subtype='html')
+                with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                    smtp.login(settings.EMAIL_HOST_USER,
+                               settings.EMAIL_HOST_PASSWORD)
                     smtp.send_message(msg1)
 
                 # mail to personal email
-                
+
                 msg["Subject"] = "Got new partner"
-                msg["From"] =settings.EMAIL_HOST_USER
+                msg["From"] = settings.EMAIL_HOST_USER
                 msg["To"] = partner_email
-                msg.set_content(f"{name} wants to partner with Orgeon of stars.")
+                msg.set_content(
+                    f"{name} wants to partner with Orgeon of stars.")
                 hml = f"""
                 <!Doctype html>
                 <html>
@@ -333,9 +349,10 @@ def become_partner(request):
                 </html>
                 </html>
                 """
-                msg.add_alternative(hml,subtype='html')
-                with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
-                    smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+                msg.add_alternative(hml, subtype='html')
+                with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                    smtp.login(settings.EMAIL_HOST_USER,
+                               settings.EMAIL_HOST_PASSWORD)
                     smtp.send_message(msg)
                     messages.success(request, f"Thank you for joining us..")
                     return redirect('partners')
@@ -363,23 +380,28 @@ def donate(request):
 
     return render(request, "blog/donate.html")
 
-class ReportListView(LoginRequiredMixin,ListView):
+
+class ReportListView(LoginRequiredMixin, ListView):
     model = Report
     template_name = "blog/reports.html"
     context_object_name = "reports"
     ordering = ['-date_posted']
     paginate_by = 5
 
+
 @login_required()
 def report_detail(request, id):
-
-    report = get_object_or_404(Report, id=id)
-    hasRead = False
-    if report:
-        if not report.has_read.filter(id=request.user.id).exists():
-            report.has_read.add(request.user)
-            hasRead = True
-    reports = Report.objects.all().order_by('-date_posted')[:6]
+    if LoginCode.objects.filter(user=request.user).exists():
+        report = get_object_or_404(Report, id=id)
+        hasRead = False
+        if report:
+            if not report.has_read.filter(id=request.user.id).exists():
+                report.has_read.add(request.user)
+                hasRead = True
+        reports = Report.objects.all().order_by('-date_posted')[:6]
+    else:
+        messages.info(request,f"You were logged out")
+        return redirect('login')
 
     context = {
         'report': report,
@@ -392,28 +414,31 @@ def report_detail(request, id):
 
 @login_required()
 def create_report(request):
+    if LoginCode.objects.filter(user=request.user).exists():
+        if request.method == "POST":
+            form = ReportForm(request.POST)
+            if form.is_valid():
+                title = form.cleaned_data.get('title')
+                report = form.cleaned_data.get('report')
+                Report.objects.create(
+                    user=request.user, title=title, report=report)
+                reporter = request.user
 
-    if request.method == "POST":
-        form = ReportForm(request.POST)
-        if form.is_valid():
-            title = form.cleaned_data.get('title')
-            report = form.cleaned_data.get('report')
-            Report.objects.create(
-                user=request.user, title=title, report=report)
-            reporter = request.user
+                subject = f"New report from {reporter}"
+                message = f"Login to orgeon of stars in order to read message"
+                from_email = settings.EMAIL_HOST_USER
+                to_list = [settings.EMAIL_HOST_USER]
+                send_mail(subject, message, from_email,
+                        to_list, fail_silently=True)
+                messages.success(
+                    request, f"Report '{title}' successfullly created.")
+                return redirect('reports')
 
-            subject = f"New report from {reporter}"
-            message = f"Login to orgeon of stars in order to read message"
-            from_email = settings.EMAIL_HOST_USER
-            to_list = [settings.EMAIL_HOST_USER]
-            send_mail(subject, message, from_email,
-                      to_list, fail_silently=True)
-            messages.success(
-                request, f"Report '{title}' successfullly created.")
-            return redirect('reports')
-
+        else:
+            form = ReportForm()
     else:
-        form = ReportForm()
+        messages.info(request,f"You were logged out")
+        return redirect('login')
 
     context = {
         'form': form
@@ -424,9 +449,11 @@ def create_report(request):
 
 @login_required()
 def employees(request):
-
-    employees = User.objects.all()
-
+    if LoginCode.objects.filter(user=request.user).exists():
+        employees = User.objects.all()
+    else:
+        messages.info(request,f"You were logged out")
+        return redirect('login')
     context = {
         'employees': employees
     }
@@ -446,12 +473,19 @@ class InstantMessgeCreateView(LoginRequiredMixin, CreateView):
 
 @login_required()
 def user_messages(request):
-    user_messages = InstantMessage.objects.filter(recipient=request.user).order_by('-date_posted')
-    unread_count = InstantMessage.objects.filter(recipient=request.user, read=False).count
+    if LoginCode.objects.filter(user=request.user).exists():
+        user_messages = InstantMessage.objects.filter(
+            recipient=request.user).order_by('-date_posted')
+        unread_count = InstantMessage.objects.filter(
+            recipient=request.user, read=False).count
 
-    paginator = Paginator(user_messages, 4)
-    page = request.GET.get('page')
-    user_messages = paginator.get_page(page)
+        paginator = Paginator(user_messages, 4)
+        page = request.GET.get('page')
+        user_messages = paginator.get_page(page)
+    else:
+        messages.info(request,f"You were logged out")
+        return redirect('login')
+
     context = {
         'user_messages': user_messages,
         'notification_count': unread_count,
@@ -461,14 +495,18 @@ def user_messages(request):
 
 
 @login_required()
-def instantmessage_detail(request,id):
-    user = get_object_or_404(User, username=request.user)
-    instant_message = get_object_or_404(InstantMessage, recipient=user, id=id)
-    has_read = False
-    if instant_message:
-        instant_message.read = True
-        has_read = True
-        instant_message.save()
+def instantmessage_detail(request, id):
+    if LoginCode.objects.filter(user=request.user).exists():
+        user = get_object_or_404(User, username=request.user)
+        instant_message = get_object_or_404(InstantMessage, recipient=user, id=id)
+        has_read = False
+        if instant_message:
+            instant_message.read = True
+            has_read = True
+            instant_message.save()
+    else:
+        messages.info(request,f"You were logged out")
+        return redirect('login')
 
     context = {
         "instant_message": instant_message,
@@ -497,29 +535,32 @@ class PostListView(LoginRequiredMixin, ListView):
 
 @login_required()
 def post_detail(request, id):
+    if LoginCode.objects.filter(user=request.user).exists():
+        hasRead = False
+        post = get_object_or_404(Post, id=id)
 
-    hasRead = False
-    post = get_object_or_404(Post, id=id)
+        if post:
+            post.views += 1
+            post.save()
+            if not post.has_read.filter(id=request.user.id).exists():
+                post.has_read.add(request.user)
+                hasRead = True
 
-    if post:
-        post.views += 1
-        post.save()
-        if not post.has_read.filter(id=request.user.id).exists():
-            post.has_read.add(request.user)
-            hasRead = True
+        comments = Comments.objects.filter(post=post).order_by('-date_posted')
 
-    comments = Comments.objects.filter(post=post).order_by('-date_posted')
+        if request.method == "POST":
+            form = CommentsForm(request.POST)
+            if form.is_valid():
+                comment_content = request.POST.get('comment_content')
+                comment = Comments.objects.create(
+                    post=post, user=request.user, reply=comment_content)
+                comment.save()
 
-    if request.method == "POST":
-        form = CommentsForm(request.POST)
-        if form.is_valid():
-            comment_content = request.POST.get('comment_content')
-            comment = Comments.objects.create(
-                post=post, user=request.user, reply=comment_content)
-            comment.save()
-
+        else:
+            form = CommentsForm()
     else:
-        form = CommentsForm()
+        messages.info(request,f"You were logged out")
+        return redirect('login')
 
     context = {
         "post": post,
@@ -537,15 +578,23 @@ def post_detail(request, id):
 
 @login_required()
 def main(request):
-    unread_count = InstantMessage.objects.filter(recipient=request.user.id).order_by('-date_posted')[:6]
-    unread_counts = InstantMessage.objects.filter(recipient=request.user.id, read=False).count
-    reports = Report.objects.all().order_by('-date_posted')[:6]
-    posts = Post.objects.all().order_by('-date_posted')[:6]
-    td = date.today()
-    tt = timezone.now()
-    ntt = tt.time
-    current_events = Events.objects.filter(date_of_event=td)
+    if LoginCode.objects.filter(user=request.user).exists():
+        on_line_users = Online_user.objects.all()
+        unread_count = InstantMessage.objects.filter(
+            recipient=request.user.id).order_by('-date_posted')[:6]
+        unread_counts = InstantMessage.objects.filter(
+            recipient=request.user.id, read=False).count
+        reports = Report.objects.all().order_by('-date_posted')[:6]
+        posts = Post.objects.all().order_by('-date_posted')[:6]
+        td = date.today()
+        tt = timezone.now()
+        ntt = tt.time
+        current_events = Events.objects.filter(date_of_event=td)
+    else:
+        messages.info(request,f"You were logged out")
+        return redirect('login')
     context = {
+        'users': on_line_users,
         'reports': reports,
         'posts': posts,
         'current_events': current_events,
@@ -573,14 +622,17 @@ class EventDetailView(LoginRequiredMixin, DetailView):
 
 @login_required()
 def user_activities(request):
-    users = User.objects.all().count()
-    volunteers = Volunteer.objects.all().count()
-    partners = Partnership.objects.all().count()
-    # reports = Report.objects.all().order_by('-date_posted').count()
-    subscribers = NewsLetter.objects.all().count()
-    msg_system = InstantMessage.objects.all().count()
+    if LoginCode.objects.filter(user=request.user).exists():
+        users = User.objects.all().count()
+        volunteers = Volunteer.objects.all().count()
+        partners = Partnership.objects.all().count()
+        # reports = Report.objects.all().order_by('-date_posted').count()
+        subscribers = NewsLetter.objects.all().count()
+        msg_system = InstantMessage.objects.all().count()
+    else:
+        messages.info(request,f"You were logged out")
+        return redirect('login')
 
-   
     context = {
         "users": users,
         "volunteers": volunteers,
@@ -593,8 +645,7 @@ def user_activities(request):
     if request.is_ajax():
         return HttpResponse(context)
 
-    return render(request,"blog/activities.html",context)
-
+    return render(request, "blog/activities.html", context)
 
 
 def gallery(request):
@@ -602,5 +653,49 @@ def gallery(request):
     context = {
         "gallery": gallery
     }
-    return render(request,"blog/gallery.html",context)
-    
+    return render(request, "blog/gallery.html", context)
+
+
+
+
+def login_request(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request,request.POST)
+        if form.is_valid():
+            uname = request.POST['username']
+            upassword = request.POST['password']
+            user = authenticate(username=uname, password=upassword)
+            if user is not None:
+                login(request,user)
+                if not LoginCode.objects.filter(user=user).exists():
+                    LoginCode.objects.create(user=user)
+                if not Online_user.objects.filter(user=user).exists():
+                    Online_user.objects.create(user=user)
+                # messages.success(request, f"login success")
+                return redirect('main')
+                # Redirect to a success page.
+            else:
+                messages.info(request,f"invalid username or password")
+        else:
+                messages.info(request,f"invalid information given")
+    else:
+        form = AuthenticationForm()
+
+    context = {
+        "form": form
+    }
+
+    return render(request,"users/login.html",context)
+
+
+@login_required()
+def logout(request):
+    ul = LoginCode.objects.filter(user=request.user)
+    on_user = Online_user.objects.filter(user=request.user)
+    if ul:
+        ul.delete()
+    if on_user:
+        on_user.delete()
+
+
+    return render(request,"blog/logout.html")
