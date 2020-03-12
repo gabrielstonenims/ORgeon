@@ -1,7 +1,7 @@
 {% extends "blog/base2.html" %}
 
 {% block content %}
-<div class="container mt-3">
+<div class="container mt-3" id="postdetail">
     <section class="my-5">
         <div class="row">
             <div class="col-lg-5 admin-posts">
@@ -33,4 +33,11 @@
 
 </div>
 
+<script>
+
+    setInterval(function () {
+        location.reload();
+    }, 10000);
+
+</script>
 {% endblock %}

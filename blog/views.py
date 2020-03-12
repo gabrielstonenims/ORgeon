@@ -21,7 +21,7 @@ from .forms import (VolunteerForm,
                     NewsLetterForm,
                     ReportForm,
                     PostForm, InstantMessageForm, CommentsForm,
-                    NewsUpdateForm, LoginForm
+                    NewsUpdateForm
                     )
 from django.contrib.auth.models import User
 import random
@@ -57,11 +57,9 @@ def news_letter(request):
             """
             msg.add_alternative(hml, subtype='html')
             with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-                smtp.login(settings.EMAIL_HOST_USER,
-                           settings.EMAIL_HOST_PASSWORD)
+                smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
                 smtp.send_message(msg)
-                messages.success(
-                    request, f"News update messages sent successfully.")
+                messages.success(request, f"News update messages sent successfully.")
                 return redirect('newsletter_create')
     else:
         form = NewsUpdateForm()
@@ -551,9 +549,8 @@ def post_detail(request, id):
         if request.method == "POST":
             form = CommentsForm(request.POST)
             if form.is_valid():
-                comment_content = request.POST.get('comment_content')
-                comment = Comments.objects.create(
-                    post=post, user=request.user, reply=comment_content)
+                comment_content = request.POST.get('reply')
+                comment = Comments.objects.create(post=post, user=request.user, reply=comment_content)
                 comment.save()
 
         else:

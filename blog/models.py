@@ -172,7 +172,7 @@ class Post(models.Model):
 class Comments(models.Model):
     user  = models.ForeignKey(User,on_delete=models.CASCADE)
     post  = models.ForeignKey(Post,on_delete=models.CASCADE)
-    reply = models.TextField()
+    reply = models.TextField(blank=True)
     date_posted  = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
