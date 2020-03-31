@@ -1,0 +1,50 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<div class="row">
+  <div class="col-xs-5 col-sm-6 col-md-4 mb-3">
+    <form method="post" class="instant-form" action=".">
+      <fieldset class="form-group">
+        {% csrf_token %}
+        {{ form|crispy }}
+      </fieldset>
+      {% if user.is_authenticated %}
+      <div class="form-group">
+        <button class="butt" id="butt" type="submit" style="border: none;">
+          Submit
+        </button>
+      </div>
+      {% else %}
+      <div class="form-group">
+        <button id="butt" type="submit" disabled>
+          Submit
+        </button>
+      </div>
+      {% endif %}
+    </form>
+  </div>
+  <br />
+
+  <div class="col-xs-6 col-sm-6 col-md-6 mb-3">
+    <h4 class="mb-3">
+      Replies <span class="ml-2 badge badge-info">{{ ireplies.count }}</span>
+    </h4>
+    <br />
+    <div class="comment-section-post">
+      <ul class="list-group z-depth-1-half">
+        {% for reply in ireplies %}
+        <li class="list-group-item" >
+          <div class="userpicandname mb-3">
+            <img src="{{ reply.user.profile.profile_pic.url }}" alt="user-profile-picture"
+              style="width: 40px;height: 40px;border-radius: 20px;" class="z-depth-2" />
+            <a class="ml-2" style="text-transform: capitalize;font-weight: bold;">{{ reply.user }}</a>
+          </div>
+          <div class="employeecomment mb-3">
+            <p class="ml-5">{{ reply.reply_content | safe }}</p>
+            <small class="text-muted" style="float: right;">{{ reply.date_posted|date:"D d M Y" }}</small>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>

@@ -3,9 +3,6 @@ $(function() {
     $(".alert").slideUp(3000);
   }, 5000);
  
-
-
-  
   $(document).on("submit", ".post-comment-form", function(event) {
     event.preventDefault();
     $.ajax({
@@ -22,6 +19,24 @@ $(function() {
       }
     });
   });
+  // reply-instant message
+  $(document).on("submit", ".instant-form", function(event) {
+    event.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: $(this).attr("action"),
+      data: $(this).serialize(),
+      dataType: "json",
+      success: function(response) {
+        $(".main-reply-section").html(response["form"]);
+        $("textarea").val("");
+      },
+      error: function(rs, e) {
+        console.log(rs.responseText);
+      }
+    });
+  });
+  // reply-instant message
   var usr = document.querySelector("#users").innerHTML;
   var subs = document.querySelector("#sub").innerHTML;
   var vols = document.querySelector("#voluns").innerHTML;

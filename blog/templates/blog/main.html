@@ -9,7 +9,7 @@
         <span class="users-online">
 
             {% for user in users %}
-            <div class="online-user">
+            <div class="online-user" id="online-now">
                 <img src="{{ user.user.profile.profile_pic.url}}" alt="user-pic" class="z-depth-1-half animated jello" title="@{{ user.user.username }}" >
             </div>
             {% endfor %}</span>
@@ -144,4 +144,11 @@
         </div>
     </div>
 </div>
+<script>
+
+    setInterval(function () {
+        location.reload();
+    }, 300000);
+
+</script>
 {% endblock %}

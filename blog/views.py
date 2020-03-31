@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView
-from .models import Volunteer, Events, JoinTrip, Partnership, NewsLetter, Report, InstantMessage, Post, Comments, NewsUpdate, Usermsg, Gallery,LoginCode,Online_user
+from .models import Volunteer, Events, JoinTrip, Partnership, NewsLetter, Report, InstantMessage, Post, Comments, NewsUpdate, Usermsg, Gallery,LoginCode,Online_user,InstantReply
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
@@ -21,7 +21,7 @@ from .forms import (VolunteerForm,
                     NewsLetterForm,
                     ReportForm,
                     PostForm, InstantMessageForm, CommentsForm,
-                    NewsUpdateForm
+                    NewsUpdateForm,InstantReplyForms
                     )
 from django.contrib.auth.models import User
 import random
@@ -29,7 +29,15 @@ from django.contrib import auth
 from django.utils import timezone
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate,login
+import threading
+import time
+import asyncio
 
+# global time checker
+CAN_STAY_LOGGED_IN1 = 30
+CAN_STAY_LOGGED_IN2 = 45
+CAN_STAY_LOGGED_IN3 = 55
+CAN_STAY_LOGGED_IN4 = 15
 
 @login_required()
 def news_letter(request):
@@ -397,6 +405,10 @@ def report_detail(request, id):
                 report.has_read.add(request.user)
                 hasRead = True
         reports = Report.objects.all().order_by('-date_posted')[:6]
+        this_time = datetime.now()
+        this_min = this_time.minute
+        if this_min == CAN_STAY_LOGGED_IN1 or this_min == CAN_STAY_LOGGED_IN2 or this_min == CAN_STAY_LOGGED_IN3 or this_min == CAN_STAY_LOGGED_IN4:
+            return redirect('logout')
     else:
         messages.info(request,f"You were logged out")
         return redirect('login')
@@ -449,6 +461,10 @@ def create_report(request):
 def employees(request):
     if LoginCode.objects.filter(user=request.user).exists():
         employees = User.objects.all()
+        this_time = datetime.now()
+        this_min = this_time.minute
+        if this_min == CAN_STAY_LOGGED_IN1 or this_min == CAN_STAY_LOGGED_IN2 or this_min == CAN_STAY_LOGGED_IN3 or this_min == CAN_STAY_LOGGED_IN4:
+            return redirect('logout')
     else:
         messages.info(request,f"You were logged out")
         return redirect('login')
@@ -472,14 +488,15 @@ class InstantMessgeCreateView(LoginRequiredMixin, CreateView):
 @login_required()
 def user_messages(request):
     if LoginCode.objects.filter(user=request.user).exists():
-        user_messages = InstantMessage.objects.filter(
-            recipient=request.user).order_by('-date_posted')
-        unread_count = InstantMessage.objects.filter(
-            recipient=request.user, read=False).count
-
+        user_messages = InstantMessage.objects.filter(recipient=request.user).order_by('-date_posted')
+        unread_count = InstantMessage.objects.filter(recipient=request.user, read=False).count
         paginator = Paginator(user_messages, 4)
         page = request.GET.get('page')
         user_messages = paginator.get_page(page)
+        this_time = datetime.now()
+        this_min = this_time.minute
+        if this_min == CAN_STAY_LOGGED_IN1 or this_min == CAN_STAY_LOGGED_IN2 or this_min == CAN_STAY_LOGGED_IN3 or this_min == CAN_STAY_LOGGED_IN4:
+            return redirect('logout')
     else:
         messages.info(request,f"You were logged out")
         return redirect('login')
@@ -491,25 +508,82 @@ def user_messages(request):
 
     return render(request, "blog/messages.html", context)
 
+@login_required()
+def replied_detail(request,id):
+    replied = get_object_or_404(InstantReply,id=id)
+
+    context = {
+        'replied' : replied
+    }
+
+    return render(request,"blog/replied.html",context)
+
+
+@login_required()
+def user_sent_messages(request):
+    if LoginCode.objects.filter(user=request.user).exists():
+        # sent messages
+        sent_messages = InstantMessage.objects.filter(sender=request.user).order_by('-date_posted')
+        ireplies = InstantReply.objects.all().order_by('-date_post')
+        paginator = Paginator(sent_messages, 4)
+        page = request.GET.get('page')
+        sent_messages = paginator.get_page(page)
+        this_time = datetime.now()
+        this_min = this_time.minute
+        if this_min == CAN_STAY_LOGGED_IN1 or this_min == CAN_STAY_LOGGED_IN2 or this_min == CAN_STAY_LOGGED_IN3 or this_min == CAN_STAY_LOGGED_IN4:
+            return redirect('logout')
+    else:
+        messages.info(request,f"You were logged out")
+        return redirect('login')
+
+    context = {
+        'user_messages': sent_messages,
+    }
+
+    return render(request, "blog/user_sent_messages.html", context)
+
+
 
 @login_required()
 def instantmessage_detail(request, id):
     if LoginCode.objects.filter(user=request.user).exists():
         user = get_object_or_404(User, username=request.user)
         instant_message = get_object_or_404(InstantMessage, recipient=user, id=id)
+
         has_read = False
         if instant_message:
             instant_message.read = True
             has_read = True
             instant_message.save()
+        ireplies = InstantReply.objects.filter(imessage=instant_message).order_by('-date_posted')
+        if request.method == "POST":
+            form = InstantReplyForms(request.POST)
+            if form.is_valid():
+                rcontent = request.POST.get('reply_content')
+                repmessage = InstantReply.objects.create(imessage=instant_message,user=request.user,reply_content=rcontent)
+                back_to_sender = InstantMessage.objects.create(title=instant_message.title,sender=request.user,recipient=instant_message.sender)
+                back_to_sender.save()
+                repmessage.save()
+        else:
+            form = InstantReplyForms()
+        this_time = datetime.now()
+        this_min = this_time.minute
+        if this_min == CAN_STAY_LOGGED_IN1 or this_min == CAN_STAY_LOGGED_IN2 or this_min == CAN_STAY_LOGGED_IN3 or this_min == CAN_STAY_LOGGED_IN4:
+            return redirect('logout')
     else:
         messages.info(request,f"You were logged out")
         return redirect('login')
 
     context = {
         "instant_message": instant_message,
-        'has_read': has_read
+        'has_read': has_read,
+        'form': form,
+        'ireplies': ireplies
     }
+
+    if request.is_ajax():
+        html = render_to_string("blog/inreply.html",context,request=request)
+        return JsonResponse({"form":html})
 
     return render(request, "blog/instant_message_detail.html", context)
 
@@ -553,6 +627,11 @@ def post_detail(request, id):
                 comment = Comments.objects.create(post=post, user=request.user, reply=comment_content)
                 comment.save()
 
+        this_time = datetime.now()
+        this_min = this_time.minute
+        if this_min == CAN_STAY_LOGGED_IN1 or this_min == CAN_STAY_LOGGED_IN2 or this_min == CAN_STAY_LOGGED_IN3 or this_min == CAN_STAY_LOGGED_IN4:
+            return redirect('logout')
+
         else:
             form = CommentsForm()
     else:
@@ -575,18 +654,22 @@ def post_detail(request, id):
 
 @login_required()
 def main(request):
+    
     if LoginCode.objects.filter(user=request.user).exists():
         on_line_users = Online_user.objects.all()
-        unread_count = InstantMessage.objects.filter(
-            recipient=request.user.id).order_by('-date_posted')[:6]
-        unread_counts = InstantMessage.objects.filter(
-            recipient=request.user.id, read=False).count
+        unread_count = InstantMessage.objects.filter(recipient=request.user.id).order_by('-date_posted')[:6]
+        unread_counts = InstantMessage.objects.filter(recipient=request.user.id, read=False).count
+
         reports = Report.objects.all().order_by('-date_posted')[:6]
         posts = Post.objects.all().order_by('-date_posted')[:6]
         td = date.today()
         tt = timezone.now()
         ntt = tt.time
         current_events = Events.objects.filter(date_of_event=td)
+        this_time = datetime.now()
+        this_min = this_time.minute
+        if this_min == CAN_STAY_LOGGED_IN1 or this_min == CAN_STAY_LOGGED_IN2 or this_min == CAN_STAY_LOGGED_IN3 or this_min == CAN_STAY_LOGGED_IN4:
+            return redirect('logout')
     else:
         messages.info(request,f"You were logged out")
         return redirect('login')
@@ -626,6 +709,11 @@ def user_activities(request):
         # reports = Report.objects.all().order_by('-date_posted').count()
         subscribers = NewsLetter.objects.all().count()
         msg_system = InstantMessage.objects.all().count()
+
+        this_time = datetime.now()
+        this_min = this_time.minute
+        if this_min == CAN_STAY_LOGGED_IN1 or this_min == CAN_STAY_LOGGED_IN2 or this_min == CAN_STAY_LOGGED_IN3 or this_min == CAN_STAY_LOGGED_IN4:
+            return redirect('logout')
     else:
         messages.info(request,f"You were logged out")
         return redirect('login')
@@ -687,12 +775,22 @@ def login_request(request):
 
 @login_required()
 def logout(request):
-    ul = LoginCode.objects.filter(user=request.user)
-    on_user = Online_user.objects.filter(user=request.user)
-    if ul:
-        ul.delete()
-    if on_user:
-        on_user.delete()
+    try:
 
+        ul = LoginCode.objects.filter(user=request.user)
+        on_user = Online_user.objects.filter(user=request.user)
+        
+        if ul:
+            ul.delete()
+        if on_user:
+            on_user.delete()
+        del request.session['username']
+
+    except:
+      pass
 
     return render(request,"blog/logout.html")
+
+
+   
+   

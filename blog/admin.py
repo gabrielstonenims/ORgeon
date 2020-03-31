@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Volunteer,Events,JoinTrip,Partnership,NewsLetter,NewsUpdate,Report,InstantMessage,Post,Comments,Usermsg,Gallery,LoginCode,Online_user
+from .models import Volunteer,Events,JoinTrip,Partnership,NewsLetter,NewsUpdate,Report,InstantMessage,Post,Comments,Usermsg,Gallery,LoginCode,Online_user,InstantReply
 admin.site.register(Volunteer)
 admin.site.register(Events)
 admin.site.register(JoinTrip)
@@ -15,3 +15,4 @@ admin.site.register(Usermsg)
 admin.site.register(Gallery)
 admin.site.register(LoginCode)
 admin.site.register(Online_user)
+admin.site.register(InstantReply)

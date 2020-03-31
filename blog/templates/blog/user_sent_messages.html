@@ -6,17 +6,15 @@
 <div class="container">
     <br>
     <!-- Section: Blog v.3 -->
-    <div class="sendmessage">
-        <a title="send new message to a single user" href="{% url 'message_new' %}"><i class="fas fa-plus-circle fa-2x"></i></a>
-    </div>
+<h3 class="text-center mb-3">Your sent messages</h3>
     <div class="row ml-4">
         <div class="col-xs-6 col-sm-6 col-md-8 mb-3">
             {% for message in user_messages %}
                 <div class="user-message mb-3">
                     <span>
-                        <img class="z-depth-1-half" src="{{ message.sender.profile.profile_pic.url  }}" alt="message-sender" title="@{{ message.sender.username }}">
+                        <img class="z-depth-1-half" src="{{ message.recipient.profile.profile_pic.url  }}" alt="message-sender" title="@{{ message.recipient.username }}">
                     </span>
-                    <a href="{{ message.get_absolute_instant_reply_message_url }}" class="ml-2 sender-name text-center">{{ message.title }}</a><br>
+                    <a href="{{ message.get_absolute_instant_message_url }}" class="ml-2 sender-name text-center">{{ message.title }}</a><br>
                     <span class="ml-2 sender-message">{{ message.message_content|safe }}</span><br>
                     <small class="time-posted text-muted">{{ message.date_posted|date:"D d M Y" }}</small>
                 </div>
@@ -90,11 +88,9 @@
     </div>
 </div>
 <script>
-
   setInterval(function () {
     location.reload();
   }, 300000);
-
 </script>
 {% endblock %}
 

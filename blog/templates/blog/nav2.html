@@ -28,10 +28,22 @@
     <li class="nav-item" title="add a new report">
         <a class="nav-link" href="{% url 'create_report' %}"><i class="fas fa-plus mr-1"></i>Report</a>
     </li>
-    <li class="nav-item" title="view all your messages">
+    <!-- <li class="nav-item" title="view all your messages">
         <a class="nav-link" href="{% url 'messages'  %}">
             <i class="fas fa-envelope mr-1"></i>Messages
         </a>
+    </li> -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">Messages</a>
+      <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+        <a class="nav-link" href="{% url 'messages'  %}" title="received messages">
+          <i class="fas fa-envelope mr-1"></i>Messages
+      </a>
+      <a class="nav-link" href="{% url 'sent_messages'  %}" title="view all sent messages">
+        <i class="fas fa-envelope mr-1"></i>Sent Messages
+      </a>
+      </div>
     </li>
     </ul>
     <ul class="navbar-nav ml-auto nav-flex-icons">

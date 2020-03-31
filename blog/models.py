@@ -29,8 +29,6 @@ class Volunteer(models.Model):
     profession = models.CharField(max_length=100)
     phone = models.CharField(max_length=40)
     why_join_Orgeon = models.CharField(max_length=200)
-    # volunteering_as = models.CharField(max_length=100)
-    # photo = models.ImageField(upload_to='volunteers_pics',default='default.jpg',validators=[FileExtensionValidator(allowed_extensions=['jpeg','jpg'])])
     date_volunteered = models.DateTimeField(default=timezone.now)
 
 
@@ -132,6 +130,19 @@ class InstantMessage(models.Model):
     def message_count(self):
         return self.message_content.count
 
+class InstantReply(models.Model):
+    imessage = models.ForeignKey(InstantMessage,on_delete=models.CASCADE,related_name="reply_to_message")
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    reply_content = models.TextField(max_length=200)
+    read = models.BooleanField(default=False)
+    date_posted = models.DateTimeField(default=timezone.now)
+
+    def get_absolute_instant_reply_message_url(self):
+        return reverse('message_reply_detail',args={self.pk})
+
+
+    def __str__(self):
+        return f"{self.user.username} has replied to {self.imessage.title }"
 class Usermsg(models.Model):
     unread_message = models.ForeignKey(InstantMessage,on_delete=models.CASCADE)
     # user = models.ForeignKey(User,on_delete=models.CASCADE)
