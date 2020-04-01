@@ -26,7 +26,7 @@ urlpatterns = [
     path('notification/new/',PostCreateView.as_view(),name='post_new'),
     path('posts/',PostListView.as_view(),name='posts'),
     path('post/<int:id>/',views.post_detail,name='post_detail'),
-    path('message/new/',InstantMessgeCreateView.as_view(),name='message_new'),
+    path('message/new/',views.instantmessage_create,name='message_new'),
     path('main/',views.main,name='main'),
     path('messages/<int:id>/',views.instantmessage_detail,name='inmessage_detail'),
     path('msreplies/<int:id>/', views.replied_detail,

@@ -482,8 +482,52 @@ class InstantMessgeCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.sender = self.request.user
+        
         return super().form_valid(form)
 
+@login_required
+def instantmessage_create(request):
+    msg = EmailMessage()
+    if request.method == "POST":
+        form  = InstantMessageForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data.get('title')
+            recipient = form.cleaned_data.get('recipient')
+            content = form.cleaned_data.get('message_content')
+            InstantMessage.objects.create(title=title,sender=request.user,recipient=recipient,message_content=content)
+            theuser = User.objects.get(username=recipient)
+            receiver_email = theuser.email
+
+            msg["Subject"] = f"Got a new Message from {request.user.username}"
+            msg["From"] = settings.EMAIL_HOST_USER
+            msg["To"] = receiver_email
+            msg.set_content(
+                f"{request.user.username} just sent a private message to your inbox.Login to read it.")
+            hml = f"""
+                <!Doctype html>
+                <html>
+                <body>
+                <h1 style='font-style:italic;'>Got a new Message from {request.user.username}</h1>
+                <p style='color:SlateGray;'>{request.user.username} just sent a private message to your inbox.Login to read it.</p>
+                </body>
+                </html>
+                </html>
+                """
+            msg.add_alternative(hml, subtype='html')
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+                smtp.send_message(msg)
+                messages.success(request,f'Your message to {recipient} was successful.')
+                return redirect('main')
+
+    else:
+        form = InstantMessageForm()
+
+    context = {
+        'form': form
+    }
+
+    return render(request,"blog/instantmessage_form.html",context)
 
 @login_required()
 def user_messages(request):
