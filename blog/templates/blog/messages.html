@@ -16,7 +16,7 @@
                     <span>
                         <img class="z-depth-1-half" src="{{ message.sender.profile.profile_pic.url  }}" alt="message-sender" title="@{{ message.sender.username }}">
                     </span>
-                    <a href="{{ message.get_absolute_instant_reply_message_url }}" class="ml-2 sender-name text-center">{{ message.title }}</a><br>
+                    <p class="ml-2 sender-name text-center">{{ message.title }}</p><br>
                     <span class="ml-2 sender-message">{{ message.message_content|safe }}</span><br>
                     <small class="time-posted text-muted">{{ message.date_posted|date:"D d M Y" }}</small>
                 </div>

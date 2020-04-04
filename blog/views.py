@@ -501,8 +501,7 @@ def instantmessage_create(request):
             msg["Subject"] = f"Got a new Message from {request.user.username}"
             msg["From"] = settings.EMAIL_HOST_USER
             msg["To"] = receiver_email
-            msg.set_content(
-                f"{request.user.username} just sent a private message to your inbox.Login to read it.")
+            msg.set_content(f"{request.user.username} just sent a private message to your inbox.Login to read it.")
             hml = f"""
                 <!Doctype html>
                 <html>
@@ -552,15 +551,6 @@ def user_messages(request):
 
     return render(request, "blog/messages.html", context)
 
-@login_required()
-def replied_detail(request,id):
-    replied = get_object_or_404(InstantReply,id=id)
-
-    context = {
-        'replied' : replied
-    }
-
-    return render(request,"blog/replied.html",context)
 
 
 @login_required()
@@ -590,10 +580,16 @@ def user_sent_messages(request):
 
 @login_required()
 def instantmessage_detail(request, id):
+    msg = EmailMessage()
     if LoginCode.objects.filter(user=request.user).exists():
         user = get_object_or_404(User, username=request.user)
         instant_message = get_object_or_404(InstantMessage, recipient=user, id=id)
+        thesender = instant_message.sender
+        thesender_email = thesender.email
 
+        send_user = User.objects.get(username=request.user)
+        print(send_user)
+        # sender_email = send_user.email
         has_read = False
         if instant_message:
             instant_message.read = True
@@ -605,9 +601,27 @@ def instantmessage_detail(request, id):
             if form.is_valid():
                 rcontent = request.POST.get('reply_content')
                 repmessage = InstantReply.objects.create(imessage=instant_message,user=request.user,reply_content=rcontent)
-                back_to_sender = InstantMessage.objects.create(title=instant_message.title,sender=request.user,recipient=instant_message.sender)
+                back_to_sender = InstantMessage.objects.create(title=instant_message.title,sender=request.user,recipient=instant_message.sender,message_content=rcontent)
                 back_to_sender.save()
                 repmessage.save()
+                msg["Subject"] = f"{send_user} has replied to your message '{instant_message.title}'"
+                msg["From"] = settings.EMAIL_HOST_USER
+                msg["To"] = thesender_email
+                msg.set_content(f"{thesender} just replied to a message of yours.Login to read it.")
+                hml = f"""
+                <!Doctype html>
+                <html>
+                <body>
+                <h1 style='font-style:italic;'>{send_user} has replied to your message '{instant_message.title}'</h1>
+                <p style='color:SlateGray;'><strong>{send_user}</strong> just replied to a message of yours.Login to read it.</p>
+                </body>
+                </html>
+                </html>
+                """
+                msg.add_alternative(hml, subtype='html')
+                with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                    smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+                    smtp.send_message(msg)
         else:
             form = InstantReplyForms()
         this_time = datetime.now()

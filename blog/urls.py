@@ -29,8 +29,6 @@ urlpatterns = [
     path('message/new/',views.instantmessage_create,name='message_new'),
     path('main/',views.main,name='main'),
     path('messages/<int:id>/',views.instantmessage_detail,name='inmessage_detail'),
-    path('msreplies/<int:id>/', views.replied_detail,
-         name='message_reply_detail'),
     path('newsletter/',views.news_letter,name='newsletter_create'),
     path('event/new/',EventCreateView.as_view(),name='event_new'),
     path('event/<int:pk>/',EventDetailView.as_view(),name="event_detail"),
