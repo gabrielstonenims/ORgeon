@@ -1,8 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import (Volunteer, 
-JoinTrip, Partnership, NewsLetter,
- Report,Post,InstantMessage,Comments,Comments,NewsUpdate,InstantReply
+JoinTrip, Partnership, NewsLetter,Report, Post, InstantMessage, Comments, Comments, NewsUpdate, InstantReply,MessageD,Message,ContactUs
  )
 
 
@@ -94,6 +93,34 @@ class LoginForm(forms.Form):
     #     fields = ['username','password']
 
 
+class MessageD_Form(forms.ModelForm):
+    message = forms.CharField(label="",widget=forms.Textarea(attrs={'placeholder': 'Message....', 'rows': '3', 'cols': '35', 'id': 'directmessage', 'name': 'directmessage'}))
+
+    class Meta:
+        model = MessageD
+        fields = ['message']
 
 
+class Message_Form(forms.ModelForm):
+    message = forms.CharField(label="", widget=forms.Textarea(
+        attrs={'placeholder': 'Message....', 'rows': '3', 'cols': '35', 'id': 'directmessage', 'name': 'directmessage'}))
+
+    class Meta:
+        model = Message
+        fields = ['message']
+
+
+class ContactForm(forms.ModelForm):
+    name = forms.CharField(label='', max_length=100, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'name'}))
+    email = forms.EmailField(label='', max_length=100, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'email'}))
+    phone = forms.CharField(label='', max_length=100, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'phone'}))
+    message = forms.CharField(label="", widget=forms.Textarea(
+        attrs={'placeholder': 'Message....', 'rows': '3', 'cols': '35', 'id': 'contact_message', 'name': 'contact_message'}))
+
+    class Meta:
+        model = ContactUs
+        fields = ['name','email','phone','message']
 

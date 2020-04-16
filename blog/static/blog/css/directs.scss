@@ -1,0 +1,105 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  line-height: 1.4;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+.forusers {
+  border: solid 2px silver;
+  border-radius: 10px;
+  .head {
+    position: fixed;
+    width: 300px;
+    h3 {
+      text-align: center;
+      color: white;
+    }
+  }
+  .myusers {
+    height: 465px;
+    width: 300px;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding: 20px;
+
+    ul {
+      list-style-type: none;
+      a {
+        color: white;
+        text-transform: capitalize;
+        li {
+          display: flex;
+          padding: 10px;
+          // justify-content: center;
+          align-items: center;
+          img {
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+          }
+        }
+      }
+    }
+  }
+  .justchat {
+    padding-left: 0;
+    padding-right: 0;
+    .message-chat-area {
+      position: fixed;
+      width: 750px;
+      .for-detail-user {
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 20px;
+        }
+        span {
+          color: white;
+          text-transform: capitalize;
+        }
+      }
+
+      .chat-area {
+        height: 400px;
+        overflow: scroll;
+        overflow-x: hidden;
+        .msgs{
+            padding: 10px;
+            p{
+                padding: 10px;
+                border: solid 2px silver;
+                border-radius: 20px;
+            }
+            img{
+                width: 25px;
+                height: 25px;
+                border-radius: 17px;
+                float: left;
+            }
+        }
+      }
+      .message-form {
+            position: fixed;
+            // margin-top: 200px;
+            form{
+                textarea{
+                    width: 600px;
+                    height: 40px;
+                }
+                button{
+                    padding: 9px;
+                    border-top-right-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                    border: none;
+                }
+            }
+        }
+    }
+  }
+}

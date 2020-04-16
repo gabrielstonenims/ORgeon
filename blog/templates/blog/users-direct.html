@@ -1,0 +1,37 @@
+{% extends "blog/base2.html" %}
+
+{% block content %}
+<div class="container mt-3">
+    <div class="row mb-3 forusers">
+        <div class="col-xs-6 col-sm-6 col-md-4 mb-3">
+            <div class="head mb-3 mt-2">
+                <h3 class="text-center mb-3">Direct</h3>
+            </div>
+            <br>
+            <br>
+            <div class="myusers">
+                <ul>
+                    {% for user in users %}
+                    <a href="{% url 'userdetail' user.id %}">
+                        <li>
+                            <img class="mr-3 z-depth-1-half" src="{{ user.profile.profile_pic.url }}" alt="">
+                            <span>
+                                {{ user.username }}
+                            </span>
+                        </li>
+                    </a>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-8 mb-3">
+            <div class="message-chat-area">
+                <div class="for-detail-user">
+                    <!-- <img src="" alt=""> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

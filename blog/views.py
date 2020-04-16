@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView
-from .models import Volunteer, Events, JoinTrip, Partnership, NewsLetter, Report, InstantMessage, Post, Comments, NewsUpdate, Usermsg, Gallery,LoginCode,Online_user,InstantReply
+from .models import Volunteer, Events, JoinTrip, Partnership, NewsLetter, Report, InstantMessage, Post, Comments, NewsUpdate, Usermsg, Gallery,LoginCode,Online_user,InstantReply,MessageD,Message,ContactUs
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
@@ -21,7 +21,7 @@ from .forms import (VolunteerForm,
                     NewsLetterForm,
                     ReportForm,
                     PostForm, InstantMessageForm, CommentsForm,
-                    NewsUpdateForm,InstantReplyForms
+                    NewsUpdateForm,InstantReplyForms,Message_Form,MessageD_Form,ContactForm
                     )
 from django.contrib.auth.models import User
 import random
@@ -850,5 +850,139 @@ def logout(request):
     return render(request,"blog/logout.html")
 
 
+@login_required
+def all_users(request):
+    users = User.objects.exclude(id=request.user.id)
+
+    context = {
+        "users": users
+    }
+
+    return render(request,"blog/users-direct.html",context)
+
    
+@login_required
+def user_detail(request,id):
+    if LoginCode.objects.filter(user=request.user).exists():
+        user = get_object_or_404(User,id=id)
+        users = User.objects.exclude(id=request.user.id)
+        all_messages = Message.objects.all().order_by('date_sent')
+        usermessages = Message.objects.filter(receiver=user).order_by('date_sent')
+        reqmessages = Message.objects.filter(sender=request.user).order_by('date_sent')
+
+        if request.method == "POST":
+            form = Message_Form(request.POST)
+            if form.is_valid():
+                user1 = request.user
+                user2 = user
+                message = form.cleaned_data.get('message')
+                Message.objects.create(sender=user1,receiver=user2,message=message)
+        else:
+            form = Message_Form()
+
+        this_time = datetime.now()
+        this_min = this_time.minute
+        if this_min == CAN_STAY_LOGGED_IN1 or this_min == CAN_STAY_LOGGED_IN2 or this_min == CAN_STAY_LOGGED_IN3 or this_min == CAN_STAY_LOGGED_IN4:
+            return redirect('logout')
+    else:
+        messages.info(request, f"You were logged out")
+        return redirect('login')
+
+
+    context = {
+        "users": users,
+        "user": user,
+        "all_messages": all_messages,
+        "form": form,
+        "usermessages": usermessages,
+        "reqmessages": reqmessages,
+    }
+
+    if request.is_ajax():
+        msg = render_to_string("blog/umessages.html",context,request=request)
+        return JsonResponse({
+            "form": msg
+        })
    
+    return render(request,"blog/user_direct_detail.html",context)
+
+
+@login_required
+def group_chat(request):
+    if LoginCode.objects.filter(user=request.user).exists():
+        all_messages = MessageD.objects.all().order_by('date_sent')
+        users = User.objects.exclude(id=request.user.id)
+        if request.method == "POST":
+            form = MessageD_Form(request.POST)
+            if form.is_valid():
+                sender = request.user
+                message = form.cleaned_data.get('message')
+                MessageD.objects.create(sender=sender,message=message)
+
+        else:
+            form = MessageD_Form()
+
+        this_time = datetime.now()
+        this_min = this_time.minute
+        if this_min == CAN_STAY_LOGGED_IN1 or this_min == CAN_STAY_LOGGED_IN2 or this_min == CAN_STAY_LOGGED_IN3 or this_min == CAN_STAY_LOGGED_IN4:
+            return redirect('logout')
+    else:
+        messages.info(request, f"You were logged out")
+        return redirect('login')
+
+    context = {
+        "form":form,
+        "users": users,
+        "all_messages": all_messages
+    }
+
+    if request.is_ajax():
+        msg_chat = render_to_string("blog/groupchat.html",context,request=request)
+        return JsonResponse({
+            "form": msg_chat,
+        })
+
+    return render(request,"blog/gchat.html",context)
+
+
+def contact_us(request):
+    msg = EmailMessage()
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data.get('name')
+            email = form.cleaned_data.get('email')
+            phone = form.cleaned_data.get('phone')
+            message = form.cleaned_data.get('message')
+            ContactUs.objects.create(name=name,email=email,phone=phone,message=message)
+            msg["Subject"] = f"Message from {name}"
+            msg["From"] = settings.EMAIL_HOST_USER
+            msg["To"] = "help@orgeonofstars.org"
+            msg.set_content(f"{message}")
+            hml = f"""
+                <!Doctype html>
+                <html>
+                <body>
+                <h1 style='font-style:italic;'>{name} sent an enquiry to you.</h1>
+                <p style='color:SlateGray;'>{message}</p>
+                <p style='color:SlateGray;'>{email}</p>
+                <p style='color:SlateGray;'>{phone}</p>
+                </body>
+                </html>
+                </html>
+                """
+            msg.add_alternative(hml, subtype='html')
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+                smtp.send_message(msg)
+                messages.success(request, f'Message sent.')
+                return redirect('home')
+
+    else:
+        form = ContactForm()
+
+    context = {
+        "form": form
+    }
+
+    return render(request,"blog/contact-us.html",context)

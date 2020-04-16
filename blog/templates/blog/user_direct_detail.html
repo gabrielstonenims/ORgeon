@@ -1,0 +1,150 @@
+{% extends "blog/base2.html" %}
+{% load crispy_forms_tags%}
+{% block content %}
+<div class="container-fluid h-100">
+    <div class="row justify-content-center h-100">
+        <div class="col-md-4 col-xl-3 chat">
+            <div class="card mb-sm-3 mb-md-0 contacts_card">
+                <div class="card-header">
+                    <div class="input-group">
+                        <input type="text" placeholder="Search..." name="" class="form-control search">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body contacts_body">
+                    <ui class="contacts">
+                        {% for user in users %}
+                        <a href="{% url 'userdetail' user.id %}">
+                            <li>
+                                <div class="d-flex bd-highlight">
+                                    <div class="img_cont">
+                                        <img src="{{ user.profile.profile_pic.url }}"
+                                            class="rounded-circle user_img">
+                                            <span class="online_icon"></span>
+                                    </div>
+                                    <div class="user_info">
+                                        <span>{{ user.username }}</span>
+                                        <p>Online</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </a>
+                        {% endfor %}
+                    </ui>
+                </div>
+                <div class="card-footer"></div>
+            </div>
+        </div>
+        <div class="col-md-8 col-xl-6 chat">
+            <div class="card">
+                <div class="card-header msg_head">
+                    <div class="d-flex bd-highlight">
+                        <div class="img_cont">
+                            <img src="{{ user.profile.profile_pic.url }}"
+                                class="rounded-circle user_img">
+                            <span class="online_icon"></span>
+                        </div>
+                        <div class="user_info">
+                            <span>{{ user.username }}</span><br>
+                            <small style="color: white;">Last seen:</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body msg_card_body">
+                    {% for message in all_messages %}
+                        {% if user == message.receiver  %}
+                        <div class="d-flex justify-content-end mb-4">
+                            <div class="msg_cotainer">
+                                {{ message.message }}
+                                <span class="msg_time">8:40 AM, Today</span>
+                            </div>
+                            <div class="img_cont_msg">
+                                <img src="{{ request.user.profile.profile_pic.url}}" class="rounded-circle user_img_msg ml-2">
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="d-flex justify-content-start mb-4">
+                            <div class="img_cont_msg">
+                                <img src="{{ message.sender.profile.profile_pic.url }}"
+                                    class="rounded-circle user_img_msg mr-2">
+                            </div>
+                            <div class="msg_cotainer_send ml-2">
+                                {{ message.message }}
+                                <span class="msg_time_send">8:55 AM, Today</span>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+
+                {% if user.is_authenticated %}
+                <div class="card-footer">
+                    <div class="input-group">
+                        {% include "blog/umessages.html" %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="container mt-3">
+    <div class="row mb-3 forusers">
+        <div class="col-xs-6 col-sm-6 col-md-4 mb-3">
+            <div class="head mb-3 mt-2">
+                <h3 class="text-center mb-3">Direct</h3>
+            </div>
+            <br>
+            <br>
+            <div class="myusers">
+                <ul>
+                    {% for user in users %}
+                    <a href="{% url 'userdetail' user.id %}">
+                        <li>
+                            <img class="mr-3 z-depth-1-half" src="{{ user.profile.profile_pic.url }}" alt="">
+                            <span>
+                                {{ user.username }}
+                            </span>
+                        </li>
+                    </a>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-8 mb-3 justchat">
+            <div class="message-chat-area mb-3 mt-2">
+                <div class="for-detail-user">
+                    <img class="mr-3 z-depth-1-half" src="{{user.profile.profile_pic.url }}"
+                        alt=""><span>{{ user.username }}</span>
+                </div>
+                <div class="chat-area">
+                    <div class="msgs">
+                        {% for message in all_messages %}
+                        {% if message.user1 == request.user %}
+                        <p style="color: white; float: right;">
+                            {{ message.message }} <br>
+                            <small class="text-muted" style="float: right;">{{ message.date_posted }}</small>
+                        </p>
+                        <br><br><br><br>
+                        {% else %}
+                        <img class="mr-2 z-depth-1-half" src="{{ message.user2.profile.profile_pic.url }}" alt="">
+                        <p style="color: white;float: left;">
+                            {{ message.message }} <br>
+                            <small class="text-muted" style="float: right;">{{ message.date_posted }}</small>
+                        </p>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="message-form">
+                    {% include "blog/umessages.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+{% endblock %}

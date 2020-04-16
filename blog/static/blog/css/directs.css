@@ -1,0 +1,121 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  line-height: 1.4;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+.forusers {
+  border: solid 2px silver;
+  border-radius: 10px;
+}
+
+.forusers .head {
+  position: fixed;
+  width: 300px;
+}
+
+.forusers .head h3 {
+  text-align: center;
+  color: white;
+}
+
+.forusers .myusers {
+  height: 465px;
+  width: 300px;
+  overflow: scroll;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+.forusers .myusers ul {
+  list-style-type: none;
+}
+
+.forusers .myusers ul a {
+  color: white;
+  text-transform: capitalize;
+}
+
+.forusers .myusers ul a li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.forusers .myusers ul a li img {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+}
+
+.forusers .justchat {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.forusers .justchat .message-chat-area {
+  position: fixed;
+  width: 750px;
+}
+
+.forusers .justchat .message-chat-area .for-detail-user img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.forusers .justchat .message-chat-area .for-detail-user span {
+  color: white;
+  text-transform: capitalize;
+}
+
+.forusers .justchat .message-chat-area .chat-area {
+  height: 400px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.forusers .justchat .message-chat-area .chat-area .msgs {
+  padding: 10px;
+}
+
+.forusers .justchat .message-chat-area .chat-area .msgs p {
+  padding: 10px;
+  border: solid 2px silver;
+  border-radius: 20px;
+}
+
+.forusers .justchat .message-chat-area .chat-area .msgs img {
+  width: 25px;
+  height: 25px;
+  border-radius: 17px;
+  float: left;
+}
+
+.forusers .justchat .message-chat-area .message-form {
+  position: fixed;
+}
+
+.forusers .justchat .message-chat-area .message-form form textarea {
+  width: 600px;
+  height: 40px;
+}
+
+.forusers .justchat .message-chat-area .message-form form button {
+  padding: 9px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: none;
+}
+/*# sourceMappingURL=directs.css.map */

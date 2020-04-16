@@ -207,3 +207,36 @@ class Online_user(models.Model):
 
     def __str__(self):
         return f"{self.user.username} just came online"
+
+
+
+class Message(models.Model):
+    sender = models.ForeignKey(User,on_delete=models.CASCADE,related_name='message_sender')
+    receiver = models.ForeignKey(User,on_delete=models.CASCADE)
+    message = models.TextField()
+    read = models.BooleanField(default=False)
+    date_sent = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.sender.username} sent a message to {self.receiver.username}"
+
+
+class MessageD(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='group_message_sender')
+    message = models.TextField()
+    read = models.BooleanField(default=False)
+    date_sent = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.sender.username} sent a message"
+
+
+class ContactUs(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    message = models.TextField()
+    date_contacted = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.name}"

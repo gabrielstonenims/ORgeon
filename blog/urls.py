@@ -34,5 +34,9 @@ urlpatterns = [
     path('event/<int:pk>/',EventDetailView.as_view(),name="event_detail"),
     path('activities/',views.user_activities,name='activities'),
     path('login/',views.login_request,name='login'),
-    path('logout/',views.logout,name='logout')
+    path('logout/',views.logout,name='logout'),
+    path('direct/',views.all_users,name="allusers"),
+    path('direct/<int:id>/',views.user_detail,name="userdetail"),
+    path('chat/',views.group_chat,name="chat"),
+    path("contact-us/",views.contact_us,name='contact')
 ]

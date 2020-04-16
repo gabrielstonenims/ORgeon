@@ -33,17 +33,15 @@
             <i class="fas fa-envelope mr-1"></i>Messages
         </a>
     </li> -->
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">Messages</a>
-      <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-        <a class="nav-link" href="{% url 'messages'  %}" title="received messages">
-          <i class="fas fa-envelope mr-1"></i>Messages
+    <li class="nav-item" title="Private chat">
+      <a class="nav-link" href="{% url 'allusers' %}">
+        <i class="far fa-comment"></i>
       </a>
-      <a class="nav-link" href="{% url 'sent_messages'  %}" title="view all sent messages">
-        <i class="fas fa-envelope mr-1"></i>Sent Messages
+    </li>
+    <li class="nav-item" title="Group chat">
+      <a class="nav-link" href="{% url 'chat' %}">
+        <i class="far fa-comment"></i>++
       </a>
-      </div>
     </li>
     </ul>
     <ul class="navbar-nav ml-auto nav-flex-icons">
