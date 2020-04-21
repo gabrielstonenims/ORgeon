@@ -1,10 +1,29 @@
-{% load crispy_forms_tags%}
-<form action="." method="POST">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <div class="input-group-append">
-        <button class="input-group-text send_btn" type="submit">
-            <i class="fas fa-location-arrow"></i>
-        </button>
+<div class="card-body msg_card_body for-group-div">
+    {% for message in all_messages %}
+    <div class="d-flex justify-content-start mb-4">
+        <div class="img_cont_msg">
+            <img src="{{ message.sender.profile.profile_pic.url}}" class="rounded-circle user_img_msg mr-2">
+        </div>
+        <div class="msg_cotainer">
+            {{ message.message }}
+            <span class="msg_time">{{ message.date_sent }}</span>
+        </div>
     </div>
-</form>
+    {% endfor %}
+</div>
+{% if user.is_authenticated %}
+<div class="card-footer">
+    <div class="input-group">
+        {% load crispy_forms_tags%}
+        <form action="." method="POST" class="group-chat-form">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="input-group-append">
+                <button class="input-group-text send_btn" type="submit" id="group-chat-button">
+                    <i class="fas fa-location-arrow"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endif %}

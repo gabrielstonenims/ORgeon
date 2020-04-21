@@ -103,45 +103,6 @@ class Report(models.Model):
         return reverse("report_detail",args={self.pk})
 
 
-class InstantMessage(models.Model):
-    title = models.CharField(max_length=200,blank=True)
-    sender = models.ForeignKey(User,on_delete=models.CASCADE,related_name='message_user')
-    recipient = models.ForeignKey(User,on_delete=models.CASCADE,related_name='recipient',blank=True,null=True,help_text="Please select just one employee.")
-    message_content = models.TextField()
-    read = models.BooleanField(default=False)
-    date_posted = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return f"{self.sender} has sent a private message to { self.recipient.username }."
-
-    def get_absolute_instant_message_url(self):
-        return reverse("inmessage_detail",args={ self.pk })
-
-
-    def message_count(self):
-        return self.message_content.count
-
-class InstantReply(models.Model):
-    imessage = models.ForeignKey(InstantMessage,on_delete=models.CASCADE,related_name="reply_to_message")
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    reply_content = models.TextField(max_length=200)
-    read = models.BooleanField(default=False)
-    date_posted = models.DateTimeField(default=timezone.now)
-
-    def get_absolute_instant_reply_message_url(self):
-        return reverse('message_reply_detail',args={self.pk})
-
-
-    def __str__(self):
-        return f"{self.user.username} has replied to {self.imessage.title }"
-class Usermsg(models.Model):
-    unread_message = models.ForeignKey(InstantMessage,on_delete=models.CASCADE)
-    # user = models.ForeignKey(User,on_delete=models.CASCADE)
-
-
-    def __str__(self):
-        return f"{self.unread_message.title}"
-
 
 class Post(models.Model):
     author = author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_user')
@@ -211,11 +172,12 @@ class Online_user(models.Model):
 
 
 class Message(models.Model):
+    chat_id = models.IntegerField(default=1)
     sender = models.ForeignKey(User,on_delete=models.CASCADE,related_name='message_sender')
     receiver = models.ForeignKey(User,on_delete=models.CASCADE)
     message = models.TextField()
     read = models.BooleanField(default=False)
-    date_sent = models.DateTimeField(default=timezone.now)
+    date_sent = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.sender.username} sent a message to {self.receiver.username}"

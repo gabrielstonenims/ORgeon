@@ -12,7 +12,8 @@
             <div class="myusers">
                 <ul>
                     {% for user in users %}
-                    <a href="{% url 'userdetail' user.id %}">
+
+                    <a href="{% url 'userdetail' user.username %}">
                         <li>
                             <img class="mr-3 z-depth-1-half" src="{{ user.profile.profile_pic.url }}" alt="">
                             <span>
@@ -20,6 +21,7 @@
                             </span>
                         </li>
                     </a>
+
                     {% endfor %}
                 </ul>
             </div>

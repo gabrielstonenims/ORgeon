@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import (Volunteer, 
-JoinTrip, Partnership, NewsLetter,Report, Post, InstantMessage, Comments, Comments, NewsUpdate, InstantReply,MessageD,Message,ContactUs
+JoinTrip, Partnership, NewsLetter,Report, Post, Comments, Comments, NewsUpdate,MessageD,Message,ContactUs
  )
 
 
@@ -53,11 +53,6 @@ class ReportForm(forms.ModelForm):
         model = Report
         fields = ['title', 'report']
 
-class InstantMessageForm(forms.ModelForm):
-
-    class Meta:
-        model = InstantMessage
-        fields = ['title','recipient','message_content']
 
 class PostForm(forms.ModelForm):
 
@@ -73,14 +68,6 @@ class CommentsForm(forms.ModelForm):
     class Meta:
         model = Comments
         fields = ['reply']
-
-class InstantReplyForms(forms.ModelForm):
-    reply_content = forms.CharField( widget=forms.Textarea(
-        attrs={'placeholder': 'reply here....', 'rows': '3', 'cols': '35', 'id': 'instantreplyform','name':'instantreplyform'}))
-
-    class Meta:
-        model = InstantReply
-        fields = ['reply_content']
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='', max_length=100, widget=forms.TextInput(

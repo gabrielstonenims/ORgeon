@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView
-from .models import Volunteer, Events, JoinTrip, Partnership, NewsLetter, Report, InstantMessage, Post, Comments, NewsUpdate, Usermsg, Gallery,LoginCode,Online_user,InstantReply,MessageD,Message,ContactUs
+from .models import Volunteer, Events, JoinTrip, Partnership, NewsLetter, Report, Post, Comments, NewsUpdate,Gallery,LoginCode,Online_user,MessageD,Message,ContactUs
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
@@ -20,8 +20,8 @@ from .forms import (VolunteerForm,
                     PartnershipForm,
                     NewsLetterForm,
                     ReportForm,
-                    PostForm, InstantMessageForm, CommentsForm,
-                    NewsUpdateForm,InstantReplyForms,Message_Form,MessageD_Form,ContactForm
+                    PostForm, CommentsForm,
+                    NewsUpdateForm,Message_Form,MessageD_Form,ContactForm
                     )
 from django.contrib.auth.models import User
 import random
@@ -29,9 +29,8 @@ from django.contrib import auth
 from django.utils import timezone
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate,login
-import threading
 import time
-import asyncio
+
 
 # global time checker
 CAN_STAY_LOGGED_IN1 = 30
@@ -474,178 +473,6 @@ def employees(request):
 
     return render(request, "blog/employees.html", context)
 
-
-class InstantMessgeCreateView(LoginRequiredMixin, CreateView):
-    model = InstantMessage
-    fields = ['title', 'recipient', 'message_content']
-    success_url = '/main'
-
-    def form_valid(self, form):
-        form.instance.sender = self.request.user
-        
-        return super().form_valid(form)
-
-@login_required
-def instantmessage_create(request):
-    msg = EmailMessage()
-    if request.method == "POST":
-        form  = InstantMessageForm(request.POST)
-        if form.is_valid():
-            title = form.cleaned_data.get('title')
-            recipient = form.cleaned_data.get('recipient')
-            content = form.cleaned_data.get('message_content')
-            InstantMessage.objects.create(title=title,sender=request.user,recipient=recipient,message_content=content)
-            theuser = User.objects.get(username=recipient)
-            receiver_email = theuser.email
-
-            msg["Subject"] = f"Got a new Message from {request.user.username}"
-            msg["From"] = settings.EMAIL_HOST_USER
-            msg["To"] = receiver_email
-            msg.set_content(f"{request.user.username} just sent a private message to your inbox.Login to read it.")
-            hml = f"""
-                <!Doctype html>
-                <html>
-                <body>
-                <h1 style='font-style:italic;'>Got a new Message from {request.user.username}</h1>
-                <p style='color:SlateGray;'>{request.user.username} just sent a private message to your inbox.Login to read it.</p>
-                </body>
-                </html>
-                </html>
-                """
-            msg.add_alternative(hml, subtype='html')
-            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-                smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
-                smtp.send_message(msg)
-                messages.success(request,f'Your message to {recipient} was successful.')
-                return redirect('main')
-
-    else:
-        form = InstantMessageForm()
-
-    context = {
-        'form': form
-    }
-
-    return render(request,"blog/instantmessage_form.html",context)
-
-@login_required()
-def user_messages(request):
-    if LoginCode.objects.filter(user=request.user).exists():
-        user_messages = InstantMessage.objects.filter(recipient=request.user).order_by('-date_posted')
-        unread_count = InstantMessage.objects.filter(recipient=request.user, read=False).count
-        paginator = Paginator(user_messages, 4)
-        page = request.GET.get('page')
-        user_messages = paginator.get_page(page)
-        this_time = datetime.now()
-        this_min = this_time.minute
-        if this_min == CAN_STAY_LOGGED_IN1 or this_min == CAN_STAY_LOGGED_IN2 or this_min == CAN_STAY_LOGGED_IN3 or this_min == CAN_STAY_LOGGED_IN4:
-            return redirect('logout')
-    else:
-        messages.info(request,f"You were logged out")
-        return redirect('login')
-
-    context = {
-        'user_messages': user_messages,
-        'notification_count': unread_count,
-    }
-
-    return render(request, "blog/messages.html", context)
-
-
-
-@login_required()
-def user_sent_messages(request):
-    if LoginCode.objects.filter(user=request.user).exists():
-        # sent messages
-        sent_messages = InstantMessage.objects.filter(sender=request.user).order_by('-date_posted')
-        ireplies = InstantReply.objects.all().order_by('-date_post')
-        paginator = Paginator(sent_messages, 4)
-        page = request.GET.get('page')
-        sent_messages = paginator.get_page(page)
-        this_time = datetime.now()
-        this_min = this_time.minute
-        if this_min == CAN_STAY_LOGGED_IN1 or this_min == CAN_STAY_LOGGED_IN2 or this_min == CAN_STAY_LOGGED_IN3 or this_min == CAN_STAY_LOGGED_IN4:
-            return redirect('logout')
-    else:
-        messages.info(request,f"You were logged out")
-        return redirect('login')
-
-    context = {
-        'user_messages': sent_messages,
-    }
-
-    return render(request, "blog/user_sent_messages.html", context)
-
-
-
-@login_required()
-def instantmessage_detail(request, id):
-    msg = EmailMessage()
-    if LoginCode.objects.filter(user=request.user).exists():
-        user = get_object_or_404(User, username=request.user)
-        instant_message = get_object_or_404(InstantMessage, recipient=user, id=id)
-        thesender = instant_message.sender
-        thesender_email = thesender.email
-
-        send_user = User.objects.get(username=request.user)
-        print(send_user)
-        # sender_email = send_user.email
-        has_read = False
-        if instant_message:
-            instant_message.read = True
-            has_read = True
-            instant_message.save()
-        ireplies = InstantReply.objects.filter(imessage=instant_message).order_by('-date_posted')
-        if request.method == "POST":
-            form = InstantReplyForms(request.POST)
-            if form.is_valid():
-                rcontent = request.POST.get('reply_content')
-                repmessage = InstantReply.objects.create(imessage=instant_message,user=request.user,reply_content=rcontent)
-                back_to_sender = InstantMessage.objects.create(title=instant_message.title,sender=request.user,recipient=instant_message.sender,message_content=rcontent)
-                back_to_sender.save()
-                repmessage.save()
-                msg["Subject"] = f"{send_user} has replied to your message '{instant_message.title}'"
-                msg["From"] = settings.EMAIL_HOST_USER
-                msg["To"] = thesender_email
-                msg.set_content(f"{thesender} just replied to a message of yours.Login to read it.")
-                hml = f"""
-                <!Doctype html>
-                <html>
-                <body>
-                <h1 style='font-style:italic;'>{send_user} has replied to your message '{instant_message.title}'</h1>
-                <p style='color:SlateGray;'><strong>{send_user}</strong> just replied to a message of yours.Login to read it.</p>
-                </body>
-                </html>
-                </html>
-                """
-                msg.add_alternative(hml, subtype='html')
-                with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-                    smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
-                    smtp.send_message(msg)
-        else:
-            form = InstantReplyForms()
-        this_time = datetime.now()
-        this_min = this_time.minute
-        if this_min == CAN_STAY_LOGGED_IN1 or this_min == CAN_STAY_LOGGED_IN2 or this_min == CAN_STAY_LOGGED_IN3 or this_min == CAN_STAY_LOGGED_IN4:
-            return redirect('logout')
-    else:
-        messages.info(request,f"You were logged out")
-        return redirect('login')
-
-    context = {
-        "instant_message": instant_message,
-        'has_read': has_read,
-        'form': form,
-        'ireplies': ireplies
-    }
-
-    if request.is_ajax():
-        html = render_to_string("blog/inreply.html",context,request=request)
-        return JsonResponse({"form":html})
-
-    return render(request, "blog/instant_message_detail.html", context)
-
-
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'message', 'poster', 'need_replies']
@@ -715,8 +542,9 @@ def main(request):
     
     if LoginCode.objects.filter(user=request.user).exists():
         on_line_users = Online_user.objects.all()
-        unread_count = InstantMessage.objects.filter(recipient=request.user.id).order_by('-date_posted')[:6]
-        unread_counts = InstantMessage.objects.filter(recipient=request.user.id, read=False).count
+        users = User.objects.exclude(id=request.user.id)
+        for i in users:
+            print(f"{i.username}'s id is {i.id}")
 
         reports = Report.objects.all().order_by('-date_posted')[:6]
         posts = Post.objects.all().order_by('-date_posted')[:6]
@@ -733,11 +561,11 @@ def main(request):
         return redirect('login')
     context = {
         'users': on_line_users,
+        "chat":users,
         'reports': reports,
         'posts': posts,
         'current_events': current_events,
-        'unread_count': unread_count,
-        'unread_counts': unread_counts
+        # "last_message": last_message
     }
 
     return render(request, "blog/main.html", context)
@@ -766,7 +594,7 @@ def user_activities(request):
         partners = Partnership.objects.all().count()
         # reports = Report.objects.all().order_by('-date_posted').count()
         subscribers = NewsLetter.objects.all().count()
-        msg_system = InstantMessage.objects.all().count()
+
 
         this_time = datetime.now()
         this_min = this_time.minute
@@ -782,7 +610,6 @@ def user_activities(request):
         "partners": partners,
         # "report": reports,
         "subscribers": subscribers,
-        "msg_system": msg_system
     }
 
     if request.is_ajax():
@@ -853,58 +680,71 @@ def logout(request):
 @login_required
 def all_users(request):
     users = User.objects.exclude(id=request.user.id)
-
+    
     context = {
-        "users": users
+        "users": users,
     }
 
     return render(request,"blog/users-direct.html",context)
 
-   
 @login_required
-def user_detail(request,id):
-    if LoginCode.objects.filter(user=request.user).exists():
-        user = get_object_or_404(User,id=id)
-        users = User.objects.exclude(id=request.user.id)
-        all_messages = Message.objects.all().order_by('date_sent')
-        usermessages = Message.objects.filter(receiver=user).order_by('date_sent')
-        reqmessages = Message.objects.filter(sender=request.user).order_by('date_sent')
+def user_detail(request,username):
+    msg = EmailMessage()
+    deuser = get_object_or_404(User,username=username)
+    deuser_email = deuser.email
+    users = User.objects.exclude(id=request.user.id)
+    chatid = deuser.id * request.user.id
+    chat = Message.objects.filter(chat_id=chatid)
+    mychats = Message.objects.all().filter(chat_id=chatid).filter(sender=request.user).filter(receiver=deuser).order_by('message')
 
-        if request.method == "POST":
-            form = Message_Form(request.POST)
-            if form.is_valid():
-                user1 = request.user
-                user2 = user
-                message = form.cleaned_data.get('message')
-                Message.objects.create(sender=user1,receiver=user2,message=message)
-        else:
-            form = Message_Form()
+   
+    if request.method == "POST":
+        form = Message_Form(request.POST)
+        if form.is_valid():
+            message = form.cleaned_data.get('message')
+            if not Message.objects.filter(chat_id=chatid).exists():
+                Message.objects.create(chat_id=chatid, sender=request.user, receiver=deuser, message=message)
+            else:
+                Message.objects.create(chat_id=chatid, sender=request.user, receiver=deuser, message=message)
+            # mail to personal email
 
-        this_time = datetime.now()
-        this_min = this_time.minute
-        if this_min == CAN_STAY_LOGGED_IN1 or this_min == CAN_STAY_LOGGED_IN2 or this_min == CAN_STAY_LOGGED_IN3 or this_min == CAN_STAY_LOGGED_IN4:
-            return redirect('logout')
+            msg["Subject"] = f"Got new messages from {request.user}"
+            msg["From"] = settings.EMAIL_HOST_USER
+            msg["To"] = deuser_email
+            msg.set_content(f"{request.user} has sent a private message to you,login to view and reply.")
+            hml = f"""
+            <!Doctype html>
+            <html>
+            <body>
+            <h1 style='font-style:italic;'>Got new messages from {request.user}.</h1>
+            <p style='color:SlateGray;'>{request.user} has sent a private message to you,login to view and reply.</p>
+            </body>
+            </html>
+            </html>
+            """
+            msg.add_alternative(hml, subtype='html')
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+                smtp.send_message(msg)
     else:
-        messages.info(request, f"You were logged out")
-        return redirect('login')
-
+        form = Message_Form()
 
     context = {
-        "users": users,
-        "user": user,
-        "all_messages": all_messages,
         "form": form,
-        "usermessages": usermessages,
-        "reqmessages": reqmessages,
+        "deuser": deuser,
+        "chat":chat,
+        "users":users,
+        "mychats": mychats
     }
-
     if request.is_ajax():
         msg = render_to_string("blog/umessages.html",context,request=request)
         return JsonResponse({
             "form": msg
         })
-   
-    return render(request,"blog/user_direct_detail.html",context)
+
+    return render(request, "blog/user_direct_detail.html", context)
+
+
 
 
 @login_required
@@ -912,6 +752,7 @@ def group_chat(request):
     if LoginCode.objects.filter(user=request.user).exists():
         all_messages = MessageD.objects.all().order_by('date_sent')
         users = User.objects.exclude(id=request.user.id)
+        on_users = Online_user.objects.all()
         if request.method == "POST":
             form = MessageD_Form(request.POST)
             if form.is_valid():
@@ -933,7 +774,8 @@ def group_chat(request):
     context = {
         "form":form,
         "users": users,
-        "all_messages": all_messages
+        "all_messages": all_messages,
+        "on_users": on_users
     }
 
     if request.is_ajax():
