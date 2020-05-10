@@ -2,7 +2,7 @@ from django.urls import path
 
 from . import views
 from .views import Volunteers
-from .views import PostCreateView,PostListView,EventCreateView,EventDetailView,ReportListView
+from .views import (PostCreateView,PostListView,EventCreateView,EventDetailView,ReportListView,ClientInfoCreateView, ClientInfoListView, ClientInfoUpdateView, ClientInfoDeleteView)
 urlpatterns = [
     path('',views.home,name='home'),
     path('gallery/',views.gallery,name='gallery'),
@@ -34,5 +34,10 @@ urlpatterns = [
     path('direct/',views.all_users,name="allusers"),
     path('direct/<str:username>/',views.user_detail,name="userdetail"),
     path('chat/',views.group_chat,name="chat"),
-    path("contact-us/",views.contact_us,name='contact')
+    path("contact-us/",views.contact_us,name='contact'),
+    path('clients/', ClientInfoListView.as_view(), name='clients'),
+    path('clients/new/', ClientInfoCreateView.as_view(), name='clients_new'),
+    path('client/<int:id>/', views.client_detail, name='client_detail'),
+    path('client/<int:pk>/update/', ClientInfoUpdateView.as_view(), name='client_update'),
+    path('client/<int:pk>/delete/', ClientInfoDeleteView.as_view(), name='client_delete')
 ]

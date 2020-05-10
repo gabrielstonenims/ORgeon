@@ -1,0 +1,119 @@
+.client-master {
+  padding: 20px;
+  color: white;
+  .client-image {
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: solid 2px silver;
+    }
+  }
+  .other-details {
+    span.c-level {
+      padding: 2px;
+      border: solid 2px silver;
+      border-radius: 5px;
+    }
+    .levels {
+      display: flex;
+      .level {
+        text-align: center;
+        font-weight: bold;
+        border-radius: 10px;
+        width: 10%;
+        padding: 5px;
+        border: solid 2px silver;
+      }
+      .level-accessment {
+        color: white;
+        background-color: red;
+        animation: glow 1s ease-in-out infinite alternate;
+      }
+      .level-development {
+        color: white;
+        background-color: red;
+        animation: glow 1s ease-in-out infinite alternate;
+      }
+      .level-planning {
+        color: black;
+        background-color: yellow;
+        animation: glow 1s ease-in-out infinite alternate;
+      }
+      .level-implementation {
+        color: black;
+        background-color: yellow;
+        animation: glow 1s ease-in-out infinite alternate;
+      }
+      .level-evaluation {
+        color: white;
+        background-color: green;
+        animation: glow 1s ease-in-out infinite alternate;
+      }
+      .level-star {
+        .fa-star {
+          color: yellow;
+          animation: rotate-star 2s infinite linear;
+        }
+      }
+    }
+  }
+}
+
+@keyframes rotate-star {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #eeeeee, 0 0 20px #000000, 0 0 30px #000000,
+      0 0 40px #000000, 0 0 50px #9554b3, 0 0 60px #9554b3, 0 0 70px #9554b3;
+  }
+  to {
+    text-shadow: 0 0 20px #eeeeee, 0 0 30px #ff4da6, 0 0 40px #ff4da6,
+      0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+
+.client-detail-stuff {
+  .client-detail-image {
+    display: flex;
+    padding: 20px;
+    color: white;
+    font-weight: bold;
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+    }
+    .client-detail-name-accessment {
+      margin-left: 50px;
+      margin-top: 70px;
+      span.c-level {
+        padding: 2px;
+        border: solid 2px silver;
+        border-radius: 5px;
+      }
+    }
+  }
+  hr{
+      border: solid white 2px;
+  }
+
+  .clients-other-details{
+      color: white;
+      font-weight: bold;
+      padding: 20px;
+  }
+  .changes-buttons{
+      a.delete-client{
+          color: white;
+          background-color: red;
+      }
+  }
+}

@@ -23,6 +23,20 @@ FEELINGS_CHOICES = (
     ("Chilling","Chilling"),
 )
 
+LEVEL_CHOICES = (
+    ("Assessment", "Assessment"),
+    ("Development", "Development"),
+    ("Planning", "Planning"),
+    ("Implementation", "Implementation"),
+    ("Evaluation", "Evaluation"),
+    ("Star", "Star")
+)
+
+GENDER_CHOICES = (
+    ("MALE","MALE"),
+    ("FEMALE","FEMALE"),
+)
+
 class Volunteer(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
@@ -202,3 +216,26 @@ class ContactUs(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+
+
+class ClientInfoProgress(models.Model):
+    accessment_officer = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=60)
+    email = models.EmailField(unique=True, max_length=255, blank=True,
+                              help_text="Leave blank if client doesn't have any.")
+    phone = models.CharField(max_length=20)
+    emergency_phone = models.CharField(max_length=20, blank=True, help_text="Leave blank if client doesn't have any.")
+    gender = models.CharField(max_length=10,choices=GENDER_CHOICES, default="Male")
+    client_image = models.ImageField(upload_to="client_images", blank=True, default="client.jpg")
+    next_of_kin = models.CharField(max_length=50, blank=True, help_text="Leave blank if client doesn't have any.")
+    issue = models.TextField()
+    progress = models.CharField(choices=LEVEL_CHOICES, max_length=30, help_text="Choose current level for your client.",
+                                default="Assessment")
+    date_issued = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolut_client_url(self):
+        return reverse("client_detail", args={self.pk})

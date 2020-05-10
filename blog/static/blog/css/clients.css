@@ -1,0 +1,151 @@
+.client-master {
+  padding: 20px;
+  color: white;
+}
+
+.client-master .client-image img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: solid 2px silver;
+}
+
+.client-master .other-details span.c-level {
+  padding: 2px;
+  border: solid 2px silver;
+  border-radius: 5px;
+}
+
+.client-master .other-details .levels {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.client-master .other-details .levels .level {
+  text-align: center;
+  font-weight: bold;
+  border-radius: 10px;
+  width: 10%;
+  padding: 5px;
+  border: solid 2px silver;
+}
+
+.client-master .other-details .levels .level-accessment {
+  color: white;
+  background-color: red;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+          animation: glow 1s ease-in-out infinite alternate;
+}
+
+.client-master .other-details .levels .level-development {
+  color: white;
+  background-color: red;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+          animation: glow 1s ease-in-out infinite alternate;
+}
+
+.client-master .other-details .levels .level-planning {
+  color: black;
+  background-color: yellow;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+          animation: glow 1s ease-in-out infinite alternate;
+}
+
+.client-master .other-details .levels .level-implementation {
+  color: black;
+  background-color: yellow;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+          animation: glow 1s ease-in-out infinite alternate;
+}
+
+.client-master .other-details .levels .level-evaluation {
+  color: white;
+  background-color: green;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+          animation: glow 1s ease-in-out infinite alternate;
+}
+
+.client-master .other-details .levels .level-star .fa-star {
+  color: yellow;
+  -webkit-animation: rotate-star 2s infinite linear;
+          animation: rotate-star 2s infinite linear;
+}
+
+@-webkit-keyframes rotate-star {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@keyframes rotate-star {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #eeeeee, 0 0 20px #000000, 0 0 30px #000000, 0 0 40px #000000, 0 0 50px #9554b3, 0 0 60px #9554b3, 0 0 70px #9554b3;
+  }
+  to {
+    text-shadow: 0 0 20px #eeeeee, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #eeeeee, 0 0 20px #000000, 0 0 30px #000000, 0 0 40px #000000, 0 0 50px #9554b3, 0 0 60px #9554b3, 0 0 70px #9554b3;
+  }
+  to {
+    text-shadow: 0 0 20px #eeeeee, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+
+.client-detail-stuff .client-detail-image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 20px;
+  color: white;
+  font-weight: bold;
+}
+
+.client-detail-stuff .client-detail-image img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.client-detail-stuff .client-detail-image .client-detail-name-accessment {
+  margin-left: 50px;
+  margin-top: 70px;
+}
+
+.client-detail-stuff .client-detail-image .client-detail-name-accessment span.c-level {
+  padding: 2px;
+  border: solid 2px silver;
+  border-radius: 5px;
+}
+
+.client-detail-stuff hr {
+  border: solid white 2px;
+}
+
+.client-detail-stuff .clients-other-details {
+  color: white;
+  font-weight: bold;
+  padding: 20px;
+}
+
+.client-detail-stuff .changes-buttons a.delete-client {
+  color: white;
+  background-color: red;
+}
+/*# sourceMappingURL=clients.css.map */

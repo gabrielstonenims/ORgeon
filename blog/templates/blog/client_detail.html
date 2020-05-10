@@ -1,0 +1,44 @@
+{% extends "blog/base2.html" %}
+
+{% block content %}
+<div class="container mt-3">
+    <br>
+    <div class="row mb-3">
+        <div class="col-xs-6 col-sm-6 col-md-8 mr-auto ml-auto mb-3 client-detail-stuff">
+            <div class="client-detail-image">
+                <img src="{{ client.client_image.url }}" alt="">
+                <div class="client-detail-name-accessment">
+                    <h5>Name: {{ client.name }}</h5>
+                    <p>Level: <span class="c-level ml-3"> {{ client.progress }}</span></p>
+                </div>
+            </div>
+            <br>
+            <hr class="my-4">
+            <br>
+            <div class="clients-other-details">
+                <p>Email: {{ client.email }}</p>
+                <p>Phone: {{ client.phone }}</p>
+                {% if client.emergency_phone %}
+                <p>Emergency Contact: {{ client.emergency_phone }}</p>
+                {% else %}
+                <p>Emergency Contact:None provided</p>
+                {% endif %}
+                <p>Gender: {{ client.gender }}</p>
+                {% if client.next_of_kin %}
+                <p>Next of kin: {{ client.next_of_kin }}</p>
+                {% else %}
+                <p>Next of kin: None provided </p>
+                {% endif %}
+                <p>Need: {{ client.issue }}</p>
+            </div>
+            {% if client.accessment_officer == request.user %}
+            <div class="changes-buttons">
+                <a href="{% url 'client_update' client.pk %}" class="butt">Edit</a>
+                <a href="{% url 'client_delete' client.pk  %}" class="delete" id="delete_client_button"> Delete</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

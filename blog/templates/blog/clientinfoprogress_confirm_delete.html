@@ -1,0 +1,23 @@
+{% extends "blog/base2.html" %}
+{% load static %}
+{% block content %}
+<div class="container mt-3">
+    <div class="row mb-3">
+        <div class="col-xs-6 col-sm-6 col-md-8 mr-auto ml-auto mb-3">
+            <form method="post" >
+            {% csrf_token %}
+            <fieldset class="form-group">
+            <h3 class="animated bounce">Are you sure you want to delete client {{ object.name }}?</strong></h3>
+            <div class="foremoji">
+              <img src="{% static 'blog/images/cry.gif' %}" alt="">
+            </div>
+            </fieldset>
+            <div class="form-group">
+              <button class="delete" type="submit" id="delete">Yes</button>
+                <a class="butt" href="{% url 'client_detail' object.pk %}" >Cancel</a>
+            </div>
+          </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

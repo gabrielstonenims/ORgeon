@@ -12,17 +12,23 @@
   <link rel="stylesheet" href="{% static 'blog/css/forms.css'%}" type="text/css">
   <link rel="stylesheet" href="{% static 'blog/css/reports.css'%}" type="text/css">
   <link rel="stylesheet" href="{% static 'blog/css/chat.css'%}" type="text/css">
+  <link rel="stylesheet" href="{% static 'blog/css/clients.css'%}" type="text/css">
   <link rel="stylesheet" href="{% static 'blog/css/messages.css'%}" type="text/css">
   <link rel="stylesheet" href="{% static 'blog/css/main.css'%}" type="text/css">
   <link rel="stylesheet" href="{% static 'blog/css/directs.css'%}" type="text/css">
   <link rel="stylesheet" href="{% static 'blog/css/post.css'%}" type="text/css">
   <link rel="stylesheet" href="{% static 'blog/css/profile.css'%}" type="text/css">
-  <link rel="stylesheet" href="{% static 'blog/css/swiper.min.css'%}" type="text/css">
   <link rel="stylesheet" href="{% static 'blog/css/fontawesome-all.min.css'%}" type="text/css">
   <link rel="stylesheet" href="{% static 'blog/css/animate.css'%}" type="text/css">
   <link rel="stylesheet" href="{% static 'blog/css/lightbox.min.css'%}" type="text/css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js">
-  <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.css">
+  <!-- <script type="text/javascript" src="{% static 'blog/js/emojionearea.min.js'%}" defer></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
+
+
+  
+  
   <title>
     ORGEON
   </title>
@@ -47,18 +53,22 @@
   {% block content %}
 
   {% endblock %}
-  <script src="{% static 'blog/js/jquery-3.4.1.min.js'%}"></script>
-    <script src="{% static 'blog/js/bootstrap.min.js'%}"></script>
-    <script src="{% static 'blog/js/mdb.min.js'%}"></script>
-    <script src="{% static 'blog/js/swiper.min.js'%}"></script>
-    <script type="text/javascript" src="{% static 'blog/js/ckeditor.js'%}"></script>
-    <script src="{% static 'blog/js/jscode.js'%}"></script>
-    <script src="{% static 'blog/js/main.js'%}"></script>
-    <script src="{% static 'blog/js/chat.js'%}"></script>
-    <script src="{% static 'blog/js/chart.min.js'%}"></script>
-    <script src="{% static 'blog/js/fontawesome-all.min.js'%}"></script>
-    <script src="{% static 'blog/js/lightbox-plus-jquery.min.js'%}"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script type="text/javascript" src="{% static 'blog/js/jquery-3.4.1.min.js'%}" defer></script>
+  <script type="text/javascript" src="{% static 'blog/js/bootstrap.min.js'%}" defer></script>
+  <script type="text/javascript" src="{% static 'blog/js/mdb.min.js'%}" defer></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/emoji-button@latest/dist/index.min.js"></script> -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+  <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+  <script type="text/javascript" type="text/javascript" src="{% static 'blog/js/ckeditor.js'%}" defer></script>
+  <script type="text/javascript" src="{% static 'blog/js/jscode.js'%}" defer></script>
+  <script type="text/javascript" src="{% static 'blog/js/areaemojis.js'%}" defer></script>
+  <script type="text/javascript" src="{% static 'blog/js/main.js'%}" defer></script>
+  <script type="text/javascript" src="{% static 'blog/js/chat.js'%}" defer></script>
+  <script type="text/javascript" src="{% static 'blog/js/chart.min.js'%}" defer></script>
+  <script type="text/javascript" src="{% static 'blog/js/fontawesome-all.min.js'%}" defer></script>
+  <script type="text/javascript" src="{% static 'blog/js/lightbox-plus-jquery.min.js'%}" defer></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
             offset: 400,

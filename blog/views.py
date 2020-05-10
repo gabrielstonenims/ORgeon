@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView
-from .models import Volunteer, Events, JoinTrip, Partnership, NewsLetter, Report, Post, Comments, NewsUpdate,Gallery,LoginCode,Online_user,MessageD,Message,ContactUs
+from .models import Volunteer, Events, JoinTrip, Partnership, NewsLetter, Report, Post, Comments, NewsUpdate,Gallery,LoginCode,Online_user,MessageD,Message,ContactUs, ClientInfoProgress
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
@@ -828,3 +828,63 @@ def contact_us(request):
     }
 
     return render(request,"blog/contact-us.html",context)
+
+
+
+class ClientInfoListView(LoginRequiredMixin, ListView):
+    model = ClientInfoProgress
+    template_name = "blog/clientinfoprogress_list.html"
+    context_object_name = "clients"
+    ordering = ['-date_issued']
+
+
+@login_required
+def client_detail(request, id):
+    client = get_object_or_404(ClientInfoProgress, id=id)
+
+    context = {
+        "client": client
+    }
+
+    return render(request, "blog/client_detail.html", context)
+
+
+class ClientInfoCreateView(LoginRequiredMixin, CreateView):
+    model = ClientInfoProgress
+    fields = ['name', 'email', 'phone', 'emergency_phone','gender','client_image','next_of_kin', 'issue', 'progress']
+    success_url = '/clients'
+
+    def form_valid(self, form):
+        form.instance.accessment_officer = self.request.user
+        return super().form_valid(form)
+
+
+class ClientInfoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = ClientInfoProgress
+    fields = ['name', 'email', 'phone', 'emergency_phone', 'next_of_kin', 'issue', 'progress']
+    success_url = '/clients'
+
+    def form_valid(self, form):
+        form.instance.accessment_officer = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        client = self.get_object()
+        if self.request.user == client.accessment_officer:
+            return True
+        else:
+            return False
+
+
+class ClientInfoDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = ClientInfoProgress
+    success_url = '/clients'
+
+    def test_func(self):
+        client = self.get_object()
+        if self.request.user == client.accessment_officer:
+            return True
+        else:
+            return False
+
+
