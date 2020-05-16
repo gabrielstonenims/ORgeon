@@ -1,23 +1,46 @@
-{% extends "blog/base.html" %}
+{% extends "blog/base.html" %} 
 {% block content %}
-
 <div class="container mt-3">
-    <br>
-    <h3 class="text-center mb-3">Our Volunteers</h3>
-    <br>
-    <div class="row mb-3">
-        {% for v in volunteers %}
-        <div class="col-xs-6 col-sm-6 col-md-3 mb-3">
-            <div class="card">
-                <!-- <img class="card-img-top" src="{{ v.photo.url }}" alt="Card image cap"> -->
-                <div class="card-body">
-                    <h4 class="card-title"><a>{{ v.name }}</a></h4>
-                    <p class="card-text">{{ v.email }}</p>
-                </div>
-            </div>
+  <br />
+  <span style="position: fixed; ">
+    <a title="Become a volunteer" href="{% url 'volunteer_join' %}">
+        <i class="fas fa-plus-circle fa-3x"></i>
+    </a>
+  </span><h3 class="text-center mb-3">Our Volunteers</h3>
+  <br />
+  <div class="row mb-3">
+    {% for v in volunteers %}
+    <div class="col-xs-6 col-sm-6 col-md-3 mb-3">
+      <!-- Card Dark -->
+      <div class="card myvolunteer-container">
+        <!-- Card image -->
+        <div class="view overlay">
+            {% if v.photo %}
+          <img
+            class="card-img-top"
+            src="{{ v.photo.url }}"
+            alt="Card image cap"
+          />
+          {% endif %}
         </div>
-        {% endfor %}
+
+        <!-- Card content -->
+        <div class="card-body elegant-color white-text rounded-bottom">
+          <h5 class="card-title">{{ v.name }}</h5>
+          <hr class="hr-light" />
+          <!-- Text -->
+          <p class="card-text white-text mb-2">
+            {{ v.profession }}
+           </p>
+          <p class="card-text white-text mb-4">
+           "{{ v.additional_message}}"
+          </p>
+        </div>
+      </div>
+      <!-- Card Dark -->
     </div>
+    {% endfor %}
+  </div>
 </div>
 
 {% endblock %}

@@ -11,6 +11,42 @@ body {
   margin: 0;
 }
 
+a.delete {
+  color: #fff;
+  font-weight: bold;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: red;
+  border-radius: 5px;
+  -webkit-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
+}
+
+a.delete:hover {
+  background: #ff02029a;
+  color: #fff;
+}
+
+#delete {
+  color: #fff;
+  font-weight: bold;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: red;
+  border-radius: 5px;
+  -webkit-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
+}
+
+#delete:hover {
+  background: #ff02029a;
+  color: #fff;
+}
+
 a.butt {
   color: #fff;
   font-weight: bold;
@@ -48,6 +84,26 @@ a.butt:hover {
 }
 
 #butt:hover {
+  background: #ffec8b;
+  color: #000;
+}
+
+.butt {
+  color: #fff;
+  font-weight: bold;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: #020024;
+  background: -webkit-gradient(linear, left top, right top, from(#020024), color-stop(35%, #090979), to(#00d4ff));
+  background: linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%);
+  border-radius: 5px;
+  -webkit-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
+}
+
+.butt:hover {
   background: #ffec8b;
   color: #000;
 }
@@ -149,5 +205,15 @@ h3.header-employee {
 .employee-container .card .employee-full-details .employee-details h3.em-email {
   text-align: center;
   font-size: 15px;
+}
+
+.myvolunteer-container {
+  width: 250px;
+  height: 450px;
+}
+
+.myvolunteer-container img {
+  width: 250px;
+  height: 250px;
 }
 /*# sourceMappingURL=forms.css.map */
