@@ -1,0 +1,21 @@
+@import "./config";
+
+.video-container{
+    display: none;
+    padding: 5px;
+    .myvid-wrapper{
+        width: 100%;
+        height: 550px;
+        
+        video{
+            position: absolute;
+            width: 100%;
+            height: 550px;
+            border-radius: 10px;
+        }
+        #endcall_butt{
+            position: relative;
+            margin-top: 30px;
+        }
+    }
+}

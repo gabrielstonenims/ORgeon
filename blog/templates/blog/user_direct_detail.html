@@ -2,33 +2,8 @@
 {% load crispy_forms_tags%}
 {% block content %}
 <div class="container-fluid h-100">
-    <div class="row justify-content-center h-100">
-        <div class="col-md-4 col-xl-3 chat">
-            <div class="card mb-sm-3 mb-md-0 contacts_card">
-                <div class="card-body contacts_body">
-                    <ui class="contacts">
-                        {% for user in users %}
-                        <a href="{% url 'userdetail' user.username %}">
-                            <li>
-                                <div class="d-flex bd-highlight">
-                                    <div class="img_cont">
-                                        <img src="{{ user.profile.profile_pic.url }}" class="rounded-circle user_img">
-                                        <!-- <span class="online_icon"></span> -->
-                                    </div>
-                                    <div class="user_info">
-                                        <span>{{ user.username }}</span>
-                                        <!-- <p>Online</p> -->
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                        {% endfor %}
-                    </ui>
-                </div>
-                <div class="card-footer"></div>
-            </div>
-        </div>
-        <div class="col-md-8 col-xl-6 chat">
+    <div class="row justify-content-center h h-100" id="message-box1">
+        <div class="col-xs-6 col-sm-6 col-md-10 col-xl-8  chat">
             <div class="card">
                 <div class="card-header msg_head">
                     <div class="d-flex bd-highlight">
@@ -36,7 +11,12 @@
                             <img src="{{ deuser.profile.profile_pic.url }}" class="rounded-circle user_img">
                         </div>
                         <div class="user_info">
-                            <span>{{ deuser.username }}</span><br>
+                            <div style="display: flex;justify-content: space-between;">
+                                <span>{{ deuser.username }}</span>
+                                <span id="myvidcaller-button" style="cursor: pointer;float: right;">
+                                    <i style="color: white;" class="fas fa-video fa-2x ml-3"></i><br>
+                                </span>
+                            </div>
                             <small class="mr-2 text-muted" style="color: white;">Last seen: {{ deuser.last_login }}</small>
                         </div>
                     </div>
@@ -47,6 +27,16 @@
             </div>
         </div>
     </div>
+    <div class="row justify-content-center video-container">
+        <div class="col-xs-6 col-sm-6 col-md-10 col-xl-8 mb-3 ml-auto mr-auto">
+            <div class="myvid-wrapper">
+                <video controls autoplay></video>
+                <button id="endcall_butt" class="butt">End Call</button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
 </div>
 <script>
     setInterval(function () {

@@ -31,7 +31,7 @@
 <div class="card-footer">
     <div class="input-group">
         {% load crispy_forms_tags%}
-        <form action="." method="POST"  class="private-chat-form">
+        <form action="." method="POST"  class="private-chat-form d-flex">
             <fieldset class="form-group">
                 {% csrf_token %}
                 {{ form|crispy }}
@@ -40,9 +40,9 @@
                 <button class="input-group-text send_btn" type="submit" id="private-chat-button">
                     <i class="fas fa-location-arrow"></i>
                 </button>
+                <a style="border: none;height: 10px;margin-top: 20px;background-color: transparent;"  id="emoji-button">😀</a>
             </div>
         </form>
     </div>
 </div>
 {% endif %}
-
