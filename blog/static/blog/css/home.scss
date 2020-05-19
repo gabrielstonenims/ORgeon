@@ -457,381 +457,7 @@ footer {
   @include setFlex(column);
 }
 
-// media queries
-@media (max-width: 500px) {
-  // service christ
-  .services {
-    padding: 20px;
-    .card {
-      max-width: 100%;
-      height: 200px;
-      .card-img-top {
-        position: absolute;
-        max-width: 100%;
-        height: 100px;
-        overflow: hidden;
-      }
-    }
-    // service christ
-    .service-christ {
-      max-width: 100%;
-      height: 200px;
-      background: #fdb425;
-      sup.simage-christ {
-        position: relative;
-        display: flex;
-        justify-content: flex-end;
-        color: #ffffff !important;
-        img {
-          max-width: 15%;
-        }
-      }
-      a {
-        font-weight: bold;
-        color: #fff;
-      }
-      &:hover {
-        sup.simage-christ {
-          transform: scale(1.1);
-          transition: 1.2s ease-in;
-        }
-      }
-    }
-    // end of service christ
-    // service counselling
-    .service-counselling {
-      max-width: 100%;
-      height: 200px;
-      background: #909f05;
-      sup.simage-counselling {
-        position: relative;
-        display: flex;
-        justify-content: flex-end;
-        color: #ffffff !important;
-        img {
-          max-width: 15%;
-        }
-      }
-      a {
-        font-weight: bold;
-        color: #fff;
-      }
-      &:hover {
-        sup.simage-counselling {
-          transform: scale(1.1);
-          transition: 1.2s ease-in;
-        }
-      }
-    }
-    // end of service counsellling
-    // service education
-    .service-education {
-      max-width: 100%;
-      height: 200px;
-      background: #ea5528;
-      sup.simage-education {
-        position: relative;
-        display: flex;
-        justify-content: flex-end;
-        color: #ffffff !important;
-        img {
-          max-width: 15%;
-        }
-      }
-      a {
-        font-weight: bold;
-        color: #fff;
-      }
-      &:hover {
-        sup.simage-education {
-          transform: scale(1.1);
-          transition: 1.2s ease-in;
-        }
-      }
-    }
-    // end of service education
-    // service medical
-    .service-medical {
-      max-width: 100%;
-      height: 200px;
-      background: #00b5ff;
-      sup.simage-medical {
-        position: relative;
-        display: flex;
-        justify-content: flex-end;
-        color: #ffffff !important;
-        img {
-          max-width: 15%;
-        }
-      }
-      a {
-        font-weight: bold;
-        color: #fff;
-      }
-      &:hover {
-        sup.simage-medical {
-          transform: scale(1.1);
-          transition: 1.2s ease-in;
-        }
-      }
-    }
-    // end of medical aids
-    // service shelter
-    .service-shelter {
-      max-width: 100%;
-      height: 200px;
-      background: #8b6cc4;
-      sup.simage-shelter {
-        position: relative;
-        display: flex;
-        justify-content: flex-end;
-        color: #ffffff !important;
-        img {
-          max-width: 15%;
-        }
-      }
-      a {
-        font-weight: bold;
-        color: #fff;
-      }
-      &:hover {
-        sup.simage-shelter {
-          transform: scale(1.1);
-          transition: 1.2s ease-in;
-        }
-      }
-    }
-  }
-}
-
-@media (min-width: 760px) {
-  // stories
-
-  section.stories {
-    .success {
-      width: 100%;
-      height: 250px;
-      .card-back-success {
-        width: 100%;
-        height: 250px;
-        position: absolute;
-        background: url("../images/6.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        z-index: 1;
-      }
-      .card-success-content {
-        position: relative;
-        z-index: 2;
-        overflow: hidden;
-        a {
-          margin-top: 220px;
-          background: rgba(0, 0, 0, 0.521);
-          font-size: 20px;
-          @include setFlex(column);
-          font-weight: bold;
-          color: #ffffff;
-        }
-      }
-    }
-    // end of success
-    // need
-    .need {
-      width: 100%;
-      height: 250px;
-      .card-back-need {
-        width: 100%;
-        height: 250px;
-        position: absolute;
-        background: url("../images/73.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        z-index: 1;
-      }
-      .card-need-content {
-        position: relative;
-        z-index: 2;
-        a {
-          margin-top: 220px;
-          background: rgba(0, 0, 0, 0.521);
-          font-size: 20px;
-          @include setFlex(column);
-          font-weight: bold;
-          color: #ffffff;
-        }
-      }
-    }
-    // end of need
-    // inspiration
-    .inspiration {
-      width: 100%;
-      height: 250px;
-      .card-back-inspiration {
-        width: 100%;
-        height: 250px;
-        position: absolute;
-        background: url("../images/idontknow.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        z-index: 1;
-      }
-      .card-inspiration-content {
-        position: relative;
-        z-index: 2;
-        a {
-          margin-top: 220px;
-          background: rgba(0, 0, 0, 0.521);
-          font-size: 20px;
-          @include setFlex(column);
-          font-weight: bold;
-          color: #ffffff;
-        }
-      }
-    }
-    // end of inspiration
-    // videos
-    .vids {
-      width: 100%;
-      height: 250px;
-      .card-back-vid {
-        width: 100%;
-        height: 250px;
-        position: absolute;
-        background: url("../images/41.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        z-index: 1;
-      }
-      .card-vid-content {
-        position: relative;
-        z-index: 2;
-        a {
-          margin-top: 220px;
-          background: rgba(0, 0, 0, 0.521);
-          font-size: 20px;
-          @include setFlex(column);
-          font-weight: bold;
-          color: #ffffff;
-        }
-      }
-    }
-  }
-  // what you can do
-  section.cando {
-    .volunteer {
-      width: 100%;
-      height: 250px;
-      .card-back-volunteer {
-        width: 100%;
-        height: 250px;
-        position: absolute;
-        background: url("../images/volunteer.png");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        z-index: 1;
-      }
-      .card-volunteer-content {
-        position: relative;
-        z-index: 2;
-        a {
-          margin-top: 220px;
-          background: rgba(0, 0, 0, 0.521);
-          font-size: 20px;
-          @include setFlex(column);
-          font-weight: bold;
-          color: #ffffff;
-        }
-      }
-    }
-    // end of volunteer
-    // travel
-    .travel {
-      width: 100%;
-      height: 250px;
-      .card-back-travel {
-        width: 100%;
-        height: 250px;
-        position: absolute;
-        background: url("../images/00_Top-Travel-Trends-for-2018_209155915_06photo_FT.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        // background-position: center;
-        z-index: 1;
-      }
-      .card-travel-content {
-        position: relative;
-        z-index: 2;
-        a {
-          margin-top: 220px;
-          background: rgba(0, 0, 0, 0.521);
-          font-size: 20px;
-          @include setFlex(column);
-          font-weight: bold;
-          color: #ffffff;
-        }
-      }
-    }
-
-    // end of travel
-    // become partner
-    .partnership {
-      width: 100%;
-      height: 250px;
-      .card-back-partner {
-        width: 100%;
-        height: 250px;
-        position: absolute;
-        background: url("../images/Partner Handshake.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        z-index: 1;
-      }
-      .card-partner-content {
-        position: relative;
-        z-index: 2;
-        a {
-          margin-top: 220px;
-          background: rgba(0, 0, 0, 0.521);
-          font-size: 20px;
-          @include setFlex(column);
-          font-weight: bold;
-          color: #ffffff;
-        }
-      }
-    }
-    // end of partnership
-    // donate
-    .donate {
-      width: 100%;
-      height: 250px;
-      .card-back-donate {
-        width: 100%;
-        height: 250px;
-        position: absolute;
-        background: url("../images/Donate-Button.png");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        z-index: 1;
-      }
-      .card-donate-content {
-        position: relative;
-        z-index: 2;
-        a {
-          margin-top: 220px;
-          background: rgba(0, 0, 0, 0.521);
-          font-size: 20px;
-          @include setFlex(column);
-          font-weight: bold;
-          color: #ffffff;
-        }
-      }
-    }
-  }
-}
-
+ 
 // gallery
 .gallery {
   overflow: hidden;
@@ -848,5 +474,126 @@ footer {
 
       }
     }
+  }
+}
+.mynewsection{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  // grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  gap: 10px;
+}
+.mynewsection > div{
+  height: 210px;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  &:hover{
+    opacity: 0.7;
+    transform: scale(0.98);
+  }
+}
+.mynewsection > div:nth-of-type(1){
+  grid-column: 1/3;
+}
+
+.mynewsection > div:nth-of-type(6){
+  grid-column: 3/5;
+}
+.mynewsection > div:nth-of-type(11){
+  grid-column: 1/3;
+}
+
+.bg1{
+  background: url("../images/nature-red-forest-leaves-33109.jpg");
+  a{
+    color: white;
+    font-weight: bold;
+    img{
+      color: white !important;
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+.bg2{
+  background: url("../images/photo-of-pod-of-dolphins-2422915.jpg");
+  a{
+    color: white;
+    font-weight: bold;
+    img{
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .mynewsection{
+    grid-template-columns: 1fr;
+    // grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  }
+  .mynewsection > div:nth-of-type(1){
+    grid-column: 1;
+  }
+  
+  .mynewsection > div:nth-of-type(6){
+    grid-column: 1;
+  }
+  .mynewsection > div:nth-of-type(11){
+    grid-column: 1;
+  }
+}
+
+// /* Small devices (portrait tablets and large phones, 600px and up) */
+// @media only screen and (min-width: 600px) {}
+
+// /* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .mynewsection{
+    grid-template-columns: repeat(3,1fr);
+    // grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  }
+
+}
+
+// /* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .mynewsection{
+    grid-template-columns: repeat(4,1fr);
+    // grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  }
+  .mynewsection > div:nth-of-type(1){
+    grid-column: 1/3;
+  }
+  
+  .mynewsection > div:nth-of-type(6){
+    grid-column: 3/5;
+  }
+  .mynewsection > div:nth-of-type(11){
+    grid-column: 1/3;
+  }
+  
+}
+
+// /* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .mynewsection{
+    grid-template-columns: repeat(4,1fr);
+    // grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  }
+  .mynewsection > div:nth-of-type(1){
+    grid-column: 1/3;
+  }
+  
+  .mynewsection > div:nth-of-type(6){
+    grid-column: 3/5;
+  }
+  .mynewsection > div:nth-of-type(11){
+    grid-column: 1/3;
   }
 }

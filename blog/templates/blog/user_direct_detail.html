@@ -13,9 +13,6 @@
                         <div class="user_info">
                             <div style="display: flex;justify-content: space-between;">
                                 <span>{{ deuser.username }}</span>
-                                <span id="myvidcaller-button" style="cursor: pointer;float: right;">
-                                    <i style="color: white;" class="fas fa-video fa-2x ml-3"></i><br>
-                                </span>
                             </div>
                             <small class="mr-2 text-muted" style="color: white;">Last seen: {{ deuser.last_login }}</small>
                         </div>
@@ -24,14 +21,6 @@
                 <div class="private-message-display">
                     {% include "blog/umessages.html" %}
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center video-container">
-        <div class="col-xs-6 col-sm-6 col-md-10 col-xl-8 mb-3 ml-auto mr-auto">
-            <div class="myvid-wrapper">
-                <video controls autoplay></video>
-                <button id="endcall_butt" class="butt">End Call</button>
             </div>
         </div>
     </div>

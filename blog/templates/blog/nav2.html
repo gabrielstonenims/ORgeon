@@ -21,6 +21,16 @@
     <li class="nav-item" title="add a new employee">
         <a class="nav-link" href="{% url 'register' %}"><i class="fas fa-plus mr-1"></i>Employee</a>
     </li>
+    <li class="nav-item" title="view all clients">
+      <a class="nav-link" href="{% url 'clients' %}"><i class="fas fa-users mr-1"></i>Clients</a>
+    </li>
+    <li class="nav-item" title="view all clients">
+      <a class="nav-link" href="{% url 'ourvolunteers' %}"><i class="fas fa-users mr-1"></i>Ourvolunteers</a>
+    </li>
+    <li class="nav-item" title="add a new client">
+      <a class="nav-link" href="{% url 'clients_new' %}"><i class="fas fa-plus mr-1"></i>Add Client</a>
+    </li>
+
     {% endif %}
     <li class="nav-item" title="view all reports">
         <a class="nav-link" href="{% url 'reports' %}"><i class="fas fa-edit mr-1"></i>Reports</a>
@@ -45,6 +55,9 @@
           aria-labelledby="navbarDropdownMenuLink-333">
           <a title="view profile" class="dropdown-item" href="{% url 'profile' %}"><i class="fas fa-user mr-1"></i>Profile</a>
           {% if request.user.username == "joycelyn" %}
+          <a title="View all your Clients" class="dropdown-item" href="{% url 'clients' %}"><i class="fas fa-users mr-1" ></i>Clients</a>
+          <a title="View all your Clients" class="dropdown-item" href="{% url 'clients_new' %}"><i class="fas fa-users mr-1" ></i>Add Client</a>
+          <a title="View all your Clients" class="dropdown-item" href="{% url 'ourvolunteers' %}"><i class="fas fa-users mr-1" ></i>Our Volunteers</a>
           <a title="send post to all employees" class="dropdown-item" href="{% url 'post_new' %}"><i class="fas fa-plus-circle mr-1"></i>Post</a>
           <a class="dropdown-item" href="{% url 'event_new' %}" title="send post to all employees"><i class="fas fa-plus-circle mr-1"></i>Event</a>
           <a title="send updates to subscribers" class="dropdown-item" href="{% url 'newsletter_create' %}"><i class="fas fa-plus-circle mr-1" ></i>News</a>

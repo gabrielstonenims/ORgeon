@@ -193,78 +193,18 @@ class VolunteerFormView(CreateView):
             # return redirect('volunteers')
         return super().form_valid(form)
 
-# def volunteer_register(request):
-#     msg = EmailMessage()
-#     msg1 = EmailMessage()
-#     if request.method == "POST":
-#         form = VolunteerForm(request.POST)
-#         if form.is_valid():
-#             v_email = form.cleaned_data.get('email')
-#             if Volunteer.objects.filter(email=v_email).exists():
-#                 messages.info(
-#                     request, f"Volunteer with {v_email} already exist.")
-#             else:
-#                 form.save()
-#                 name = form.cleaned_data.get('name')
-#                 msg["Subject"] = f"{name} has just volunteered."
-#                 msg["From"] = settings.EMAIL_HOST_USER
-#                 msg["To"] = settings.EMAIL_HOST_USER
-#                 msg.set_content(f"{name} wishes to volunteer for Orgeon.")
-#                 hml = f"""
-#                 <!Doctype html>
-#                 <html>
-#                 <body>
-#                 <h1 style='font-style:italic;'>{name} has just volunteered.</h1>
-#                 <p style='color:SlateGray;'> {name} wishes to volunteer for Orgeon.</p>
-#                 </body>
-#                 </html>
-#                 </html>
-#                 """
-#                 msg.add_alternative(hml, subtype='html')
-#                 with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-#                     smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
-#                     smtp.send_message(msg)
-#                 # to user volunteering email
-#                 msg1["Subject"] = "Orgeon of Stars welcomes you."
-#                 msg1["From"] = settings.EMAIL_HOST_USER
-#                 msg1["To"] = v_email
-#                 msg1.set_content(
-#                     "Thank you for volunteering with Orgeon of stars,in order to know more about  you we will contact you soon,stay blessed.")
-#                 hml = f"""
-#                 <!Doctype html>
-#                 <html>
-#                 <body>
-#                 <h1 style='font-style:italic;'>Welcome to ORgeonofstars.</h1>
-#                 <p style='color:SlateGray;'> Thank you for volunteering with Orgeon of stars,in order to know more about  you we will contact you soon.</p>
-#                 <p style='color:SlateGray;'>Stay blessed.</p>
-#                 <p style='color:SlateGray;'>ORgeonofstars</p>
-#                 </body>
-#                 </html>
-#                 </html>
-#                 """
-#                 msg1.add_alternative(hml, subtype='html')
-#                 with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-#                     smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
-#                     smtp.send_message(msg1)
-#                     messages.success(request, f"Thank you for joining.")
-#                     return redirect('volunteers')
-
-#     else:
-#         form = VolunteerForm()
-
-#     context = {
-#         'form': form
-#     }
-
-#     return render(request, "blog/volunteer_form.html", context)
-
 
 class Volunteers(ListView):
     model = Volunteer
-    template_name = 'blog/volunteers.html'
+    template_name = 'blog/volunteers_list.html'
     context_object_name = 'volunteers'
     ordering = ['-date_volunteered']
 
+class OurVolunteers(LoginRequiredMixin,ListView):
+    model = Volunteer
+    template_name = 'blog/ourvolunteer_list.html'
+    context_object_name = 'ourvolunteers'
+    ordering = ['-date_volunteered']
 
 def events(request):
     events = Events.objects.all().order_by('-date_posted')[:1]
@@ -645,8 +585,8 @@ def user_activities(request):
         users = User.objects.all().count()
         volunteers = Volunteer.objects.all().count()
         partners = Partnership.objects.all().count()
-        # reports = Report.objects.all().order_by('-date_posted').count()
         subscribers = NewsLetter.objects.all().count()
+        myclients = ClientInfoProgress.objects.all().count()
 
         this_time = datetime.now()
         this_min = this_time.minute
@@ -660,7 +600,7 @@ def user_activities(request):
         "users": users,
         "volunteers": volunteers,
         "partners": partners,
-        # "report": reports,
+        "myclients": myclients,
         "subscribers": subscribers,
     }
 
@@ -899,26 +839,26 @@ def client_detail(request, id):
 
 class ClientInfoCreateView(LoginRequiredMixin, CreateView):
     model = ClientInfoProgress
-    fields = ['name', 'email', 'phone', 'emergency_phone','gender','client_image','next_of_kin', 'issue', 'progress']
+    fields = ['care_plan','assessment_officer','name', 'age','email', 'phone', 'emergency_phone','gender','client_image','next_of_kin', 'issue', 'progress','assessment_phase_details','development_phase_details','planning_phase_details','implementation_phase_details','evaluation_phase_details','star_phase_details']
     success_url = '/clients'
 
     def form_valid(self, form):
-        form.instance.accessment_officer = self.request.user
+        form.instance.assessment_officer = self.request.user
         return super().form_valid(form)
 
 
 class ClientInfoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ClientInfoProgress
-    fields = ['name', 'email', 'phone', 'emergency_phone', 'next_of_kin', 'issue', 'progress']
+    fields = ['care_plan','assessment_officer','name', 'age','email', 'phone', 'emergency_phone','gender','client_image','next_of_kin', 'issue', 'progress','assessment_phase_details','development_phase_details','planning_phase_details','implementation_phase_details','evaluation_phase_details','star_phase_details']
     success_url = '/clients'
 
     def form_valid(self, form):
-        form.instance.accessment_officer = self.request.user
+        form.instance.assessment_officer = self.request.user
         return super().form_valid(form)
 
     def test_func(self):
         client = self.get_object()
-        if self.request.user == client.accessment_officer:
+        if self.request.user == client.assessment_officer:
             return True
         else:
             return False
@@ -930,7 +870,7 @@ class ClientInfoDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         client = self.get_object()
-        if self.request.user == client.accessment_officer:
+        if self.request.user == client.assessment_officer:
             return True
         else:
             return False

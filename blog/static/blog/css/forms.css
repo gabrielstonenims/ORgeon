@@ -30,6 +30,7 @@ a.delete:hover {
 }
 
 #delete {
+  border: none;
   color: #fff;
   font-weight: bold;
   padding-left: 7px;
@@ -108,6 +109,27 @@ a.butt:hover {
   color: #000;
 }
 
+button.butt {
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: #020024;
+  background: -webkit-gradient(linear, left top, right top, from(#020024), color-stop(35%, #090979), to(#00d4ff));
+  background: linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%);
+  border-radius: 5px;
+  -webkit-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
+}
+
+button.butt:hover {
+  background: #ffec8b;
+  color: #000;
+}
+
 body {
   width: 100%;
   height: 100%;
@@ -129,84 +151,6 @@ body {
   display: none;
 }
 
-h3.header-employee {
-  font-weight: bold;
-  color: #fff;
-}
-
-.employee-container {
-  padding: 20px;
-}
-
-.employee-container .card {
-  border-radius: 5px;
-  background: silver;
-  max-width: 100%;
-  height: 400px;
-}
-
-.employee-container .card .card-back {
-  width: 100%;
-  height: 200px;
-  position: absolute;
-  background: url("../images/airbnb-apartment-appartment-584399.jpg");
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
-
-.employee-container .card .employee-full-details {
-  z-index: 1;
-  position: relative;
-}
-
-.employee-container .card .employee-full-details .employee-pic {
-  margin-top: 150px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 10px;
-}
-
-.employee-container .card .employee-full-details .employee-pic img {
-  width: 80px;
-  height: 80px;
-  border-radius: 40px;
-  border: solid silver 2px;
-  overflow: hidden;
-  -webkit-transition: 0.5s ease-in;
-  transition: 0.5s ease-in;
-}
-
-.employee-container .card .employee-full-details .employee-pic img:hover {
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
-}
-
-.employee-container .card .employee-full-details .employee-details h3 {
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.employee-container .card .employee-full-details .employee-details h6 {
-  color: #002387;
-  font-weight: bold;
-}
-
-.employee-container .card .employee-full-details .employee-details h3.em-email {
-  text-align: center;
-  font-size: 15px;
-}
-
 .myvolunteer-container {
   width: 250px;
   height: 450px;
@@ -215,5 +159,66 @@ h3.header-employee {
 .myvolunteer-container img {
   width: 250px;
   height: 250px;
+}
+
+.myemployees-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(250px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
+}
+
+.myemployees-container > div {
+  height: 250px;
+  background-size: cover;
+  background-attachment: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+}
+
+.myemployees-container > div:hover {
+  opacity: 0.7;
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+
+.employee-bg1 {
+  background: url("../images/nature-red-forest-leaves-33109.jpg");
+  color: white;
+  font-weight: bold;
+}
+
+.employee-bg1 img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: solid 2px silver;
+}
+
+.bg2 {
+  background: url("../images/photo-of-pod-of-dolphins-2422915.jpg");
+}
+
+.bg2 a {
+  color: white;
+  font-weight: bold;
+}
+
+.bg2 a img {
+  width: 40px;
+  height: 40px;
 }
 /*# sourceMappingURL=forms.css.map */

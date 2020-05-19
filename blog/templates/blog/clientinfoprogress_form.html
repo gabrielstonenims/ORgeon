@@ -1,22 +1,205 @@
 {% extends "blog/base2.html" %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container mt-3">
     <br>
-    <h3 class="text-center mb-3">Update Clients info</h3>
-    <br>
+    <h3 class="text-center mb-3">Cares Plans Available</h3>
+    <p class="about-cares mb-3" style="color: white;">Before filling a form for a new client,please kindly take a minute or two and read about each care in order to assign the client a proper care.</p>
     <div class="row mb-3">
-        <div class="col-xs-6 col-sm-6 col-md-6 ml-auto mr-auto">
-            <form method="POST">
-                {% csrf_token %}
-                <div class="form-group">
-                    {{ form|crispy }}
-                </div>
-                <div class="form-group">
-                    <button type="submit" id="butt">Save</button>
-                </div>
-            </form>
-        </div>
+        <br>
     </div>
 </div>
+
+<div class="modal fade left" id="sideModalTR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-side modal-top-left" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="myModalLabel" style="color: black;">Update Clients Profile</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <i class="fas fa-star mr-2"></i>Updating a client's profile is really easy since you already have their information.Make changes to previous data and add new data according to the phases,make sure to hit the save button when done.This is as easy as it sounds.Thank you<br>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Side Modal Top Right -->
+  <!-- Full Height Modal Right -->
+  <div class="modal fade left" id="client_form_instructions_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-side modal-top-left" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title w-100" id="myModalLabel" style="color: black;">How to fill client form</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="overflow: scroll;overflow-x: hidden;">
+            <i class="fas fa-star mr-2"></i>Please take note,whatever you put in the client form is important,not just for you but to all those that would be reading the client's profile.<br>
+            <i class="fas fa-star mr-2"></i><p>If you are registering a client for the first time,it signifies that you have already gone via the care plans above and it's safe to say that you know exactly what care plan to pick for the client.</p>
+            <i class="fas fa-star mr-2"></i><p>Most of the fields are self explanatory,however it would be confusing ang challenging for you and all the client profile readers if you let's say miss a step or entered a details in the wrong field.</p>
+            <i class="fas fa-star mr-2"></i><p>Please follow these steps.</p>
+            <i class="fas fa-star mr-2"></i>1.Care Plan => Pick a care plan that is suitable for the client's needs.<br>
+            <i class="fas fa-star mr-2"></i>2.Name => Name of the client<br>
+            <i class="fas fa-star mr-2"></i>3.Age => How old is the client?<br>
+            <i class="fas fa-star mr-2"></i>4.Gender => Is the client a male or female?<br>
+            <i class="fas fa-star mr-2"></i>5.Image => Photo of the client,you should have  a photo of the client on your pc,if not at the moment leave this field blank and update later when you get a photo of the client.<br>
+            <i class="fas fa-star mr-2"></i>6.Next of kin => In case the client is not available ,who should replace him or her <br>
+            <i class="fas fa-star mr-2"></i>7.Email => If the client has an email,add it and leave blank if they don't have one<br>
+            <i class="fas fa-star mr-2"></i>8.Phone => Client's personal contact number<br>
+            <i class="fas fa-star mr-2"></i>9.Emergency Phone => In case the client is not reachable,who to contact<br>
+            <i class="fas fa-star mr-2"></i>10.Issue => Challenge(s) the client if facing currently<br>
+            **The following steps matter<br>
+            <i class="fas fa-star mr-2"></i>11. <strong>Progress =></strong> As default every new client created is assigned a level or phase of Assessment and that is set as default on the form as you can see.<br>
+            <i class="fas fa-star mr-2"></i>12. <strong>Assessment =></strong> This phase is where the client stars his or her journey via the care,whatever process the client was taken via regarding Assessment,please put them here.It's going to be ease for anyone reading the clients profile get the understanding of what tranpired in Assessment phase.<br>
+            <i class="fas fa-star mr-2"></i>Leave the other phases alone.Only fill or update a phase only when the client has reach that particular phase.
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Full Height Modal Right -->
+  <div class="modal fade right" id="eagle_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+  
+    <!-- Add class .modal-side and then add class .modal-top-right (or other classes from list above) to set a position to the modal -->
+    <div class="modal-dialog modal-side modal-top-right" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title w-100" id="myModalLabel" style="color: black;">Eagle Care</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <p>Eagle care is a care plan with a short term peroid of 1 to 3 months.Within these month(s) peroid,the client would be taken via all the necessary steps in order to attain the Eagle care.Clients with any of the following situations are likely to fall under this care plan.
+            </p>
+        <mark class="mb-2">Family Malfunctioning</mark>
+        <br>
+        <mark class="mb-2">Fiancee</mark>
+        <mark class="mb-2">Devorce</mark>
+        <br>
+        <mark class="mb-2">Abusive Home</mark>
+        <br>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Side Modal Top Right -->
+  <!-- kangaroo care -->
+
+   <!-- To change the direction of the modal animation change .right class -->
+   <div class="modal fade right" id="kangaroo_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+   aria-hidden="true">
+ 
+   <!-- Add class .modal-side and then add class .modal-top-right (or other classes from list above) to set a position to the modal -->
+   <div class="modal-dialog modal-side modal-top-right" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h4 class="modal-title w-100" id="myModalLabel" style="color: black;">Kangaroo Care</h4>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+        <p>Kangaroo care is a care plan with a short term peroid of 1 to 3 months.Within these month(s) peroid,the client would be taken via all the necessary steps in order to attain the Kangaroo care.Clients with any of the following situations are likely to fall under this care plan.Parent or guardian unable to work due to <br>
+        </p>
+            <mark class="mb-2">medical conditions</mark>
+            <br>
+            <mark class="mb-2">disability</mark>
+       </div>
+     </div>
+   </div>
+ </div>
+ <!-- Side Modal Top Right -->
+
+ <!-- nested care -->
+  <!-- To change the direction of the modal animation change .right class -->
+  <div class="modal fade right" id="nested_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+  
+    <!-- Add class .modal-side and then add class .modal-top-right (or other classes from list above) to set a position to the modal -->
+    <div class="modal-dialog modal-side modal-top-right" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title w-100" id="myModalLabel" style="color: black;">Nested Care</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>This is a care plan for children from 0 to 18 years of age.These children are given the Nested care plan if they are 
+        </p>
+            <mark class="mb-2">With medical conditions or an Orphan</mark>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!-- Modal -->
+<div class="modal fade" id="myclient_form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document" >
+  <div class="modal-content" >
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel" style="color: black;">Client Form</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" style="overflow: scroll;overflow-x: hidden;">
+      <form method="POST" id="myclient_form">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form|crispy }}
+        </div>
+        <div class="form-group">
+            <button type="submit" id="butt">Save</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="my_client_container">
+  <div class="client-bg1">
+    <a href="" data-toggle="modal" data-target="#eagle_modal">
+      <img src="{% static 'blog/images/flying-eagle.gif'  %}" alt="">
+      <h4>Eagle Care</h4>
+    </a>
+  </div>
+  <div class="client-bg1">
+    <a href="" data-toggle="modal" data-target="#kangaroo_modal">
+      <img src="{% static 'blog/images/giphy.gif'  %}" alt="">
+      <h4>Kangaroo Care</h4>
+    </a>
+  </div>
+  <div class="client-bg1">
+    <a href="" data-toggle="modal" data-target="#nested_modal">
+      <img src="{% static 'blog/images/unnamed.gif'  %}" alt="">
+      <h4>Nested Care</h4>
+    </a>
+  </div>
+  <div class="client-bg1">
+    <a href="" data-toggle="modal" data-target="#client_form_instructions_modal">
+      <h4>How to fill client form</h4>
+    </a>
+  </div>
+  <div class="client-bg1">
+    <a href="" data-toggle="modal" data-target="#sideModalTR">
+      <h4>How to update client form</h4>
+    </a>
+  </div>
+  <div class="client-bg1">
+    <a href="" data-toggle="modal" data-target="#myclient_form">
+      <h4>Form</h4>
+    </a>
+  </div>
+</div>
+<br><br>
 {% endblock %}
+

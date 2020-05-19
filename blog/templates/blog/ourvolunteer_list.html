@@ -1,0 +1,57 @@
+{% extends "blog/base2.html" %} 
+{% block content %}
+<div class="container mt-3">
+  <br />
+  <span style="position: fixed;">
+    <a title="Become a volunteer" href="{% url 'volunteer_join' %}">
+        <i class="fas fa-plus-circle fa-3x"></i>
+    </a>
+  </span><h3 class="text-center mb-3">Our Volunteers</h3>
+  <br />
+  <div class="row mb-3">
+    <!-- Card deck -->
+<div class="card-deck">
+  {% for v in ourvolunteers %}
+  <div class="card mb-4" style="width:400px ;">
+    <div class="view overlay">
+      {% if v.photo %}
+      <img class="card-img-top" src="{{ v.photo.url }}"
+        alt="volunteer photo" style="width: 400px;height: 320px;">
+        {% endif %}
+      <a href="#!">
+        <div class="mask rgba-white-slight"></div>
+      </a>
+    </div>
+    <div class="card-body">
+      <h4 class="card-title">{{ v.name }}</h4>
+      <p class="card-text white-text mb-2">
+        <span class="mr-2 font-weight-bold">Profession: </span>{{ v.profession }}
+       </p>
+       <p class="card-text white-text mb-2">
+        <span class="mr-2 font-weight-bold">Email: </span>{{ v.email }}
+       </p>
+       <p class="card-text white-text mb-2">
+        <span class="mr-2 font-weight-bold">Country: </span>{{ v.country }}
+       </p>
+       <p class="card-text white-text mb-2">
+        <span class="mr-2 font-weight-bold">Phone: </span>{{ v.phone }}
+       </p>
+       <p class="card-text white-text mb-2">
+        <span class="mr-2 font-weight-bold">Why join ORgeon?: </span>{{ v.why_join_Orgeon }}
+       </p>
+      <p class="card-text white-text mb-4">
+        <span class="mr-2 font-weight-bold">Additional Msg: </span>"{{ v.additional_message}}"
+      </p>
+      <p class="card-text white-text mb-4">
+        <span class="mr-2 font-weight-bold">Date Volunteered: </span>"{{ v.date_volunteered |date:"D M i Y"}}"
+      </p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<!-- Card deck -->
+  </div>
+</div>
+
+{% endblock %}
+

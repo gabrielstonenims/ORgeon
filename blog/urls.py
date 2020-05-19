@@ -1,7 +1,7 @@
 from django.urls import path
 
 from . import views
-from .views import Volunteers,VolunteerFormView
+from .views import Volunteers,VolunteerFormView,OurVolunteers
 from .views import (PostCreateView, PostListView, EventCreateView, EventDetailView, ReportListView,
                     ClientInfoCreateView, ClientInfoListView, ClientInfoUpdateView, ClientInfoDeleteView)
 
@@ -14,6 +14,7 @@ urlpatterns = [
     path('somevids/', views.some_videos, name='somevids'),
     path('volunteer/new/', VolunteerFormView.as_view(), name='volunteer_join'),
     path('volunteers/', Volunteers.as_view(), name='volunteers'),
+    path('ourvolunteers/',OurVolunteers.as_view(),name='ourvolunteers'),
     path('events/', views.events, name='events'),
     path('join-trip/new/', views.join_trip, name='jointrip'),
     path('partner/new/', views.become_partner, name='become_a_partner'),

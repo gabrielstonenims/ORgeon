@@ -11,64 +11,6 @@
     }
 }
 
-h3.header-employee{
-    font-weight: bold;
-    color: $light;
-
-}
-.employee-container{
-    padding: 20px;
-    .card{
-        border-radius: 5px;
-        background: silver;
-        max-width: 100%;
-        height: 400px;
-        .card-back{
-            width: 100%;
-            height: 200px;
-            position: absolute;
-            background: url('../images/airbnb-apartment-appartment-584399.jpg');
-            background-repeat: no-repeat;
-            background-size: 100%;
-        }
-        .employee-full-details{
-            z-index: 1;
-            position: relative;
-            .employee-pic{
-                margin-top: 150px;
-                @include setFlex(column);
-                padding: 10px;
-                img{
-                    width: 80px;
-                    height: 80px;
-                    border-radius: 40px;
-                    border: solid silver 2px;
-                    overflow: hidden;
-                    transition: 0.5s ease-in;
-                    &:hover{
-                        transform: scale(1.2);
-                    }
-                }
-            }
-            .employee-details{
-                
-                h3{
-                    font-weight: bold;
-                    font-size: 20px;
-                }
-                h6{
-                   color: #002387;
-                   font-weight: bold; 
-                }
-                h3.em-email{
-                    text-align: center;
-                    font-size: 15px;
-                }
-            }
-        }
-    }
-    
-}
 
 .myvolunteer-container{
     width: 250px;
@@ -78,3 +20,48 @@ h3.header-employee{
         height: 250px;
     }
 }
+
+.myemployees-container{
+    display: grid;
+    // grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+    gap: 10px;
+  }
+  .myemployees-container > div{
+    height: 250px;
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    &:hover{
+      opacity: 0.7;
+      transform: scale(0.98);
+    }
+  }
+
+  
+  .employee-bg1{
+    background: url("../images/nature-red-forest-leaves-33109.jpg");
+      color: white;
+      font-weight: bold;
+      img{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: solid 2px silver;
+      }
+  }
+  .bg2{
+    background: url("../images/photo-of-pod-of-dolphins-2422915.jpg");
+    a{
+      color: white;
+      font-weight: bold;
+      img{
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }

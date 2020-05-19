@@ -1,36 +1,22 @@
 {% extends "blog/base2.html" %}
 
 {% block content %}
-<div class="container">
-    <br>
-    <h3 class="text-center mb-3 header-employee animated bounceInDown">Employees of Orgeon</h3>
-    <br>
-    <div class="row">
-        {% for employee in employees %}
-            <div class="col-xs-6 col-sm-6 col-md-4 mb-3 employee-container">
-                <div class="card z-depth-1-half" >
-                    <div class="card-back" 
-                    style="background: url('{{ employee.profile.cover_pic.url }}');background-size: cover;"></div>
-                    <div class="employee-full-details">
-                        <div class="employee-pic mb-3">
-                            <a href="{{ employee.profile.profile_pic.url }}" data-lightbox='gallery' data-title='{{employee.profile.fullname }}'>
-                                <img title="click to enlarge" src="{{ employee.profile.profile_pic.url }}" alt="employee pic">
-                            </a>
-                        </div>
-                        <br>
-                        <div class="employee-details">
-                            <h3 class="text-center mb-2">{{ employee.profile.fullname }}</h3>
-                            <h6 class="text-center">{{ employee.profile.position }}</h6>
-                            {% if employee.email %}
-                            <h3 class="em-email text-muted text-center">{{ employee.email }} </h3>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+<br>
+<div class="myemployees-container">
+    {% for employee in employees %}
+    <div class="employee-bg1" >
+        <img src="{{ employee.profile.profile_pic.url }}" alt="">
+        <h2>{{ employee.profile.fullname }}</h2>
+        <p>{{ employee.profile.position }}</p>
+        {% if employee.email %}
+        <p class="em-email  text-center">{{ employee.email }} </p>
+        {% endif %}
     </div>
+    {% endfor %}
 </div>
+<br>
+<br>
+
 <script>
 
     setInterval(function () {

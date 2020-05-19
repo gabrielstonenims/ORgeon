@@ -9,66 +9,123 @@
     <div class="row mb-3">
         {% for client in clients %}
         <div class="col-xs-6 col-sm-6 col-md-4 mb-3 client-master">
-                <div class="clientinfo">
-                    {% if client.client_image %}
-                    <div class="client-image mb-2">
-                        <img src="{{ client.client_image.url }}" alt="client image">
-                    </div>
-                    {% endif %}
-                    <div class="other-details">
-                        <p>{{ client.name }}</p>
-                        <p>Level -><span class="c-level ml-3">{{ client.progress }}</span></p>
-                        <div class="levels">
-                            {% if client.progress == "Accessment" %}
-                            <span class="level level-accessment">A</span>
-                            <span class="level">D</span>
-                            <span class="level">P</span>
-                            <span class="level">I</span>
-                            <span class="level">E</span>
-                            <span class="level">S</span>
-                            {% elif client.progress == "Development" %}
-                            <span class="level">A</span>
-                            <span class="level level-development">D</span>
-                            <span class="level">P</span>
-                            <span class="level">I</span>
-                            <span class="level">E</span>
-                            <span class="level">S</span>
-                            {% elif client.progress == "Planning" %}
-                            <span class="level">A</span>
-                            <span class="level">D</span>
-                            <span class="level level-planning">P</span>
-                            <span class="level">I</span>
-                            <span class="level">E</span>
-                            <span class="level">S</span>
-                            {% elif client.progress == "Implementation" %}
-                            <span class="level">A</span>
-                            <span class="level">D</span>
-                            <span class="level">P</span>
-                            <span class="level level-implementation">I</span>
-                            <span class="level">E</span>
-                            <span class="level">S</span>
-                            {% elif client.progress == "Evaluation" %}
-                            <span class="level">A</span>
-                            <span class="level">D</span>
-                            <span class="level">P</span>
-                            <span class="level">I</span>
-                            <span class="level level-evaluation">E</span>
-                            <span class="level">S</span>
-                            {% elif client.progress == "Star" %}
-                            <span class="level">A</span>
-                            <span class="level">D</span>
-                            <span class="level">P</span>
-                            <span class="level">I</span>
-                            <span class="level">E</span>
-                            <span class="level level-star">
-                                <i class="far fa-star"></i>
-                            </span>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
+<div class="card">
+    <div class="view overlay">
+        <div class="client-image">
+            {% if client.client_image %}
+          <img class="card-img-top" src="{{ client.client_image.url }}"
+            alt="Card image cap">
+            {% endif %}
+        </div>
+      <a>
+        <div class="mask rgba-white-slight"></div>
+      </a>
+    </div>
+    <div class="card-body elegant-color white-text rounded-bottom">
+      <!-- Title -->
+      <h4 class="card-title">{{ client.name }}</h4>
+      <hr class="hr-light">
+      <!-- Text -->
+      <div class="other-details">
+          <div class="levels">
+            {% if client.progress == "Assessment" %}
+            <span class="level level-accessment" 
+            {% if client.assessment_phase_details%}
+            title="{{ client.assessment_phase_details }}"
+            {% else %}
+            title="No details available now"
+            {% endif %}
+            >A</span>
+            <span class="level">D</span>
+            <span class="level">P</span>
+            <span class="level">I</span>
+            <span class="level">E</span>
+            <span class="level">S</span>
+            {% elif client.progress == "Development" %}
+            <span class="level">A</span>
+            <span class="level level-development"
+            {% if client.development_phase_details %}
+            title="{{ client.development_phase_details }}"
+            {% else %}
+            title="No details available now"
+            {% endif %}
+            >D</span>
+            <span class="level">P</span>
+            <span class="level">I</span>
+            <span class="level">E</span>
+            <span class="level">S</span>
+            {% elif client.progress == "Planning" %}
+            <span class="level">A</span>
+            <span class="level">D</span>
+            <span class="level level-planning"
+            {% if client.planning_phase_details %}
+            title="{{ client.planning_phase_details }}"
+            {% else %}
+            title="No details available now"
+            {% endif %}
+            >P</span>
+            <span class="level">I</span>
+            <span class="level">E</span>
+            <span class="level">S</span>
+            {% elif client.progress == "Implementation" %}
+            <span class="level">A</span>
+            <span class="level">D</span>
+            <span class="level">P</span>
+            <span class="level level-implementation"
+            {% if client.implementation_phase_details %}
+            title="{{ client.implementation_phase_details }}"
+            {% else %}
+            title="No details available now"
+            {% endif %}
+            >I</span>
+            <span class="level">E</span>
+            <span class="level">S</span>
+            {% elif client.progress == "Evaluation" %}
+            <span class="level">A</span>
+            <span class="level">D</span>
+            <span class="level">P</span>
+            <span class="level">I</span>
+            <span class="level level-evaluation"
+            {% if client.evaluation_phase_details %}
+            title="{{ client.evaluation_phase_details }}"
+            {% else %}
+            title="No details available now"
+            {% endif %}
+            >E</span>
+            <span class="level">S</span>
+            {% elif client.progress == "Star" %}
+            <span class="level">A</span>
+            <span class="level">D</span>
+            <span class="level">P</span>
+            <span class="level">I</span>
+            <span class="level">E</span>
+            <span class="level level-star"
+            {% if client.star_phase_details %}
+            title="{{ client.star_phase_details }}"
+            {% else %}
+            title="No details available now"
+            {% endif %}
+            >
+                <i class="far fa-star"></i>
+            </span>
+            {% endif %}
+            {% if client.care_plan == "Eagle" %}
+            <span title="Client's care plan is Eagle" class="ml-4 client-progress"><img src="{% static 'blog/images/flying-eagle.gif'%}" alt=""></span>
+            {% elif client.care_plan == "Kangaroo" %}
+            <span title="Client's care plan is Kangaroo" class="ml-4 client-progress"><img src="{% static 'blog/images/giphy.gif'%}" alt=""></span>
+            {% else %}
+            <span title="Client's care plan is Nested" class="ml-4 client-progress"><img src="{% static 'blog/images/unnamed.gif'%}" alt=""></span>
+            {% endif %}
+        </div>
+      </div>
+      <br>
+      <!-- Link -->
+      <a href="#!" class="white-text d-flex justify-content-end">
+        <a href="{{ client.get_absolut_client_url }}" class="butt">Read more <i class="fas fa-angle-double-right"></i></a>
+      </a>
+    </div>
+  </div>
                 <br>
-                <a href="{{ client.get_absolut_client_url }}" class="butt">More Info</a>
         </div>
         {% endfor %}
     </div>
