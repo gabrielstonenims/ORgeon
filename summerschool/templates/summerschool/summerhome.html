@@ -1,0 +1,167 @@
+{% extends 'summerschool/schoolbase.html' %}
+{% load static %}
+{% block content %}
+<div class="mynav-wrapper">
+    <div class="myshowcase">
+        <div class="myback-overlay"></div>
+        <div class="myshowcase-back"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-12  mb-2 myheader-item ml-auto mr-auto">
+                    <div class="face">
+                        <div class="eyes">
+                            <div class="eye"></div>
+                            <div class="eye"></div>
+                        </div>
+                    </div>
+                    <br>
+                   <h3 class="myheader">
+                       <span class="s">S</span>
+                       <span class="u">u</span>
+                       <span class="m1">m</span>
+                       <span class="m2">m</span>
+                       <span class="e">e</span>
+                       <span class="r mr-3">r</span>
+                       
+                      Tutoring Program
+                    </h3>
+                    <p class="msg-intro">Knowledge is power.</p>
+                    <p class="msg-intro"><mark>COVID-19</mark> has no control over our education</p>
+                    <div class="myschool-butt">
+                        <a href="{% url 'school_login' %}">Login</a>
+                        <a href="{% url 'school_register'%}">Register</a>
+                    </div>
+                    <p id="demo"></p><span id="current-holder" class="animated rubberBand"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hold-nav-tabs">
+        <ul class="nav nav-tabs summer-tabs" id="myTab" role="tablist">
+            <li class="nav-item gradeschool mr-2 mb-2">
+              <a class="nav-link active" id="gradeschool-tab" data-toggle="tab" href="#gradeschool" role="tab" aria-controls="gradeschool"
+                aria-selected="true">GradeSchool</a>
+            </li>
+            <li class="nav-item preschool mr-2 mb-2">
+              <a class="nav-link" id="preschool-tab" data-toggle="tab" href="#preschool" role="tab" aria-controls="preschool"
+                aria-selected="false">PreSchool</a>
+            </li>
+            <li class="nav-item kindergarten mb-2">
+              <a class="nav-link" id="kindergarten-tab" data-toggle="tab" href="#kindergarten" role="tab" aria-controls="kindergarten"
+                aria-selected="false">Kindergarten</a>
+            </li>
+          </ul>
+          <div class="container main-tab-contents">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="gradeschool" role="tabpanel" aria-labelledby="gradeschool-tab">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-10">
+                            <h5>GradeSchool</h5>
+                 <br>
+                 <p class="lead">This is courses are structured for kids from grade 1 to grade 8.Below are the courses available in sessions.</p>
+                 <h4 class="badge badge-info">Session 1</h4>
+                 <p class="lead">First six weeks(1<sup>st</sup> June - 10<sup>th</sup> July)</p>
+                 <ul class="list-group z-depth-1-half">
+                    <li class="list-group-item">Maths</li>
+                    <li class="list-group-item">English</li>
+                    <li class="list-group-item">Basic Arts</li>
+                    <li class="list-group-item">Bible Studies part 1</li>
+                    <li class="list-group-item">Basic Dance Tutorials part 1</li>
+                  </ul>
+                  <br>
+                  <p class="badge badge-danger">Break July 13<sup>th</sup> - July 17<sup>th</sup></p>
+                  <br>
+                  <h4 class="badge badge-info">Session 2</h4>
+                 <p class="lead">Second six weeks(20<sup>th</sup> July - 28<sup>th</sup>August)</p>
+                 <ul class="list-group">
+                    <li class="list-group-item">Maths</li>
+                    <li class="list-group-item">English</li>
+                    <li class="list-group-item">Basic Arts</li>
+                    <li class="list-group-item">Bible Studies part 2</li>
+                    <li class="list-group-item">Basic Dance Tutorials part 2</li>
+                  </ul>
+                  <br>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="tab-pane fade" id="preschool" role="tabpanel" aria-labelledby="preschool-tab">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-10">
+                            <h5>PreSchool</h5>
+                 <br>
+                 
+                 <h4 class="badge badge-info">Session 1</h4>
+                 <p class="lead">First six weeks(1<sup>st</sup> June - 10<sup>th</sup> July)</p>
+                 <ul class="list-group">
+                    <li class="list-group-item">Maths</li>
+                    <li class="list-group-item">Basic Arts</li>
+                    <li class="list-group-item">Bible Studies part 1</li>
+                    <li class="list-group-item">Basic Dance Tutorials part 1</li>
+                  </ul>
+                  <br>
+                  <p class="badge badge-danger">Break July 13<sup>th</sup> - July 17<sup>th</sup></p>
+                  <br>
+                  <h4 class="badge badge-info">Session 2</h4>
+                 <p class="lead">Second six weeks(20<sup>th</sup> July - 28<sup>th</sup>August)</p>
+                 <ul class="list-group">
+                    <li class="list-group-item">Maths</li>
+                    <li class="list-group-item">Basic Arts</li>
+                    <li class="list-group-item">Bible Studies part 2</li>
+                    <li class="list-group-item">Basic Dance Tutorials part 2</li>
+                  </ul>
+                  <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="kindergarten" role="tabpanel" aria-labelledby="kindergarten-tab">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-10">
+                            <h5>Kindergarten</h5>
+                 <br>
+                 
+                 <h4 class="badge badge-info">Session 1</h4>
+                 <p class="lead">First six weeks(1<sup>st</sup> June - 10<sup>th</sup> July)</p>
+                 <ul class="list-group">
+                    <li class="list-group-item">Maths</li>
+                    <li class="list-group-item">Basic Arts</li>
+                    <li class="list-group-item">Bible Studies part 1</li>
+                    <li class="list-group-item">Basic Dance Tutorials part 1</li>
+                  </ul>
+                  <br>
+                  <p class="badge badge-danger">Break July 13<sup>th</sup> - July 17<sup>th</sup></p>
+                  <br>
+                  <h4 class="badge badge-info">Session 2</h4>
+                 <p class="lead">Second six weeks(20<sup>th</sup> July - 28<sup>th</sup>August)</p>
+                 <ul class="list-group">
+                    <li class="list-group-item">Maths</li>
+                    <li class="list-group-item">Basic Arts</li>
+                    <li class="list-group-item">Bible Studies part 2</li>
+                    <li class="list-group-item">Basic Dance Tutorials part 2</li>
+                  </ul>
+                  <br>
+                        </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+          
+    </div>
+</div>
+<br>
+<br>
+
+<script>
+    document.querySelector("body").addEventListener("mousemove",eyeball)
+    function eyeball(){
+        var eye = document.querySelectorAll(".eye")
+        eye.forEach(function(eye){
+            let x = (eye.getBoundingClientRect().left) + (eye.clientWidth / 2)
+            let y = (eye.getBoundingClientRect().top) + (eye.clientHeight / 2)
+            let radian = Math.atan2(event.pageX - x, event.pageY - y)
+            let rot = (radian * (180 / Math.PI) * -1) + 200
+            eye.style.transform = "rotate("+ rot +"deg)"
+        })
+    }
+</script>
+{% endblock %}

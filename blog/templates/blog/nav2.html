@@ -39,11 +39,11 @@
         <a class="nav-link" href="{% url 'create_report' %}"><i class="fas fa-plus mr-1"></i>Report</a>
     </li>
    
-    <li class="nav-item" title="Group chat">
-      <a class="nav-link" href="{% url 'chat' %}">
-        G-Chat <i class="far fa-comment"></i>++
-      </a>
-    </li>
+<!--    <li class="nav-item" title="Group chat">-->
+<!--      <a class="nav-link" href="{% url 'chat' %}">-->
+<!--        G-Chat <i class="far fa-comment"></i>++-->
+<!--      </a>-->
+<!--    </li>-->
     </ul>
     <ul class="navbar-nav ml-auto nav-flex-icons">
       <li class="nav-item dropdown">
@@ -54,7 +54,7 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-default"
           aria-labelledby="navbarDropdownMenuLink-333">
           <a title="view profile" class="dropdown-item" href="{% url 'profile' %}"><i class="fas fa-user mr-1"></i>Profile</a>
-          {% if request.user.username == "joycelyn" %}
+          {% if request.user.username == "joselyn" %}
           <a title="View all your Clients" class="dropdown-item" href="{% url 'clients' %}"><i class="fas fa-users mr-1" ></i>Clients</a>
           <a title="View all your Clients" class="dropdown-item" href="{% url 'clients_new' %}"><i class="fas fa-users mr-1" ></i>Add Client</a>
           <a title="View all your Clients" class="dropdown-item" href="{% url 'ourvolunteers' %}"><i class="fas fa-users mr-1" ></i>Our Volunteers</a>

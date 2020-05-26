@@ -31,6 +31,9 @@ from django.utils import timezone
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 import time
+from summerschool.models import  School
+from users.models import Profile, MyProfileUser
+from summerschool.models import School,Student
 
 # global time checker
 CAN_STAY_LOGGED_IN1 = 30
@@ -107,11 +110,9 @@ def home(request):
                 """
                 msg.add_alternative(hml, subtype='html')
                 with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-                    smtp.login(settings.EMAIL_HOST_USER,
-                               settings.EMAIL_HOST_PASSWORD)
+                    smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
                     smtp.send_message(msg)
-                    messages.success(
-                        request, f"Thank you,your email has been added to our newslist.")
+                    messages.success(request, f"Thank you,your email has been added to our newslist.")
                     return redirect('home')
 
     else:
@@ -139,13 +140,12 @@ def some_videos(request):
     return render(request, "blog/some_videos.html")
 
 
-
 class VolunteerFormView(CreateView):
     model = Volunteer
-    fields = ['name', 'email', 'profession','country','photo', 'phone', 'why_join_Orgeon','additional_message']
+    fields = ['name', 'email', 'profession', 'country', 'photo', 'phone', 'why_join_Orgeon', 'additional_message']
     success_url = '/volunteers'
 
-    def form_valid(self,form):
+    def form_valid(self, form):
         v_email = form.cleaned_data.get('email')
         msg = EmailMessage()
         msg1 = EmailMessage()
@@ -166,7 +166,7 @@ class VolunteerFormView(CreateView):
         """
         msg.add_alternative(hml, subtype='html')
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-            smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+            smtp.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
             smtp.send_message(msg)
         # to user volunteering email
         msg1["Subject"] = "Welcome to ORgeon of stars"
@@ -188,7 +188,7 @@ class VolunteerFormView(CreateView):
         """
         msg1.add_alternative(hml, subtype='html')
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-            smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
+            smtp.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
             smtp.send_message(msg1)
             # return redirect('volunteers')
         return super().form_valid(form)
@@ -200,11 +200,13 @@ class Volunteers(ListView):
     context_object_name = 'volunteers'
     ordering = ['-date_volunteered']
 
-class OurVolunteers(LoginRequiredMixin,ListView):
+
+class OurVolunteers(LoginRequiredMixin, ListView):
     model = Volunteer
     template_name = 'blog/ourvolunteer_list.html'
     context_object_name = 'ourvolunteers'
     ordering = ['-date_volunteered']
+
 
 def events(request):
     events = Events.objects.all().order_by('-date_posted')[:1]
@@ -219,6 +221,7 @@ def events(request):
 def join_trip(request):
     msg = EmailMessage()
     msg1 = EmailMessage()
+
     if request.method == "POST":
         form = JoinTripForm(request.POST)
         if form.is_valid():
@@ -251,13 +254,11 @@ def join_trip(request):
             """
             msg.add_alternative(hml, subtype='html')
             with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-                smtp.login(settings.EMAIL_HOST_USER,
-                           settings.EMAIL_HOST_PASSWORD)
+                smtp.login(settings.EMAIL_HOST_USER,settings.EMAIL_HOST_PASSWORD)
                 smtp.send_message(msg)
-
             msg1["Subject"] = "Thank you."
             msg1["From"] = settings.EMAIL_HOST_USER
-            msg1["To"] = trip_email
+            msg1["To"] = email
             msg1.set_content(
                 f"Orgeon of stars is so delighted that you have decided to join our trip, saving lives and helping the vulnerable children is our top priority and we are happy that you've made it yours too.We will let you know of any other information before we embark on this journey.Stay blessed.")
             hml = f"""
@@ -452,7 +453,7 @@ def create_report(request):
 @login_required()
 def employees(request):
     if LoginCode.objects.filter(user=request.user).exists():
-        employees = User.objects.all()
+        employees = Profile.objects.filter(verified=True)
         this_time = datetime.now()
         this_min = this_time.minute
         if this_min == CAN_STAY_LOGGED_IN1 or this_min == CAN_STAY_LOGGED_IN2 or this_min == CAN_STAY_LOGGED_IN3 or this_min == CAN_STAY_LOGGED_IN4:
@@ -461,7 +462,7 @@ def employees(request):
         messages.info(request, f"You were logged out")
         return redirect('login')
     context = {
-        'employees': employees
+        'employees': employees,
     }
 
     return render(request, "blog/employees.html", context)
@@ -535,10 +536,11 @@ def post_detail(request, id):
 def main(request):
     if LoginCode.objects.filter(user=request.user).exists():
         on_line_users = Online_user.objects.all()
+        v_users = []
         users = User.objects.exclude(id=request.user.id)
         for i in users:
-            print(f"{i.username}'s id is {i.id}")
-
+            if i.profile.verified == True:
+                v_users.append(i)
         reports = Report.objects.all().order_by('-date_posted')[:6]
         posts = Post.objects.all().order_by('-date_posted')[:6]
         td = date.today()
@@ -550,11 +552,11 @@ def main(request):
         if this_min == CAN_STAY_LOGGED_IN1 or this_min == CAN_STAY_LOGGED_IN2 or this_min == CAN_STAY_LOGGED_IN3 or this_min == CAN_STAY_LOGGED_IN4:
             return redirect('logout')
     else:
-        messages.info(request, f"You were logged out")
+        # messages.info(request, f"You were logged out")
         return redirect('login')
     context = {
         'users': on_line_users,
-        "chat": users,
+        "chat": v_users,
         'reports': reports,
         'posts': posts,
         'current_events': current_events,
@@ -582,11 +584,18 @@ class EventDetailView(LoginRequiredMixin, DetailView):
 @login_required()
 def user_activities(request):
     if LoginCode.objects.filter(user=request.user).exists():
-        users = User.objects.all().count()
+        users = Profile.objects.filter(verified=True).count()
+        students = Student.objects.all().count()
+        grade_school_students = School.objects.filter(school="GradeSchool")
+        pre_school_students = School.objects.filter(school="PreSchool")
+        kindergarten_students = School.objects.filter(school="Kindergarten")
         volunteers = Volunteer.objects.all().count()
         partners = Partnership.objects.all().count()
         subscribers = NewsLetter.objects.all().count()
         myclients = ClientInfoProgress.objects.all().count()
+        for i in grade_school_students:
+            print(i.user.email)
+        
 
         this_time = datetime.now()
         this_min = this_time.minute
@@ -602,6 +611,10 @@ def user_activities(request):
         "partners": partners,
         "myclients": myclients,
         "subscribers": subscribers,
+        "students": students,
+        "grade_school_students": grade_school_students,
+        "pre_school_students": pre_school_students,
+        "kindergarten_students": kindergarten_students,
     }
 
     if request.is_ajax():
@@ -627,6 +640,8 @@ def login_request(request):
             user = authenticate(username=uname, password=upassword)
             if user is not None:
                 login(request, user)
+                if not user.profile.verified:
+                    return redirect('schoolhome')
                 if not LoginCode.objects.filter(user=user).exists():
                     LoginCode.objects.create(user=user)
                 if not Online_user.objects.filter(user=user).exists():
@@ -651,7 +666,6 @@ def login_request(request):
 @login_required()
 def logout(request):
     try:
-
         ul = LoginCode.objects.filter(user=request.user)
         on_user = Online_user.objects.filter(user=request.user)
 
@@ -660,7 +674,6 @@ def logout(request):
         if on_user:
             on_user.delete()
         del request.session['username']
-
     except:
         pass
 
@@ -839,7 +852,10 @@ def client_detail(request, id):
 
 class ClientInfoCreateView(LoginRequiredMixin, CreateView):
     model = ClientInfoProgress
-    fields = ['care_plan','assessment_officer','name', 'age','email', 'phone', 'emergency_phone','gender','client_image','next_of_kin', 'issue', 'progress','assessment_phase_details','development_phase_details','planning_phase_details','implementation_phase_details','evaluation_phase_details','star_phase_details']
+    fields = ['care_plan', 'assessment_officer', 'name', 'age', 'email', 'phone', 'emergency_phone', 'gender',
+              'client_image', 'next_of_kin', 'issue', 'progress', 'assessment_phase_details',
+              'development_phase_details', 'planning_phase_details', 'implementation_phase_details',
+              'evaluation_phase_details', 'star_phase_details']
     success_url = '/clients'
 
     def form_valid(self, form):
@@ -849,7 +865,10 @@ class ClientInfoCreateView(LoginRequiredMixin, CreateView):
 
 class ClientInfoUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ClientInfoProgress
-    fields = ['care_plan','assessment_officer','name', 'age','email', 'phone', 'emergency_phone','gender','client_image','next_of_kin', 'issue', 'progress','assessment_phase_details','development_phase_details','planning_phase_details','implementation_phase_details','evaluation_phase_details','star_phase_details']
+    fields = ['care_plan', 'assessment_officer', 'name', 'age', 'email', 'phone', 'emergency_phone', 'gender',
+              'client_image', 'next_of_kin', 'issue', 'progress', 'assessment_phase_details',
+              'development_phase_details', 'planning_phase_details', 'implementation_phase_details',
+              'evaluation_phase_details', 'star_phase_details']
     success_url = '/clients'
 
     def form_valid(self, form):
@@ -874,5 +893,3 @@ class ClientInfoDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         else:
             return False
-
-

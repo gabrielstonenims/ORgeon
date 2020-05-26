@@ -1,0 +1,134 @@
+{% extends 'summerschool/school_base2.html' %}
+{% block content %}
+<div class="container mt-3">
+    <br>
+    {% if is_in_gradeschool %}
+    <h3 class="text-center mb-3">GradeSchool</h3>
+    {% elif is_in_preschool %}
+    <h3 class="text-center mb-3">PreSchool</h3>
+    {% elif is_in_kindergarten %}
+    <h3 class="text-center mb-3">Kindergarten</h3>
+    {% endif %}
+    <br>
+    <p class="animated bounceInUp">Please kindly support this course by donating</p>
+    <div class="donate-buttons">
+      <div class="mr-4">
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" title="one time donation">
+          <input type="hidden" name="cmd" value="_s-xclick" />
+          <input type="hidden" name="hosted_button_id" value="NHYKARN4U4DWJ" />
+          <input type="submit" value="One Time" id="butt" alt="Donate with PayPal button" style="border: none;">
+        </form>
+      </div>
+      <div class="ml-4">
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" title="monthly donation">
+          <input type="hidden" name="cmd" value="_s-xclick" />
+          <input type="hidden" name="hosted_button_id" value="4ABS2J7M6BLVC" />
+          <input type="submit" value="Monthly" id="butt" alt="Donate with PayPal button" style="border: none;">
+        </form>
+      </div>
+    </div>
+    <p class="mb-3">The tutors would be sending you the dates,time and links via your email,please kindly pay attention to your email so not to miss the information.</p>
+    <div class="row mb-3">
+        {% if can_attend_class %}
+        {% if is_in_gradeschool %}
+            <div class="col-xs-6 col-sm-6 col-md-6 mb-3">
+                <div class="card">
+                  <div class="card-body elegant-color white-text rounded-bottom">
+                      <h4 class="card-title">Session 1 (1<sup>st</sup> June  -  10<sup>th</sup> July)</h4>
+                    <hr class="hr-light">
+                      <ul class="list-group">
+                          <li class="list-group-item card-text">Maths</li>
+                          <li class="list-group-item card-text">English</li>
+                          <li class="list-group-item card-text">Basic Arts</li>
+                          <li class="list-group-item card-text">Bible Studies part 1</li>
+                          <li class="list-group-item card-text">Basic Dance Tutorials part 1</li>
+                      </ul>
+                  </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 mb-3">
+                <div class="card">
+                  <div class="card-body elegant-color white-text rounded-bottom">
+                    <h4 class="card-title">Session 2 (20<sup>th</sup> July  -  28<sup>th</sup> August)</h4>
+                    <hr class="hr-light">
+                      <ul class="list-group">
+                          <li class="list-group-item card-text">Maths</li>
+                          <li class="list-group-item card-text">English</li>
+                          <li class="list-group-item card-text">Basic Arts</li>
+                          <li class="list-group-item card-text">Bible Studies part 2</li>
+                          <li class="list-group-item card-text">Basic Dance Tutorials part 2</li>
+                      </ul>
+                  </div>
+                </div>
+            </div>
+        {% elif is_in_preschool %}
+            <div class="col-xs-6 col-sm-6 col-md-6 mb-3">
+                <div class="card">
+                  <div class="card-body elegant-color white-text rounded-bottom">
+                    <h4 class="card-title">Session 1 (1<sup>st</sup> June  -  10<sup>th</sup> July)</h4>
+                    <hr class="hr-light">
+                      <ul class="list-group">
+                          <li class="list-group-item card-text">Maths</li>
+                          <li class="list-group-item card-text">Basic Arts</li>
+                          <li class="list-group-item card-text">Bible Studies part 1</li>
+                          <li class="list-group-item card-text">Basic Dance Tutorials part 1</li>
+                      </ul>
+                  </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 mb-3">
+                <div class="card">
+                  <div class="card-body elegant-color white-text rounded-bottom">
+                    <h4 class="card-title">Session 2 (20<sup>th</sup> July  -  28<sup>th</sup> August)</h4>
+                    <hr class="hr-light">
+                      <ul class="list-group">
+                          <li class="list-group-item card-text">Maths</li>
+                          <li class="list-group-item card-text">Basic Arts</li>
+                          <li class="list-group-item card-text">Bible Studies part 2</li>
+                          <li class="list-group-item card-text">Basic Dance Tutorials part 2</li>
+                      </ul>
+                  </div>
+                </div>
+            </div>
+        {% elif is_in_kindergarten %}
+        <div class="col-xs-6 col-sm-6 col-md-6 mb-3">
+                <div class="card">
+                  <div class="card-body elegant-color white-text rounded-bottom">
+                    <h4 class="card-title">Session 1 (1<sup>st</sup> June  -  10<sup>th</sup> July)</h4>
+                    <hr class="hr-light">
+                      <ul class="list-group">
+                          <li class="list-group-item card-text">Maths</li>
+                          <li class="list-group-item card-text">Basic Arts</li>
+                          <li class="list-group-item card-text">Bible Studies part 1</li>
+                          <li class="list-group-item card-text">Basic Dance Tutorials part 1</li>
+                      </ul>
+                  </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 mb-3">
+                <div class="card">
+                  <div class="card-body elegant-color white-text rounded-bottom">
+                    <h4 class="card-title">Session 2 (20<sup>th</sup> July  -  28<sup>th</sup> August)</h4>
+                    <hr class="hr-light">
+                      <ul class="list-group">
+                          <li class="list-group-item card-text">Maths</li>
+                          <li class="list-group-item card-text">Basic Arts</li>
+                          <li class="list-group-item card-text">Bible Studies part 2</li>
+                          <li class="list-group-item card-text">Basic Dance Tutorials part 2</li>
+                      </ul>
+                  </div>
+                </div>
+            </div>
+        {% endif %}
+        {% else %}
+        <p>Sorry you are not in our school list</p>
+        {% endif %}
+        <br>
+        <h3 class="disclaimer">Disclaimer</h3>
+        <hr class="my-4">
+        <br>
+        <p class="jumbotron" style="color: black;font-weight: bold;">Please note that tutors offering these courses are not professional teachers,nonetheless they are well qualified graduates volunteering their time and service to reinforce what your child has already learnt from school.<br>
+        </p>
+    </div>
+</div>
+{% endblock %}

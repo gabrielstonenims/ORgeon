@@ -1,0 +1,37 @@
+{% extends 'summerschool/schoolbase.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container mt-3">
+    <br><br>
+  <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 ml-auto mr-auto login-form-container" >
+          <form method="post">
+            {% csrf_token %}
+            <fieldset class="form-group">
+              <legend class="border-bottom mb-3 text-center animated bounceInLeft">
+                <span class="l">L</span>
+                <span class="o">o</span>
+                <span class="g">g</span>
+                <span class="i">i</span>
+                <span class="n">n</span>
+              </legend>
+              {{ form|crispy}}
+            </fieldset>
+            <div class="form-group">
+              <button id="butt" type="submit" class="login_butt">Login</button>
+              <small>
+                <a class="ml-2" href="{% url 'password_reset' %}">Forgot Password?</a>
+              </small>
+            </div>
+              <small class="">Need an account? 
+                <a class="ml-2" href="{% url 'school_register' %}">Register</a>
+                <a class="ml-3" href="{% url 'summerhome' %}">
+                  <i class="fas fa-home fa-2x"></i>
+                </a>
+              </small>
+          </form>
+    </div>
+  </div>
+</div>
+<br>
+{% endblock %}

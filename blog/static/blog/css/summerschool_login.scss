@@ -1,0 +1,141 @@
+.login-form-container {
+  padding: 20px;
+  margin-top: 50px;
+  button {
+    border: none;
+    padding: 10px;
+    border-radius: 15px;
+  }
+  legend {
+    font-weight: bold;
+    span.l {
+      color: rgba(21, 181, 250, 0.904);
+    }
+    span.o {
+      color: rgba(255, 198, 37, 255);
+    }
+    span.g {
+      color: rgba(240, 71, 156, 255);
+    }
+    span.i {
+      color: rgba(185, 231, 62, 255);
+    }
+    span.n {
+      color: rgba(41, 231, 255, 255);
+    }
+  }
+  small {
+    a {
+      color: white;
+    }
+  }
+}
+
+.school-register-form {
+  margin-top: 50px;
+  form {
+    button {
+      border: none;
+      border-radius: 15px;
+      padding: 10px;
+      font-size: 20px;
+      color: black;
+      font-weight: bold;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.288);
+        color: rgb(255, 255, 255);
+        border-radius: 10px;
+        transition: 1s ease;
+      }
+    }
+    .form-group {
+      legend {
+        font-weight: bold;
+        span.join{
+          color: rgba(21, 181, 250, 0.904);
+        }
+        span.the {
+          color: rgba(255, 198, 37, 255);
+        }
+        span.sum {
+          color: rgba(240, 71, 156, 255);
+        }
+        span.pro {
+          color: rgba(185, 231, 62, 255);
+        }
+        span.n {
+          color: rgba(41, 231, 255, 255);
+        }
+      }
+      small {
+        display: none;
+      }
+    }
+  }
+}
+
+.myprofile-form-container {
+  form {
+    .form-group {
+      small {
+        color: white;
+      }
+      button {
+        border: none;
+        border-radius: 15px;
+        padding: 5px;
+        font-size: 20px;
+        color: black;
+        font-weight: bold;
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.288);
+          color: rgb(255, 255, 255);
+          border-radius: 10px;
+          transition: 1s ease;
+        }
+      }
+    }
+  }
+}
+
+.mylogout-container {
+  padding: 20px;
+  margin-top: 70px;
+  a {
+    color: white;
+  }
+}
+.donate-buttons {
+  display: flex;
+  padding: 20px;
+  form {
+    input {
+      border: none;
+      border-radius: 15px;
+      padding: 5px;
+      font-size: 15px;
+      color: black;
+      font-weight: bold;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.288);
+        color: rgb(255, 255, 255);
+        border-radius: 10px;
+        transition: 1s ease;
+      }
+    }
+  }
+}
+#bt {
+  border: none;
+  border-radius: 15px;
+  padding: 5px;
+  font-size: 15px;
+  color: black;
+  font-weight: bold;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.288);
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    transition: 1s ease;
+  }
+}

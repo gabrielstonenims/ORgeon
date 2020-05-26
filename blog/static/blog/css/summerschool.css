@@ -1,0 +1,723 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  line-height: 1.4;
+  background: radial-gradient(ellipse at center, #36383f 0%, #1a1d22 60%, #000 90%);
+  color: white;
+  height: 100%;
+}
+
+.mynav-wrapper .myshowcase {
+  width: 100%;
+  height: 100vh;
+}
+
+.mynav-wrapper .myshowcase .myback-overlay {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.mynav-wrapper .myshowcase .myshowcase-back {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  background: url("../images/little-girl-taking-online-classes-4261787.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+  z-index: -1;
+}
+
+.mynav-wrapper .myheader-item {
+  position: relative;
+  color: white;
+  margin-top: 20px;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.mynav-wrapper .myheader-item mark {
+  border-radius: 15px;
+}
+
+.mynav-wrapper .myheader-item .face {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: #6b3401;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 1;
+}
+
+.mynav-wrapper .myheader-item .face::before {
+  content: "";
+  font-weight: bold;
+  text-align: center;
+  position: absolute;
+  top: 150px;
+  width: 150px;
+  height: 70px;
+  background: #815400;
+  border-bottom-left-radius: 70px;
+  border-bottom-right-radius: 70px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.mynav-wrapper .myheader-item .face:hover::before {
+  text-align: center;
+  top: 180px;
+  width: 150px;
+  height: 20px;
+  background: #815400;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.mynav-wrapper .myheader-item .face .eyes {
+  position: relative;
+  top: -20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.mynav-wrapper .myheader-item .face .eyes .eye {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: block;
+  border-radius: 50%;
+  background: white;
+  margin: 0 15px;
+}
+
+.mynav-wrapper .myheader-item .face .eyes .eye::before {
+  content: "";
+  position: absolute;
+  top: 30%;
+  left: 25px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: #333;
+  border-radius: 50%;
+}
+
+.mynav-wrapper .myheader-item .myheader {
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.mynav-wrapper .myheader-item .myheader span.s {
+  color: rgba(21, 181, 250, 0.904);
+  font-weight: bold;
+  font-size: 45px;
+}
+
+.mynav-wrapper .myheader-item .myheader span.s:hover {
+  text-shadow: black;
+}
+
+.mynav-wrapper .myheader-item .myheader span.u {
+  color: #ffc625;
+  font-weight: bold;
+  font-size: 45px;
+}
+
+.mynav-wrapper .myheader-item .myheader span.m1 {
+  color: #f0479c;
+  font-weight: bold;
+  font-size: 45px;
+}
+
+.mynav-wrapper .myheader-item .myheader span.m2 {
+  color: #b9e73e;
+  font-weight: bold;
+  font-size: 45px;
+}
+
+.mynav-wrapper .myheader-item .myheader span.e {
+  color: #29e7ff;
+  font-weight: bold;
+  font-size: 45px;
+}
+
+.mynav-wrapper .myheader-item .myheader span.r {
+  color: #ff9048;
+  font-weight: bold;
+  font-size: 45px;
+}
+
+.mynav-wrapper .myheader-item p.msg-intro {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.mynav-wrapper .myheader-item a {
+  padding: 10px;
+  font-size: 20px;
+  color: #ffc625;
+  font-weight: bold;
+}
+
+.mynav-wrapper .myheader-item a:hover {
+  background-color: rgba(255, 255, 255, 0.288);
+  color: white;
+  border-radius: 10px;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+
+.mynav-wrapper .myheader-item p#demo {
+  text-align: center;
+  font-size: 50px;
+  margin-top: 0px;
+  color: #fa0000;
+}
+
+.mynav-wrapper .myheader-item span#current-holder {
+  font-weight: bold;
+}
+
+.mynav-wrapper .hold-nav-tabs .summer-tabs {
+  padding: 20px;
+  border-bottom: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.mynav-wrapper .hold-nav-tabs .summer-tabs li.gradeschool {
+  background-color: rgba(21, 181, 250, 0.904);
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+  font-size: 30px;
+}
+
+.mynav-wrapper .hold-nav-tabs .summer-tabs li.preschool {
+  background-color: #ffc625;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+  font-size: 30px;
+}
+
+.mynav-wrapper .hold-nav-tabs .summer-tabs li.kindergarten {
+  background-color: #f0479c;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+  font-size: 30px;
+}
+
+.mynav-wrapper .hold-nav-tabs .main-tab-contents h5 {
+  font-weight: bold;
+}
+
+.mynav-wrapper .hold-nav-tabs .main-tab-contents ul li {
+  color: #000;
+  font-weight: bold;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .mynav-wrapper .myheader-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    padding: 5px;
+    margin-top: 90px;
+  }
+  .mynav-wrapper .myheader-item .face {
+    display: none;
+  }
+  .mynav-wrapper .myheader-item .myheader {
+    font-size: 20px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.s {
+    color: rgba(21, 181, 250, 0.904);
+    font-weight: bold;
+    font-size: 30px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.s:hover {
+    text-shadow: black;
+  }
+  .mynav-wrapper .myheader-item .myheader span.u {
+    color: #ffc625;
+    font-weight: bold;
+    font-size: 30px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.m1 {
+    color: #f0479c;
+    font-weight: bold;
+    font-size: 30px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.m2 {
+    color: #b9e73e;
+    font-weight: bold;
+    font-size: 30px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.e {
+    color: #29e7ff;
+    font-weight: bold;
+    font-size: 30px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.r {
+    color: #ff9048;
+    font-weight: bold;
+    font-size: 30px;
+  }
+  .mynav-wrapper .myheader-item p.msg-intro {
+    font-size: 20px;
+    padding: 5px;
+  }
+  .mynav-wrapper .myheader-item p.msg-intro mark {
+    font-size: 15px;
+  }
+  .mynav-wrapper .myheader-item p#demo {
+    font-size: 30px;
+  }
+  .mynav-wrapper .hold-nav-tabs .summer-tabs {
+    padding: 10px;
+    border-bottom: none;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .mynav-wrapper .hold-nav-tabs .summer-tabs li.gradeschool {
+    background-color: rgba(21, 181, 250, 0.904);
+    border-radius: 10px;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+  }
+  .mynav-wrapper .hold-nav-tabs .summer-tabs li.preschool {
+    background-color: #ffc625;
+    border-radius: 10px;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+  }
+  .mynav-wrapper .hold-nav-tabs .summer-tabs li.kindergarten {
+    background-color: #f0479c;
+    border-radius: 10px;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+  }
+}
+
+/* Small devices (portrait tablets and large p}hones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .mynav-wrapper .myheader-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    padding: 5px;
+    margin-top: 90px;
+  }
+  .mynav-wrapper .myheader-item .face {
+    display: none;
+  }
+  .mynav-wrapper .myheader-item .myheader {
+    font-size: 30px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.s {
+    color: rgba(21, 181, 250, 0.904);
+    font-weight: bold;
+    font-size: 35px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.s:hover {
+    text-shadow: black;
+  }
+  .mynav-wrapper .myheader-item .myheader span.u {
+    color: #ffc625;
+    font-weight: bold;
+    font-size: 35px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.m1 {
+    color: #f0479c;
+    font-weight: bold;
+    font-size: 35px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.m2 {
+    color: #b9e73e;
+    font-weight: bold;
+    font-size: 35px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.e {
+    color: #29e7ff;
+    font-weight: bold;
+    font-size: 35px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.r {
+    color: #ff9048;
+    font-weight: bold;
+    font-size: 35px;
+  }
+  .mynav-wrapper .myheader-item p.msg-intro {
+    font-size: 20px;
+    padding: 5px;
+  }
+  .mynav-wrapper .myheader-item p.msg-intro mark {
+    font-size: 15px;
+  }
+  .mynav-wrapper .myheader-item p#demo {
+    font-size: 30px;
+  }
+  .mynav-wrapper .hold-nav-tabs .summer-tabs {
+    padding: 10px;
+    border-bottom: none;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .mynav-wrapper .hold-nav-tabs .summer-tabs li.gradeschool {
+    background-color: rgba(21, 181, 250, 0.904);
+    border-radius: 10px;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+  }
+  .mynav-wrapper .hold-nav-tabs .summer-tabs li.preschool {
+    background-color: #ffc625;
+    border-radius: 10px;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+  }
+  .mynav-wrapper .hold-nav-tabs .summer-tabs li.kindergarten {
+    background-color: #f0479c;
+    border-radius: 10px;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .mynav-wrapper .myheader-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    padding: 5px;
+    margin-top: 90px;
+  }
+  .mynav-wrapper .myheader-item .face {
+    display: none;
+  }
+  .mynav-wrapper .myheader-item .myheader {
+    font-size: 35px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.s {
+    color: rgba(21, 181, 250, 0.904);
+    font-weight: bold;
+    font-size: 40px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.u {
+    color: #ffc625;
+    font-weight: bold;
+    font-size: 40px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.m1 {
+    color: #f0479c;
+    font-weight: bold;
+    font-size: 40px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.m2 {
+    color: #b9e73e;
+    font-weight: bold;
+    font-size: 40px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.e {
+    color: #29e7ff;
+    font-weight: bold;
+    font-size: 40px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.r {
+    color: #ff9048;
+    font-weight: bold;
+    font-size: 40px;
+  }
+  .mynav-wrapper .myheader-item p.msg-intro {
+    font-size: 25px;
+    padding: 5px;
+  }
+  .mynav-wrapper .myheader-item p.msg-intro mark {
+    font-size: 20px;
+  }
+  .mynav-wrapper .myheader-item p#demo {
+    font-size: 40px;
+  }
+  .mynav-wrapper .hold-nav-tabs .summer-tabs {
+    padding: 10px;
+    border-bottom: none;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .mynav-wrapper .hold-nav-tabs .summer-tabs li.gradeschool {
+    background-color: rgba(21, 181, 250, 0.904);
+    border-radius: 10px;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+  }
+  .mynav-wrapper .hold-nav-tabs .summer-tabs li.preschool {
+    background-color: #ffc625;
+    border-radius: 10px;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+  }
+  .mynav-wrapper .hold-nav-tabs .summer-tabs li.kindergarten {
+    background-color: #f0479c;
+    border-radius: 10px;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .mynav-wrapper .myheader-item {
+    position: relative;
+    color: white;
+    margin-top: 20px;
+    padding: 20px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .mynav-wrapper .myheader-item mark {
+    border-radius: 15px;
+  }
+  .mynav-wrapper .myheader-item .face {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: #6b3401;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    z-index: 1;
+  }
+  .mynav-wrapper .myheader-item .face::before {
+    content: "";
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    top: 150px;
+    width: 150px;
+    height: 70px;
+    background: #815400;
+    border-bottom-left-radius: 70px;
+    border-bottom-right-radius: 70px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+  }
+  .mynav-wrapper .myheader-item .face:hover::before {
+    text-align: center;
+    top: 180px;
+    width: 150px;
+    height: 20px;
+    background: #815400;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+  }
+  .mynav-wrapper .myheader-item .face .eyes {
+    position: relative;
+    top: -20px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .mynav-wrapper .myheader-item .face .eyes .eye {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: block;
+    border-radius: 50%;
+    background: white;
+    margin: 0 15px;
+  }
+  .mynav-wrapper .myheader-item .face .eyes .eye::before {
+    content: "";
+    position: absolute;
+    top: 30%;
+    left: 25px;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: #333;
+    border-radius: 50%;
+  }
+  .mynav-wrapper .myheader-item .myheader {
+    font-weight: bold;
+    font-size: 35px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.s {
+    color: rgba(21, 181, 250, 0.904);
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.u {
+    color: #ffc625;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.m1 {
+    color: #f0479c;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.m2 {
+    color: #b9e73e;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.e {
+    color: #29e7ff;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .mynav-wrapper .myheader-item .myheader span.r {
+    color: #ff9048;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .mynav-wrapper .myheader-item p.msg-intro {
+    font-size: 30px;
+    font-weight: bold;
+  }
+  .mynav-wrapper .myheader-item a {
+    padding: 10px;
+    font-size: 20px;
+    color: #ffc625;
+    font-weight: bold;
+  }
+  .mynav-wrapper .myheader-item a:hover {
+    background-color: rgba(255, 255, 255, 0.288);
+    color: white;
+    border-radius: 10px;
+    -webkit-transition: 1s ease;
+    transition: 1s ease;
+  }
+  .mynav-wrapper .myheader-item p#demo {
+    text-align: center;
+    font-size: 50px;
+    margin-top: 0px;
+    color: #fa0000;
+  }
+  .mynav-wrapper .myheader-item span#current-holder {
+    font-weight: bold;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+/*# sourceMappingURL=summerschool.css.map */

@@ -1,0 +1,12 @@
+{% extends 'summerschool/schoolbase.html' %}
+{% block content %}
+<div class="container mt-4">
+    <br>
+    <div class="row mb-3 text-center">
+        <div class="col-xs-6 col-sm-6 col-md-8 mr-auto ml-auto animated bounceInDown mylogout-container">
+            <h3>You have been logged out</h3>
+            <a class="mr-3" href="{% url 'summerhome' %}">Go Home</a> or <a class="ml-2" href="{% url 'school_login' %}">Login</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

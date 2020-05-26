@@ -4,24 +4,19 @@
 <br>
 <div class="myemployees-container">
     {% for employee in employees %}
-    <div class="employee-bg1" >
-        <img src="{{ employee.profile.profile_pic.url }}" alt="">
-        <h2>{{ employee.profile.fullname }}</h2>
-        <p>{{ employee.profile.position }}</p>
-        {% if employee.email %}
-        <p class="em-email  text-center">{{ employee.email }} </p>
-        {% endif %}
-    </div>
+        <div class="employee-bg1" >
+            <img src="{{ employee.profile_pic.url }}" alt="">
+            <h2>{{ employee.fullname }}</h2>
+            <p>{{ employee.position }}</p>
+        </div>
     {% endfor %}
 </div>
 <br>
 <br>
 
 <script>
-
     setInterval(function () {
         location.reload();
     }, 300000);
-
 </script>
 {% endblock %}

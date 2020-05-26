@@ -4,7 +4,6 @@ from . import views
 from .views import Volunteers,VolunteerFormView,OurVolunteers
 from .views import (PostCreateView, PostListView, EventCreateView, EventDetailView, ReportListView,
                     ClientInfoCreateView, ClientInfoListView, ClientInfoUpdateView, ClientInfoDeleteView)
-
 urlpatterns = [
     path('', views.home, name='home'),
     path('gallery/', views.gallery, name='gallery'),

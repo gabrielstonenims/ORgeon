@@ -915,4 +915,650 @@ footer {
     grid-column: 1/3;
   }
 }
+
+.home-wrapper {
+  color: white;
+}
+
+.home-wrapper .home-showcase {
+  width: 100%;
+  height: 100vh;
+}
+
+.home-wrapper .home-showcase .homeshowcase-overlay {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.692);
+  z-index: 2;
+}
+
+.home-wrapper .home-showcase .homeshowcase-back {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  background: url("../images/mother-helping-her-daughter-use-a-laptop-4260325.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+  z-index: 1;
+}
+
+.home-wrapper .home-showcase .home-contents {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+}
+
+.home-wrapper .home-showcase .home-contents .container {
+  margin-top: 200px;
+}
+
+.home-wrapper .home-showcase .home-contents .container h2 {
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.home-wrapper .home-showcase .home-contents .container h2 span.s {
+  color: rgba(21, 181, 250, 0.904);
+  font-weight: bold;
+  font-size: 45px;
+}
+
+.home-wrapper .home-showcase .home-contents .container h2 span.s:hover {
+  text-shadow: black;
+}
+
+.home-wrapper .home-showcase .home-contents .container h2 span.u {
+  color: #ffc625;
+  font-weight: bold;
+  font-size: 45px;
+}
+
+.home-wrapper .home-showcase .home-contents .container h2 span.m1 {
+  color: #f0479c;
+  font-weight: bold;
+  font-size: 45px;
+}
+
+.home-wrapper .home-showcase .home-contents .container h2 span.m2 {
+  color: #b9e73e;
+  font-weight: bold;
+  font-size: 45px;
+}
+
+.home-wrapper .home-showcase .home-contents .container h2 span.e {
+  color: #29e7ff;
+  font-weight: bold;
+  font-size: 45px;
+}
+
+.home-wrapper .home-showcase .home-contents .container h2 span.r {
+  color: #ff9048;
+  font-weight: bold;
+  font-size: 45px;
+}
+
+.home-wrapper .home-showcase .home-contents .container p {
+  padding: 10px;
+  font-weight: bold;
+}
+
+.home-wrapper .home-showcase .home-contents .container a {
+  border: none;
+  border-radius: 15px;
+  padding: 9px;
+  font-size: 15px;
+  border-radius: 10px;
+  background-color: white;
+  font-weight: bold;
+}
+
+.home-wrapper .home-showcase .home-contents .container a:hover {
+  background-color: rgba(255, 255, 255, 0.288);
+  color: white;
+  border-radius: 10px;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .home-wrapper .home-showcase {
+    width: 100%;
+    height: 50vh;
+  }
+  .home-wrapper .home-showcase .homeshowcase-overlay {
+    width: 100%;
+    height: 50vh;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.692);
+    z-index: 2;
+  }
+  .home-wrapper .home-showcase .homeshowcase-back {
+    width: 100%;
+    height: 50vh;
+    position: absolute;
+    background: url("../images/mother-helping-her-daughter-use-a-laptop-4260325 (copy).jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    z-index: 1;
+  }
+  .home-wrapper .home-showcase .home-contents {
+    position: relative;
+    z-index: 2;
+    padding: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    text-align: center;
+  }
+  .home-wrapper .home-showcase .home-contents .container {
+    margin-top: 20px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.s {
+    color: rgba(21, 181, 250, 0.904);
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.s:hover {
+    text-shadow: black;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.u {
+    color: #ffc625;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.m1 {
+    color: #f0479c;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.m2 {
+    color: #b9e73e;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.e {
+    color: #29e7ff;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.r {
+    color: #ff9048;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container p {
+    padding: 10px;
+    font-weight: bold;
+  }
+  .home-wrapper .home-showcase .home-contents .container a {
+    border: none;
+    border-radius: 15px;
+    padding: 9px;
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: white;
+    font-weight: bold;
+  }
+  .home-wrapper .home-showcase .home-contents .container a:hover {
+    background-color: rgba(255, 255, 255, 0.288);
+    color: white;
+    border-radius: 10px;
+    -webkit-transition: 1s ease;
+    transition: 1s ease;
+  }
+}
+
+/* Small devices (portrait tablets and large p}hones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .home-wrapper .home-showcase {
+    width: 100%;
+    height: 50vh;
+  }
+  .home-wrapper .home-showcase .homeshowcase-overlay {
+    width: 100%;
+    height: 50vh;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.692);
+    z-index: 2;
+  }
+  .home-wrapper .home-showcase .homeshowcase-back {
+    width: 100%;
+    height: 50vh;
+    position: absolute;
+    background: url("../images/mother-helping-her-daughter-use-a-laptop-4260325 (copy).jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    z-index: 1;
+  }
+  .home-wrapper .home-showcase .home-contents {
+    position: relative;
+    z-index: 2;
+    padding: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    text-align: center;
+  }
+  .home-wrapper .home-showcase .home-contents .container {
+    margin-top: 20px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.s {
+    color: rgba(21, 181, 250, 0.904);
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.s:hover {
+    text-shadow: black;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.u {
+    color: #ffc625;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.m1 {
+    color: #f0479c;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.m2 {
+    color: #b9e73e;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.e {
+    color: #29e7ff;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.r {
+    color: #ff9048;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container p {
+    padding: 10px;
+    font-weight: bold;
+  }
+  .home-wrapper .home-showcase .home-contents .container a {
+    border: none;
+    border-radius: 15px;
+    padding: 9px;
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: white;
+    font-weight: bold;
+  }
+  .home-wrapper .home-showcase .home-contents .container a:hover {
+    background-color: rgba(255, 255, 255, 0.288);
+    color: white;
+    border-radius: 10px;
+    -webkit-transition: 1s ease;
+    transition: 1s ease;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .home-wrapper .home-showcase {
+    width: 100%;
+    height: 50vh;
+  }
+  .home-wrapper .home-showcase .homeshowcase-overlay {
+    width: 100%;
+    height: 50vh;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.692);
+    z-index: 2;
+  }
+  .home-wrapper .home-showcase .homeshowcase-back {
+    width: 100%;
+    height: 50vh;
+    position: absolute;
+    background: url("../images/mother-helping-her-daughter-use-a-laptop-4260325 (copy1).jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    z-index: 1;
+  }
+  .home-wrapper .home-showcase .home-contents {
+    position: relative;
+    z-index: 2;
+    padding: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    text-align: center;
+  }
+  .home-wrapper .home-showcase .home-contents .container {
+    margin-top: 30px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.s {
+    color: rgba(21, 181, 250, 0.904);
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.s:hover {
+    text-shadow: black;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.u {
+    color: #ffc625;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.m1 {
+    color: #f0479c;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.m2 {
+    color: #b9e73e;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.e {
+    color: #29e7ff;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.r {
+    color: #ff9048;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container p {
+    padding: 10px;
+    font-weight: bold;
+  }
+  .home-wrapper .home-showcase .home-contents .container a {
+    border: none;
+    border-radius: 15px;
+    padding: 9px;
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: white;
+    font-weight: bold;
+  }
+  .home-wrapper .home-showcase .home-contents .container a:hover {
+    background-color: rgba(255, 255, 255, 0.288);
+    color: white;
+    border-radius: 10px;
+    -webkit-transition: 1s ease;
+    transition: 1s ease;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .home-wrapper {
+    color: white;
+  }
+  .home-wrapper .home-showcase {
+    width: 100%;
+    height: 100vh;
+  }
+  .home-wrapper .home-showcase .homeshowcase-overlay {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.692);
+    z-index: 2;
+  }
+  .home-wrapper .home-showcase .homeshowcase-back {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background: url("../images/mother-helping-her-daughter-use-a-laptop-4260325.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    z-index: 1;
+  }
+  .home-wrapper .home-showcase .home-contents {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    text-align: center;
+  }
+  .home-wrapper .home-showcase .home-contents .container {
+    margin-top: 200px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 {
+    font-weight: bold;
+    font-size: 35px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.s {
+    color: rgba(21, 181, 250, 0.904);
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.s:hover {
+    text-shadow: black;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.u {
+    color: #ffc625;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.m1 {
+    color: #f0479c;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.m2 {
+    color: #b9e73e;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.e {
+    color: #29e7ff;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.r {
+    color: #ff9048;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container p {
+    padding: 10px;
+    font-weight: bold;
+  }
+  .home-wrapper .home-showcase .home-contents .container a {
+    border: none;
+    border-radius: 15px;
+    padding: 9px;
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: white;
+    font-weight: bold;
+  }
+  .home-wrapper .home-showcase .home-contents .container a:hover {
+    background-color: rgba(255, 255, 255, 0.288);
+    color: white;
+    border-radius: 10px;
+    -webkit-transition: 1s ease;
+    transition: 1s ease;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .home-wrapper {
+    color: white;
+  }
+  .home-wrapper .home-showcase {
+    width: 100%;
+    height: 100vh;
+  }
+  .home-wrapper .home-showcase .homeshowcase-overlay {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.692);
+    z-index: 2;
+  }
+  .home-wrapper .home-showcase .homeshowcase-back {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background: url("../images/mother-helping-her-daughter-use-a-laptop-4260325.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    z-index: 1;
+  }
+  .home-wrapper .home-showcase .home-contents {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    text-align: center;
+  }
+  .home-wrapper .home-showcase .home-contents .container {
+    margin-top: 200px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 {
+    font-weight: bold;
+    font-size: 35px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.s {
+    color: rgba(21, 181, 250, 0.904);
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.s:hover {
+    text-shadow: black;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.u {
+    color: #ffc625;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.m1 {
+    color: #f0479c;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.m2 {
+    color: #b9e73e;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.e {
+    color: #29e7ff;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container h2 span.r {
+    color: #ff9048;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  .home-wrapper .home-showcase .home-contents .container p {
+    padding: 10px;
+    font-weight: bold;
+  }
+  .home-wrapper .home-showcase .home-contents .container a {
+    border: none;
+    border-radius: 15px;
+    padding: 9px;
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: white;
+    font-weight: bold;
+  }
+  .home-wrapper .home-showcase .home-contents .container a:hover {
+    background-color: rgba(255, 255, 255, 0.288);
+    color: white;
+    border-radius: 10px;
+    -webkit-transition: 1s ease;
+    transition: 1s ease;
+  }
+}
 /*# sourceMappingURL=home.css.map */

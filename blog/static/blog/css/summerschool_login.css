@@ -1,0 +1,159 @@
+.login-form-container {
+  padding: 20px;
+  margin-top: 50px;
+}
+
+.login-form-container button {
+  border: none;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.login-form-container legend {
+  font-weight: bold;
+}
+
+.login-form-container legend span.l {
+  color: rgba(21, 181, 250, 0.904);
+}
+
+.login-form-container legend span.o {
+  color: #ffc625;
+}
+
+.login-form-container legend span.g {
+  color: #f0479c;
+}
+
+.login-form-container legend span.i {
+  color: #b9e73e;
+}
+
+.login-form-container legend span.n {
+  color: #29e7ff;
+}
+
+.login-form-container small a {
+  color: white;
+}
+
+.school-register-form {
+  margin-top: 50px;
+}
+
+.school-register-form form button {
+  border: none;
+  border-radius: 15px;
+  padding: 10px;
+  font-size: 20px;
+  color: black;
+  font-weight: bold;
+}
+
+.school-register-form form button:hover {
+  background-color: rgba(255, 255, 255, 0.288);
+  color: white;
+  border-radius: 10px;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+
+.school-register-form form .form-group legend {
+  font-weight: bold;
+}
+
+.school-register-form form .form-group legend span.join {
+  color: rgba(21, 181, 250, 0.904);
+}
+
+.school-register-form form .form-group legend span.the {
+  color: #ffc625;
+}
+
+.school-register-form form .form-group legend span.sum {
+  color: #f0479c;
+}
+
+.school-register-form form .form-group legend span.pro {
+  color: #b9e73e;
+}
+
+.school-register-form form .form-group legend span.n {
+  color: #29e7ff;
+}
+
+.school-register-form form .form-group small {
+  display: none;
+}
+
+.myprofile-form-container form .form-group small {
+  color: white;
+}
+
+.myprofile-form-container form .form-group button {
+  border: none;
+  border-radius: 15px;
+  padding: 5px;
+  font-size: 20px;
+  color: black;
+  font-weight: bold;
+}
+
+.myprofile-form-container form .form-group button:hover {
+  background-color: rgba(255, 255, 255, 0.288);
+  color: white;
+  border-radius: 10px;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+
+.mylogout-container {
+  padding: 20px;
+  margin-top: 70px;
+}
+
+.mylogout-container a {
+  color: white;
+}
+
+.donate-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 20px;
+}
+
+.donate-buttons form input {
+  border: none;
+  border-radius: 15px;
+  padding: 5px;
+  font-size: 15px;
+  color: black;
+  font-weight: bold;
+}
+
+.donate-buttons form input:hover {
+  background-color: rgba(255, 255, 255, 0.288);
+  color: white;
+  border-radius: 10px;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+
+#bt {
+  border: none;
+  border-radius: 15px;
+  padding: 5px;
+  font-size: 15px;
+  color: black;
+  font-weight: bold;
+}
+
+#bt:hover {
+  background-color: rgba(255, 255, 255, 0.288);
+  color: white;
+  border-radius: 10px;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+/*# sourceMappingURL=summerschool_login.css.map */

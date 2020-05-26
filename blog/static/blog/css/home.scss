@@ -1,8 +1,5 @@
 @import "./_config";
 
-
-
-
 section.showcase {
   width: 100%;
 
@@ -457,7 +454,6 @@ footer {
   @include setFlex(column);
 }
 
- 
 // gallery
 .gallery {
   overflow: hidden;
@@ -471,18 +467,17 @@ footer {
 
       &:hover {
         transform: scale(1.2);
-
       }
     }
   }
 }
-.mynewsection{
+.mynewsection {
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(4, 1fr);
   // grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
   gap: 10px;
 }
-.mynewsection > div{
+.mynewsection > div {
   height: 210px;
   background-size: cover;
   background-attachment: fixed;
@@ -491,40 +486,40 @@ footer {
   align-items: center;
   justify-content: center;
   text-align: center;
-  &:hover{
+  &:hover {
     opacity: 0.7;
     transform: scale(0.98);
   }
 }
-.mynewsection > div:nth-of-type(1){
+.mynewsection > div:nth-of-type(1) {
   grid-column: 1/3;
 }
 
-.mynewsection > div:nth-of-type(6){
+.mynewsection > div:nth-of-type(6) {
   grid-column: 3/5;
 }
-.mynewsection > div:nth-of-type(11){
+.mynewsection > div:nth-of-type(11) {
   grid-column: 1/3;
 }
 
-.bg1{
+.bg1 {
   background: url("../images/nature-red-forest-leaves-33109.jpg");
-  a{
+  a {
     color: white;
     font-weight: bold;
-    img{
+    img {
       color: white !important;
       width: 40px;
       height: 40px;
     }
   }
 }
-.bg2{
+.bg2 {
   background: url("../images/photo-of-pod-of-dolphins-2422915.jpg");
-  a{
+  a {
     color: white;
     font-weight: bold;
-    img{
+    img {
       width: 40px;
       height: 40px;
     }
@@ -533,18 +528,18 @@ footer {
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  .mynewsection{
+  .mynewsection {
     grid-template-columns: 1fr;
     // grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
   }
-  .mynewsection > div:nth-of-type(1){
+  .mynewsection > div:nth-of-type(1) {
     grid-column: 1;
   }
-  
-  .mynewsection > div:nth-of-type(6){
+
+  .mynewsection > div:nth-of-type(6) {
     grid-column: 1;
   }
-  .mynewsection > div:nth-of-type(11){
+  .mynewsection > div:nth-of-type(11) {
     grid-column: 1;
   }
 }
@@ -554,46 +549,621 @@ footer {
 
 // /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-  .mynewsection{
-    grid-template-columns: repeat(3,1fr);
+  .mynewsection {
+    grid-template-columns: repeat(3, 1fr);
     // grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
   }
-
 }
 
 // /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-  .mynewsection{
-    grid-template-columns: repeat(4,1fr);
+  .mynewsection {
+    grid-template-columns: repeat(4, 1fr);
     // grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
   }
-  .mynewsection > div:nth-of-type(1){
+  .mynewsection > div:nth-of-type(1) {
     grid-column: 1/3;
   }
-  
-  .mynewsection > div:nth-of-type(6){
+
+  .mynewsection > div:nth-of-type(6) {
     grid-column: 3/5;
   }
-  .mynewsection > div:nth-of-type(11){
+  .mynewsection > div:nth-of-type(11) {
     grid-column: 1/3;
   }
-  
 }
 
 // /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-  .mynewsection{
-    grid-template-columns: repeat(4,1fr);
+  .mynewsection {
+    grid-template-columns: repeat(4, 1fr);
     // grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
   }
-  .mynewsection > div:nth-of-type(1){
+  .mynewsection > div:nth-of-type(1) {
     grid-column: 1/3;
   }
-  
-  .mynewsection > div:nth-of-type(6){
+
+  .mynewsection > div:nth-of-type(6) {
     grid-column: 3/5;
   }
-  .mynewsection > div:nth-of-type(11){
+  .mynewsection > div:nth-of-type(11) {
     grid-column: 1/3;
+  }
+}
+
+.home-wrapper {
+  color: white;
+  .home-showcase {
+    width: 100%;
+    height: 100vh;
+    .homeshowcase-overlay {
+      width: 100%;
+      height: 100vh;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.692);
+      z-index: 2;
+    }
+    .homeshowcase-back {
+      width: 100%;
+      height: 100vh;
+      position: absolute;
+      background: url("../images/mother-helping-her-daughter-use-a-laptop-4260325.jpg");
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-attachment: fixed;
+      z-index: 1;
+    }
+    .home-contents {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      .container {
+        margin-top: 200px;
+        h2 {
+          font-weight: bold;
+          font-size: 35px;
+          span.s {
+            color: rgba(21, 181, 250, 0.904);
+            font-weight: bold;
+            font-size: 45px;
+            &:hover {
+              text-shadow: rgba($color: #000000, $alpha: 1);
+            }
+          }
+          span.u {
+            color: rgba(255, 198, 37, 255);
+            font-weight: bold;
+            font-size: 45px;
+          }
+          span.m1 {
+            color: rgba(240, 71, 156, 255);
+            font-weight: bold;
+            font-size: 45px;
+          }
+          span.m2 {
+            color: rgba(185, 231, 62, 255);
+            font-weight: bold;
+            font-size: 45px;
+          }
+          span.e {
+            color: rgba(41, 231, 255, 255);
+            font-weight: bold;
+            font-size: 45px;
+          }
+          span.r {
+            color: rgba(255, 144, 72, 255);
+            font-weight: bold;
+            font-size: 45px;
+          }
+        }
+        p {
+          padding: 10px;
+          font-weight: bold;
+        }
+        a {
+          border: none;
+          border-radius: 15px;
+          padding: 9px;
+          font-size: 15px;
+          border-radius: 10px;
+          background-color: white;
+          font-weight: bold;
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.288);
+            color: rgb(255, 255, 255);
+            border-radius: 10px;
+            transition: 1s ease;
+          }
+        }
+      }
+    }
+  }
+}
+
+// media queries
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .home-wrapper{
+  .home-showcase {
+    width: 100%;
+    height: 50vh;
+    .homeshowcase-overlay {
+      width: 100%;
+      height: 50vh;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.692);
+      z-index: 2;
+    }
+    .homeshowcase-back {
+      width: 100%;
+      height: 50vh;
+      position: absolute;
+      background: url("../images/mother-helping-her-daughter-use-a-laptop-4260325 (copy).jpg");
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-attachment: fixed;
+      z-index: 1;
+    }
+    .home-contents {
+      position: relative;
+      z-index: 2;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      .container {
+        margin-top: 20px;
+        h2 {
+          font-weight: bold;
+          font-size: 20px;
+          span.s {
+            color: rgba(21, 181, 250, 0.904);
+            font-weight: bold;
+            font-size: 45px;
+            &:hover {
+              text-shadow: rgba($color: #000000, $alpha: 1);
+            }
+          }
+          span.u {
+            color: rgba(255, 198, 37, 255);
+            font-weight: bold;
+            font-size: 45px;
+          }
+          span.m1 {
+            color: rgba(240, 71, 156, 255);
+            font-weight: bold;
+            font-size: 45px;
+          }
+          span.m2 {
+            color: rgba(185, 231, 62, 255);
+            font-weight: bold;
+            font-size: 45px;
+          }
+          span.e {
+            color: rgba(41, 231, 255, 255);
+            font-weight: bold;
+            font-size: 45px;
+          }
+          span.r {
+            color: rgba(255, 144, 72, 255);
+            font-weight: bold;
+            font-size: 45px;
+          }
+        }
+        p {
+          padding: 10px;
+          font-weight: bold;
+        }
+        a {
+          border: none;
+          border-radius: 15px;
+          padding: 9px;
+          font-size: 15px;
+          border-radius: 10px;
+          background-color: white;
+          font-weight: bold;
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.288);
+            color: rgb(255, 255, 255);
+            border-radius: 10px;
+            transition: 1s ease;
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+/* Small devices (portrait tablets and large p}hones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .home-wrapper{
+    .home-showcase {
+      width: 100%;
+      height: 50vh;
+      .homeshowcase-overlay {
+        width: 100%;
+        height: 50vh;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.692);
+        z-index: 2;
+      }
+      .homeshowcase-back {
+        width: 100%;
+        height: 50vh;
+        position: absolute;
+        background: url("../images/mother-helping-her-daughter-use-a-laptop-4260325 (copy).jpg");
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-attachment: fixed;
+        z-index: 1;
+      }
+      .home-contents {
+        position: relative;
+        z-index: 2;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        .container {
+          margin-top: 20px;
+          h2 {
+            font-weight: bold;
+            font-size: 20px;
+            span.s {
+              color: rgba(21, 181, 250, 0.904);
+              font-weight: bold;
+              font-size: 45px;
+              &:hover {
+                text-shadow: rgba($color: #000000, $alpha: 1);
+              }
+            }
+            span.u {
+              color: rgba(255, 198, 37, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+            span.m1 {
+              color: rgba(240, 71, 156, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+            span.m2 {
+              color: rgba(185, 231, 62, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+            span.e {
+              color: rgba(41, 231, 255, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+            span.r {
+              color: rgba(255, 144, 72, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+          }
+          p {
+            padding: 10px;
+            font-weight: bold;
+          }
+          a {
+            border: none;
+            border-radius: 15px;
+            padding: 9px;
+            font-size: 15px;
+            border-radius: 10px;
+            background-color: white;
+            font-weight: bold;
+            &:hover {
+              background-color: rgba(255, 255, 255, 0.288);
+              color: rgb(255, 255, 255);
+              border-radius: 10px;
+              transition: 1s ease;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .home-wrapper{
+    .home-showcase {
+      width: 100%;
+      height: 50vh;
+      .homeshowcase-overlay {
+        width: 100%;
+        height: 50vh;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.692);
+        z-index: 2;
+      }
+      .homeshowcase-back {
+        width: 100%;
+        height: 50vh;
+        position: absolute;
+        background: url("../images/mother-helping-her-daughter-use-a-laptop-4260325 (copy1).jpg");
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-attachment: fixed;
+        z-index: 1;
+      }
+      .home-contents {
+        position: relative;
+        z-index: 2;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        .container {
+          margin-top: 30px;
+          h2 {
+            font-weight: bold;
+            font-size: 20px;
+            span.s {
+              color: rgba(21, 181, 250, 0.904);
+              font-weight: bold;
+              font-size: 45px;
+              &:hover {
+                text-shadow: rgba($color: #000000, $alpha: 1);
+              }
+            }
+            span.u {
+              color: rgba(255, 198, 37, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+            span.m1 {
+              color: rgba(240, 71, 156, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+            span.m2 {
+              color: rgba(185, 231, 62, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+            span.e {
+              color: rgba(41, 231, 255, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+            span.r {
+              color: rgba(255, 144, 72, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+          }
+          p {
+            padding: 10px;
+            font-weight: bold;
+          }
+          a {
+            border: none;
+            border-radius: 15px;
+            padding: 9px;
+            font-size: 15px;
+            border-radius: 10px;
+            background-color: white;
+            font-weight: bold;
+            &:hover {
+              background-color: rgba(255, 255, 255, 0.288);
+              color: rgb(255, 255, 255);
+              border-radius: 10px;
+              transition: 1s ease;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .home-wrapper {
+    color: white;
+    .home-showcase {
+      width: 100%;
+      height: 100vh;
+      .homeshowcase-overlay {
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.692);
+        z-index: 2;
+      }
+      .homeshowcase-back {
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        background: url("../images/mother-helping-her-daughter-use-a-laptop-4260325.jpg");
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-attachment: fixed;
+        z-index: 1;
+      }
+      .home-contents {
+        position: relative;
+        z-index: 2;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        .container {
+          margin-top: 200px;
+          h2 {
+            font-weight: bold;
+            font-size: 35px;
+            span.s {
+              color: rgba(21, 181, 250, 0.904);
+              font-weight: bold;
+              font-size: 45px;
+              &:hover {
+                text-shadow: rgba($color: #000000, $alpha: 1);
+              }
+            }
+            span.u {
+              color: rgba(255, 198, 37, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+            span.m1 {
+              color: rgba(240, 71, 156, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+            span.m2 {
+              color: rgba(185, 231, 62, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+            span.e {
+              color: rgba(41, 231, 255, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+            span.r {
+              color: rgba(255, 144, 72, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+          }
+          p {
+            padding: 10px;
+            font-weight: bold;
+          }
+          a {
+            border: none;
+            border-radius: 15px;
+            padding: 9px;
+            font-size: 15px;
+            border-radius: 10px;
+            background-color: white;
+            font-weight: bold;
+            &:hover {
+              background-color: rgba(255, 255, 255, 0.288);
+              color: rgb(255, 255, 255);
+              border-radius: 10px;
+              transition: 1s ease;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .home-wrapper {
+    color: white;
+    .home-showcase {
+      width: 100%;
+      height: 100vh;
+      .homeshowcase-overlay {
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.692);
+        z-index: 2;
+      }
+      .homeshowcase-back {
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        background: url("../images/mother-helping-her-daughter-use-a-laptop-4260325.jpg");
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-attachment: fixed;
+        z-index: 1;
+      }
+      .home-contents {
+        position: relative;
+        z-index: 2;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        .container {
+          margin-top: 200px;
+          h2 {
+            font-weight: bold;
+            font-size: 35px;
+            span.s {
+              color: rgba(21, 181, 250, 0.904);
+              font-weight: bold;
+              font-size: 45px;
+              &:hover {
+                text-shadow: rgba($color: #000000, $alpha: 1);
+              }
+            }
+            span.u {
+              color: rgba(255, 198, 37, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+            span.m1 {
+              color: rgba(240, 71, 156, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+            span.m2 {
+              color: rgba(185, 231, 62, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+            span.e {
+              color: rgba(41, 231, 255, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+            span.r {
+              color: rgba(255, 144, 72, 255);
+              font-weight: bold;
+              font-size: 45px;
+            }
+          }
+          p {
+            padding: 10px;
+            font-weight: bold;
+          }
+          a {
+            border: none;
+            border-radius: 15px;
+            padding: 9px;
+            font-size: 15px;
+            border-radius: 10px;
+            background-color: white;
+            font-weight: bold;
+            &:hover {
+              background-color: rgba(255, 255, 255, 0.288);
+              color: rgb(255, 255, 255);
+              border-radius: 10px;
+              transition: 1s ease;
+            }
+          }
+        }
+      }
+    }
   }
 }

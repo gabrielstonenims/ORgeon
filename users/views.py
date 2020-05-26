@@ -1,14 +1,13 @@
-from django.shortcuts import render, redirect, get_object_or_404,reverse
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import UserUpdateForm, ProfileUpdateForm,UserRegisterForm
-from django.http import HttpResponseRedirect,HttpResponse,JsonResponse
+from .forms import UserUpdateForm, ProfileUpdateForm, UserRegisterForm
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.template.loader import render_to_string
 from django.conf import settings
-from .models import Profile
-
+from .models import Profile, MyProfileUser
 
 
 @login_required()
@@ -18,16 +17,17 @@ def register(request):
         if form.is_valid():
             usermail = form.cleaned_data.get('email')
             if User.objects.filter(email=usermail).exists():
-                messages.info(request,f"{usermail} already exists.")
+                messages.info(request, f"{usermail} already exists.")
             else:
                 form.save()
                 username = form.cleaned_data.get('username')
+                MyProfileUser.objects.create(profiler_email=usermail)
                 subject = f"New employee added."
                 message = f"An employee with the username {username} was just added."
                 from_email = settings.EMAIL_HOST_USER
                 to_list = [settings.EMAIL_HOST_USER]
-                send_mail(subject,message,from_email,to_list,fail_silently=True)
-                messages.success(request,f"{username}'s profile successfully created.")
+                send_mail(subject, message, from_email, to_list, fail_silently=True)
+                messages.success(request, f"{username}'s profile successfully created.")
                 return redirect('employees')
     else:
         form = UserRegisterForm()
@@ -36,7 +36,7 @@ def register(request):
         'form': form
     }
 
-    return render(request,"users/register.html",context)
+    return render(request, "users/register.html", context)
 
 
 @login_required()
@@ -50,8 +50,8 @@ def profile(request):
             p_form.save()
             return redirect('profile')
     else:
-            u_form = UserUpdateForm(instance=request.user)
-            p_form = ProfileUpdateForm(instance=request.user.profile)
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
         'u_form': u_form,
